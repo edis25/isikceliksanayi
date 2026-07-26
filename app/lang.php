@@ -6,6 +6,8 @@
 return [
     'tr' => [
         'nav.home'           => 'Ana Sayfa',
+        'nav.corporate'      => 'Kurumsal',
+        'nav.aboutus'        => 'Hakkımızda',
         'nav.about'          => 'Kurumsal',
         'nav.production'     => 'Üretim & Teknoloji',
         'nav.sustainability' => 'Sürdürülebilirlik',
@@ -78,6 +80,8 @@ return [
     ],
     'en' => [
         'nav.home'           => 'Home',
+        'nav.corporate'      => 'Corporate',
+        'nav.aboutus'        => 'About Us',
         'nav.about'          => 'About Us',
         'nav.production'     => 'Production & Technology',
         'nav.sustainability' => 'Sustainability',

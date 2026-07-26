@@ -1,8 +1,16 @@
 <?php
 require_once __DIR__ . '/icons.php';
 
-$navKeys = ['about', 'production', 'sustainability', 'products', 'industries', 'global', 'news', 'contact'];
+/* Menü yapısı: kurumsal sayfalar tek başlık altında toplanır */
+$corporateKeys = ['about', 'production', 'sustainability', 'industries', 'global'];
+$topKeys = ['products', 'news', 'contact'];
 $activeKey = $page['pkey'] ?? '';
+$corporateActive = in_array($activeKey, $corporateKeys, true);
+
+/* Açılır menüde "Kurumsal" sayfası "Hakkımızda" olarak etiketlenir */
+$navLabel = function (array $p) {
+    return $p['pkey'] === 'about' ? t('nav.aboutus') : lv($p, 'title');
+};
 $siteName = setting('site_name', 'Işık Çelik');
 $metaSuffix = ' | ' . $siteName;
 $fullTitle = $seo['title'] ?? $siteName;
@@ -87,7 +95,18 @@ if ($sameAs) {
             <img class="brand-logo" src="<?= e(asset('assets/img/logo-light.png')) ?>" alt="<?= e($siteName) ?>" width="350" height="196">
         </a>
         <nav class="main-nav" aria-label="<?= lang() === 'tr' ? 'Ana menü' : 'Main menu' ?>">
-            <?php foreach ($navKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
+            <div class="nav-item has-sub">
+                <a href="<?= e(url($pagesByKey['about']['slug_' . lang()] ?? '')) ?>"<?= $corporateActive ? ' class="active"' : '' ?>>
+                    <?= e(t('nav.corporate')) ?>
+                    <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg>
+                </a>
+                <div class="sub-menu">
+                    <?php foreach ($corporateKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
+                    <a href="<?= e(url($p['slug_' . lang()])) ?>"<?= $activeKey === $k ? ' class="active"' : '' ?>><?= e($navLabel($p)) ?></a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php foreach ($topKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
             <a href="<?= e(url($p['slug_' . lang()])) ?>"<?= $activeKey === $k ? ' class="active"' : '' ?>><?= e(lv($p, 'title')) ?></a>
             <?php endforeach; ?>
         </nav>
@@ -105,7 +124,11 @@ if ($sameAs) {
 
 <div class="mobile-nav">
     <a href="<?= e(url('')) ?>"><?= e(t('nav.home')) ?></a>
-    <?php foreach ($navKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
+    <span class="mobile-group"><?= e(t('nav.corporate')) ?></span>
+    <?php foreach ($corporateKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
+    <a class="sub<?= $activeKey === $k ? ' active' : '' ?>" href="<?= e(url($p['slug_' . lang()])) ?>"><?= e($navLabel($p)) ?></a>
+    <?php endforeach; ?>
+    <?php foreach ($topKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
     <a href="<?= e(url($p['slug_' . lang()])) ?>"<?= $activeKey === $k ? ' class="active"' : '' ?>><?= e(lv($p, 'title')) ?></a>
     <?php endforeach; ?>
     <div class="mobile-lang">
