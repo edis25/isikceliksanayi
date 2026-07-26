@@ -55,40 +55,6 @@ function build_alternates(array $page, array $extra = []): array
     return $alts;
 }
 
-/* ---------- İletişim formu (POST) ---------- */
-$contactPage = $pagesByKey['contact'] ?? null;
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $contactPage && $path === $contactPage[$slugField]) {
-    session_boot();
-    $ok = false;
-    // Honeypot dolu ise bot: sessizce başarılı gibi davran
-    if (!empty($_POST['website'])) {
-        $ok = true;
-    } elseif (csrf_check()) {
-        $name    = trim($_POST['name'] ?? '');
-        $email   = trim($_POST['email'] ?? '');
-        $phone   = trim($_POST['phone'] ?? '');
-        $subject = trim($_POST['subject'] ?? '');
-        $message = trim($_POST['message'] ?? '');
-        if ($name !== '' && filter_var($email, FILTER_VALIDATE_EMAIL) && $message !== '') {
-            Database::get()->insert('messages', [
-                'name'       => mb_substr($name, 0, 150),
-                'email'      => mb_substr($email, 0, 190),
-                'phone'      => mb_substr($phone, 0, 50),
-                'subject'    => mb_substr($subject, 0, 190),
-                'message'    => mb_substr($message, 0, 5000),
-                'lang'       => LANG,
-                'ip'         => $_SERVER['REMOTE_ADDR'] ?? '',
-                'is_read'    => 0,
-                'created_at' => date('Y-m-d H:i:s'),
-            ]);
-            $ok = true;
-        }
-    }
-    $_SESSION[$ok ? 'flash_success' : 'flash_error'] = $ok ? t('form.success') : t('form.error');
-    header('Location: ' . url($contactPage[$slugField]) . '#contact-form');
-    exit;
-}
-
 /* ---------- Rotayı eşleştir ---------- */
 $page       = null;
 $template   = '404';

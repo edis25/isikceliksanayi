@@ -35,7 +35,7 @@ $waText = (lang() === 'tr'
     . ($alternates[lang()] ?? '');
 $quoteUrl = $waNumber !== ''
     ? 'https://wa.me/' . $waNumber . '?text=' . rawurlencode($waText)
-    : ($contactPage ? url($contactPage['slug_' . lang()]) . '?urun=' . rawurlencode(lv($product, 'name')) : url(''));
+    : ($contactPage ? url($contactPage['slug_' . lang()]) : url(''));
 $quoteIsWa = $waNumber !== '';
 
 require __DIR__ . '/partials/header.php';
