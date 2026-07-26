@@ -1,0 +1,10 @@
+# Yerel veritabanı (install.php ile üretilir)
+/data/
+
+# Panel üzerinden yüklenen medya
+/uploads/*
+!/uploads/.gitkeep
+
+# Sistem dosyaları
+.DS_Store
+Thumbs.db
