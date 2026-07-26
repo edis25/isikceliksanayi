@@ -47,6 +47,7 @@ return [
         'contact.email'      => 'E-posta',
         'contact.form_title' => 'Bize Yazın',
         'contact.info_title' => 'İletişim Bilgileri',
+        'contact.map'        => 'Haritada Gör',
 
         'news.published'     => 'Yayın Tarihi',
         'news.latest'        => 'Son Haberler',
@@ -121,6 +122,7 @@ return [
         'contact.email'      => 'Email',
         'contact.form_title' => 'Write to Us',
         'contact.info_title' => 'Contact Information',
+        'contact.map'        => 'View on Map',
 
         'news.published'     => 'Published',
         'news.latest'        => 'Latest News',

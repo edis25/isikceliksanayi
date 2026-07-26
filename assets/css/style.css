@@ -807,6 +807,8 @@ ul.checks li::before {
     gap: 24px;
 }
 .loc-card {
+    display: flex;
+    flex-direction: column;
     background: var(--c-white);
     border: 1px solid var(--c-line);
     border-top: 3px solid var(--c-accent);
@@ -832,6 +834,24 @@ ul.checks li::before {
     transform: translateY(3px);
 }
 .loc-rows a:hover { color: var(--c-accent); }
+.loc-map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto; /* kart yüksekliği farklı olsa da link hep en altta, aynı hizada */
+    padding-top: 14px;
+    border-top: 1px solid var(--c-line);
+    width: 100%;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--c-accent);
+}
+.loc-map-link svg { width: 16px; height: 16px; }
+.loc-map-link .arr { transition: transform .3s var(--ease); }
+.loc-map-link:hover .arr { transform: translateX(4px); }
 
 .contact-form-box {
     max-width: 860px;

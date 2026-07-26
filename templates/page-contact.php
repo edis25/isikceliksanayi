@@ -26,6 +26,12 @@ require __DIR__ . '/partials/page-hero.php';
         </div>
         <div class="locations-grid">
             <?php foreach ($locItems as $i => $loc): ?>
+            <?php
+            // Harita bağlantısı: özel 'map' alanı varsa o, yoksa adresten Google Maps araması
+            $mapUrl = !empty($loc['map'])
+                ? $loc['map']
+                : 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode(str_replace("\n", ' ', ($loc['title'] ?? '') . ' ' . ($loc['address'] ?? '')));
+            ?>
             <div class="loc-card reveal reveal-d<?= $i % 3 + 1 ?>">
                 <h3><?= e($loc['title'] ?? '') ?></h3>
                 <p class="loc-address"><?= nl2br(e($loc['address'] ?? '')) ?></p>
@@ -40,6 +46,9 @@ require __DIR__ . '/partials/page-hero.php';
                     <li><span class="lbl">E</span><a href="mailto:<?= e($mail) ?>"><?= e($mail) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
+                <a class="loc-map-link" href="<?= e($mapUrl) ?>" target="_blank" rel="noopener">
+                    <?= icon_svg('pin') ?> <?= e(t('contact.map')) ?> <span class="arr">→</span>
+                </a>
             </div>
             <?php endforeach; ?>
         </div>
