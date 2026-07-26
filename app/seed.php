@@ -15,7 +15,7 @@ function seed_database(Database $db): void
         ['phone', 'Telefon', '+90 (370) 424 20 77', '+90 (370) 424 20 77'],
         ['whatsapp', 'WhatsApp Numarası (ülke koduyla, örn: 905321234567)', '903704242077', '903704242077'],
         ['email', 'E-posta', 'export@isikcelik.com', 'export@isikcelik.com'],
-        ['address', 'Adres', 'Karabük Organize Sanayi Bölgesi, Karabük / Türkiye', 'Karabük Organized Industrial Zone, Karabük, Türkiye'],
+        ['address', 'Adres', 'Karabük Organize Sanayi Bölgesi Manolya Cad. No:7/2 Karabük, Türkiye', 'Karabük Organized Industrial Zone, Manolya Cad. No:7/2 Karabük, Türkiye'],
         ['map_embed', 'Google Maps Embed URL', '', ''],
         ['linkedin', 'LinkedIn', '', ''],
         ['instagram', 'Instagram', '', ''],
@@ -381,6 +381,44 @@ function seed_database(Database $db): void
         "Ürünlerimiz, ihracat süreçlerimiz veya iş birliği fırsatları hakkında bilgi almak için bize ulaşın.",
         "Contact us for information about our products, export operations or partnership opportunities.",
         '', '', [], ''];
+
+    // Lokasyonlar — eski isikcelik.com/iletisim sayfasından birebir
+    $locationsTr = [
+        ['title' => 'Karabük Merkez',
+         'address' => "Hürriyet Mahallesi Zonguldak Cad.\nNo. 38 Karabük, Türkiye",
+         'phones' => ['+90 (370) 424 20 77', '+90 (370) 424 15 07', '+90 (370) 412 33 11'],
+         'fax' => '+90 (370) 413 11 29 – 412 32 29',
+         'emails' => ['info@isikcelik.com', 'export@isikcelik.com']],
+        ['title' => 'Karabük Fabrika',
+         'address' => "Karabük Organize Sanayi Bölgesi\nManolya Cad. No:7/2 Karabük, Türkiye",
+         'phones' => ['+90 (370) 447 60 50', '+90 (370) 447 61 55'],
+         'fax' => '+90 (370) 447 61 50',
+         'emails' => ['info@isikcelik.com']],
+        ['title' => 'Ankara Ofis',
+         'address' => "Dumlupınar Bulvarı Kızılırmak Mah. Next Level Residans 3/B No: 1603,\n06520 Çankaya, Ankara, Türkiye",
+         'phones' => ['+90 (312) 210 00 59'],
+         'fax' => '+90 (312) 210 02 59',
+         'emails' => ['info@isikcelik.com', 'export@isikcelik.com']],
+        ['title' => 'İstanbul Ofis',
+         'address' => "Ünalan Mh. Libadiye Cd. Emaar Square Residence E Blok No:82/E\nDaire:42 (601) Üsküdar, İstanbul, Türkiye",
+         'phones' => ['+90 (216) 629 98 78'],
+         'fax' => '+90 (216) 629 99 33',
+         'emails' => ['info@isikcelik.com']],
+        ['title' => 'İzmit Ofis',
+         'address' => "Körfez Mah. Ankara Karayolu Cad.\nNo:10 İzmit, Türkiye",
+         'phones' => ['+90 (262) 335 55 11'],
+         'fax' => '+90 (262) 335 55 83',
+         'emails' => ['info@isikcelik.com']],
+    ];
+    $locationsEn = [];
+    $enTitles = ['Karabük Head Office', 'Karabük Factory', 'Ankara Office', 'İstanbul Office', 'İzmit Office'];
+    foreach ($locationsTr as $i => $loc) {
+        $loc['title'] = $enTitles[$i];
+        $locationsEn[] = $loc;
+    }
+    $sections[] = ['contact', 'locations', 'locations', 1,
+        'Lokasyonlarımız', 'Our Locations', '', '', '', '',
+        ['items_tr' => $locationsTr, 'items_en' => $locationsEn], ''];
 
     foreach ($sections as $s) {
         $db->insert('sections', [

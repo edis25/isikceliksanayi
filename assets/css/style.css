@@ -800,6 +800,49 @@ ul.checks li::before {
 .region-block p { margin-top: 14px; }
 .region-block ul.checks { margin-top: 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 26px; }
 
+/* ---------- Lokasyon kartları ---------- */
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+.loc-card {
+    background: var(--c-white);
+    border: 1px solid var(--c-line);
+    border-top: 3px solid var(--c-accent);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.loc-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+.loc-card h3 { font-size: 19px; margin-bottom: 12px; }
+.loc-address { font-size: 14.5px; line-height: 1.7; padding-bottom: 14px; border-bottom: 1px solid var(--c-line); margin-bottom: 12px; }
+.loc-rows li { display: flex; gap: 12px; padding: 5px 0; font-size: 14px; align-items: baseline; }
+.loc-rows .lbl {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    display: inline-grid;
+    place-items: center;
+    background: rgba(240, 90, 34, .1);
+    color: var(--c-accent);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 4px;
+    transform: translateY(3px);
+}
+.loc-rows a:hover { color: var(--c-accent); }
+
+.contact-form-box {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--c-white);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    padding: clamp(28px, 5vw, 56px);
+    box-shadow: 0 6px 24px -14px rgba(11,15,20,.12);
+}
+
 /* ---------- İletişim ---------- */
 .contact-layout {
     display: grid;
@@ -1191,6 +1234,7 @@ ul.checks li::before {
 }
 
 @media (max-width: 1000px) {
+    .locations-grid { grid-template-columns: repeat(2, 1fr); }
     .shop-layout { grid-template-columns: 1fr; }
     .shop-sidebar { position: static; }
     .shop-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1206,7 +1250,7 @@ ul.checks li::before {
 }
 
 @media (max-width: 620px) {
-    .cards-grid, .icon-grid, .news-grid, .gallery-grid, .shop-grid { grid-template-columns: 1fr; }
+    .cards-grid, .icon-grid, .news-grid, .gallery-grid, .shop-grid, .locations-grid { grid-template-columns: 1fr; }
     .form-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
