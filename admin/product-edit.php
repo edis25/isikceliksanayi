@@ -4,11 +4,13 @@ admin_require();
 admin_csrf_guard();
 
 $db = Database::get();
+$categories = $db->all('SELECT * FROM categories ORDER BY sort_order, id');
 $id = (int) ($_GET['id'] ?? 0);
 $product = $id ? $db->row('SELECT * FROM products WHERE id = :id', ['id' => $id]) : null;
 $isNew = !$product;
 if ($isNew) {
     $product = [
+        'category_id' => 0,
         'name_tr' => '', 'name_en' => '', 'slug_tr' => '', 'slug_en' => '',
         'summary_tr' => '', 'summary_en' => '', 'body_tr' => '', 'body_en' => '',
         'spec_table' => '', 'image' => '', 'meta_title_tr' => '', 'meta_title_en' => '',
@@ -18,6 +20,7 @@ if ($isNew) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
+        'category_id'  => (int) ($_POST['category_id'] ?? 0),
         'name_tr'      => trim($_POST['name_tr'] ?? ''),
         'name_en'      => trim($_POST['name_en'] ?? ''),
         'slug_tr'      => trim($_POST['slug_tr'] ?? '') ?: slugify($_POST['name_tr'] ?? ''),
@@ -110,6 +113,16 @@ admin_header($isNew ? 'Yeni Ürün' : 'Ürün Düzenle: ' . $product['name_tr'])
                 <label>Meta Description (EN)</label>
                 <textarea name="meta_desc_en" style="min-height:60px"><?= e($product['meta_desc_en']) ?></textarea>
             </div>
+        </div>
+        <div class="field">
+            <label>Kategori</label>
+            <select name="category_id">
+                <option value="0">— Kategorisiz —</option>
+                <?php foreach ($categories as $c): ?>
+                <option value="<?= (int) $c['id'] ?>" <?= (int) $product['category_id'] === (int) $c['id'] ? 'selected' : '' ?>><?= e($c['name_tr']) ?></option>
+                <?php endforeach; ?>
+            </select>
+            <small>Kategorileri <a href="categories.php">Kategoriler</a> sayfasından yönetebilirsiniz.</small>
         </div>
         <?php admin_image_field('image', $product['image']); ?>
         <div class="field">

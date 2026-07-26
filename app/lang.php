@@ -54,6 +54,14 @@ return [
         'products.related'   => 'Diğer Ürünler',
         'industries.title'   => 'Hizmet Verdiğimiz Sektörler',
 
+        'shop.search'        => 'Ürün ara…',
+        'shop.categories'    => 'Kategoriler',
+        'shop.all'           => 'Tüm Ürünler',
+        'shop.count'         => 'ürün',
+        'shop.noresult'      => 'Aramanızla eşleşen ürün bulunamadı.',
+        'shop.category'      => 'Kategori',
+        'btn.quote'          => 'Teklif İste',
+
         'footer.slogan'      => 'Güçlü Altyapı. Sürdürülebilir Üretim. Küresel Vizyon.',
         'footer.quicklinks'  => 'Hızlı Erişim',
         'footer.products'    => 'Ürünler',
@@ -117,6 +125,14 @@ return [
         'products.title'     => 'Our Product Groups',
         'products.related'   => 'Other Products',
         'industries.title'   => 'Industries We Serve',
+
+        'shop.search'        => 'Search products…',
+        'shop.categories'    => 'Categories',
+        'shop.all'           => 'All Products',
+        'shop.count'         => 'products',
+        'shop.noresult'      => 'No products match your search.',
+        'shop.category'      => 'Category',
+        'btn.quote'          => 'Request a Quote',
 
         'footer.slogan'      => 'Strong Infrastructure. Sustainable Manufacturing. Global Vision.',
         'footer.quicklinks'  => 'Quick Links',

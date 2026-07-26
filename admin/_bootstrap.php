@@ -55,6 +55,7 @@ function admin_header(string $title): void
         'index.php'    => ['Panel', '⌂'],
         'pages.php'    => ['Sayfalar', '☰'],
         'products.php' => ['Ürünler', '▦'],
+        'categories.php' => ['Kategoriler', '⊞'],
         'sectors.php'  => ['Sektörler', '◫'],
         'news.php'     => ['Haberler', '✎'],
         'media.php'    => ['Medya', '▣'],

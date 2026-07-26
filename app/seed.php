@@ -399,6 +399,41 @@ function seed_database(Database $db): void
         ]);
     }
 
+    /* ================= KATEGORİLER ================= */
+    // Eski sitedeki 3 ürün kategorisi
+    $categories = [
+        ['sicak-cekilmis-urunler', 'hot-rolled-products', 'Sıcak Çekilmiş Ürünler', 'Hot-Rolled Products'],
+        ['profiller', 'profiles', 'Profiller', 'Profiles'],
+        ['diger-urunler', 'other-products', 'Diğer Ürünler', 'Other Products'],
+    ];
+    $catIds = [];
+    foreach ($categories as $i => $c) {
+        $catIds[$c[0]] = $db->insert('categories', [
+            'slug_tr' => $c[0], 'slug_en' => $c[1],
+            'name_tr' => $c[2], 'name_en' => $c[3],
+            'sort_order' => $i, 'is_published' => 1,
+        ]);
+    }
+
+    /* Ürün → kategori dağılımı (ürün slug'ına göre) */
+    $productCategory = [
+        'nervurlu-insaat-demiri'    => 'sicak-cekilmis-urunler',
+        'kosebent'                  => 'sicak-cekilmis-urunler',
+        'lama'                      => 'sicak-cekilmis-urunler',
+        'kare'                      => 'sicak-cekilmis-urunler',
+        'duz-yuvarlak'              => 'sicak-cekilmis-urunler',
+        'altikose'                  => 'sicak-cekilmis-urunler',
+        'npu'                       => 'profiller',
+        'npi'                       => 'profiller',
+        'ipe'                       => 'profiller',
+        'hea'                       => 'profiller',
+        'heb'                       => 'profiller',
+        'transmisyon-mili'          => 'diger-urunler',
+        'nervurlu-lama-celik-serit' => 'diger-urunler',
+        'izli-kare'                 => 'diger-urunler',
+        'izli-lama'                 => 'diger-urunler',
+    ];
+
     /* ================= ÜRÜNLER ================= */
     // Eski isikcelik.com'dan birebir aktarılan ürünler (ad, görsel, ölçü tablosu)
     $importFile = __DIR__ . '/products-import.json';
@@ -406,6 +441,7 @@ function seed_database(Database $db): void
     foreach ($products as $p) {
         $p['body_tr'] = $p['body_tr'] ?? '';
         $p['body_en'] = $p['body_en'] ?? '';
+        $p['category_id'] = $catIds[$productCategory[$p['slug_tr']] ?? ''] ?? 0;
         $p['is_published'] = 1;
         $db->insert('products', $p);
     }

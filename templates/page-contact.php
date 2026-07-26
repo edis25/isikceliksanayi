@@ -5,6 +5,12 @@ $flashSuccess = $_SESSION['flash_success'] ?? '';
 $flashError   = $_SESSION['flash_error'] ?? '';
 unset($_SESSION['flash_success'], $_SESSION['flash_error']);
 
+/* Ürün sayfasından "Teklif İste" ile gelindiyse konu alanını doldur */
+$prefillSubject = '';
+if (($p = trim($_GET['urun'] ?? '')) !== '') {
+    $prefillSubject = (lang() === 'tr' ? 'Teklif Talebi: ' : 'Quote Request: ') . mb_substr($p, 0, 150);
+}
+
 require __DIR__ . '/partials/header.php';
 $heroLead = $intro ? lv($intro, 'subtitle') : '';
 require __DIR__ . '/partials/page-hero.php';
@@ -63,7 +69,7 @@ require __DIR__ . '/partials/page-hero.php';
                         </div>
                         <div class="field">
                             <label><?= e(t('form.subject')) ?></label>
-                            <input type="text" name="subject" maxlength="190">
+                            <input type="text" name="subject" maxlength="190" value="<?= e($prefillSubject) ?>">
                         </div>
                         <div class="field full">
                             <label><?= e(t('form.message')) ?> <span class="req">*</span></label>

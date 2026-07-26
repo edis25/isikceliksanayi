@@ -16,8 +16,19 @@ $jsonld_extra = json_encode([
     'url'      => $seo['canonical'],
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-$others = $db->all('SELECT * FROM products WHERE is_published = 1 AND id != :id ORDER BY sort_order LIMIT 3', ['id' => $product['id']]);
+$productCat = $product['category_id']
+    ? $db->row('SELECT * FROM categories WHERE id = :id AND is_published = 1', ['id' => $product['category_id']])
+    : null;
+
+/* İlgili ürünler: önce aynı kategoriden */
+$others = $db->all(
+    'SELECT * FROM products WHERE is_published = 1 AND id != :id ORDER BY (category_id = :cid) DESC, sort_order LIMIT 3',
+    ['id' => $product['id'], 'cid' => (int) $product['category_id']]
+);
 $contactPage = $pagesByKey['contact'] ?? null;
+$quoteUrl = $contactPage
+    ? url($contactPage['slug_' . lang()]) . '?urun=' . rawurlencode(lv($product, 'name'))
+    : url('');
 
 require __DIR__ . '/partials/header.php';
 
@@ -37,15 +48,22 @@ require __DIR__ . '/partials/page-hero.php';
                 </div>
             </div>
             <div class="split-body reveal reveal-d1">
-                <p class="eyebrow"><?= e(t('nav.products')) ?></p>
+                <p class="eyebrow"><?= e($productCat ? lv($productCat, 'name') : t('nav.products')) ?></p>
                 <h2><?= e(lv($product, 'name')) ?></h2>
                 <?php if (lv($product, 'summary')): ?>
                 <p class="split-sub"><?= e(lv($product, 'summary')) ?></p>
                 <?php endif; ?>
                 <?= nl2p(lv($product, 'body')) ?>
-                <?php if ($contactPage): ?>
-                <a class="btn" href="<?= e(url($contactPage['slug_' . lang()])) ?>"><?= e(t('btn.contact_us')) ?> <span class="arr">→</span></a>
+                <?php if ($productCat): ?>
+                <p class="detail-cat">
+                    <?= e(t('shop.category')) ?>:
+                    <a href="<?= e(url($page['slug_' . lang()]) . '?cat=' . rawurlencode($productCat['slug_' . lang()])) ?>"><?= e(lv($productCat, 'name')) ?></a>
+                </p>
                 <?php endif; ?>
+                <div class="detail-actions">
+                    <a class="btn" href="<?= e($quoteUrl) ?>"><?= e(t('btn.quote')) ?> <span class="arr">→</span></a>
+                    <a class="btn btn-dark" href="tel:<?= e(preg_replace('/[^0-9+]/', '', setting('phone'))) ?>"><?= e(setting('phone')) ?></a>
+                </div>
             </div>
         </div>
     </div>

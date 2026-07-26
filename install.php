@@ -77,8 +77,19 @@ $tables = [
         is_published INT DEFAULT 1
     )$suffix",
 
+    'categories' => "CREATE TABLE IF NOT EXISTS categories (
+        id $pk,
+        slug_tr VARCHAR(190) NOT NULL,
+        slug_en VARCHAR(190) NOT NULL,
+        name_tr VARCHAR(190) NOT NULL,
+        name_en VARCHAR(190) DEFAULT '',
+        sort_order INT DEFAULT 0,
+        is_published INT DEFAULT 1
+    )$suffix",
+
     'products' => "CREATE TABLE IF NOT EXISTS products (
         id $pk,
+        category_id INT DEFAULT 0,
         slug_tr VARCHAR(190) NOT NULL,
         slug_en VARCHAR(190) NOT NULL,
         name_tr VARCHAR(190) NOT NULL,

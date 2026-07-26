@@ -12,23 +12,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
     exit;
 }
 
-$products = $db->all('SELECT * FROM products ORDER BY sort_order, id');
+$products = $db->all('SELECT p.*, c.name_tr AS cat_name FROM products p LEFT JOIN categories c ON c.id = p.category_id ORDER BY p.sort_order, p.id');
 
 admin_header('Ürünler');
 ?>
 <div class="toolbar">
     <span class="muted"><?= count($products) ?> ürün</span>
-    <a class="btn" href="product-edit.php">+ Yeni Ürün</a>
+    <span>
+        <a class="btn btn-plain btn-small" href="categories.php">Kategorileri Yönet</a>
+        <a class="btn" href="product-edit.php">+ Yeni Ürün</a>
+    </span>
 </div>
 <div class="panel">
     <table>
-        <tr><th>Görsel</th><th>Sıra</th><th>Ürün Adı</th><th>TR URL</th><th>Durum</th><th></th></tr>
+        <tr><th>Görsel</th><th>Sıra</th><th>Ürün Adı</th><th>Kategori</th><th>Durum</th><th></th></tr>
         <?php foreach ($products as $p): ?>
         <tr>
             <td><?php if ($p['image']): ?><img class="thumb" src="../<?= e($p['image']) ?>" alt=""><?php endif; ?></td>
             <td><?= (int) $p['sort_order'] ?></td>
             <td><strong><?= e($p['name_tr']) ?></strong></td>
-            <td class="muted"><?= e($p['slug_tr']) ?></td>
+            <td class="muted"><?= e($p['cat_name'] ?? '—') ?></td>
             <td><?= $p['is_published'] ? 'Yayında' : 'Gizli' ?></td>
             <td style="white-space:nowrap">
                 <a class="btn btn-small btn-plain" href="product-edit.php?id=<?= (int) $p['id'] ?>">Düzenle</a>
