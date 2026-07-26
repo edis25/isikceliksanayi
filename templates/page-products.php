@@ -18,7 +18,7 @@ require __DIR__ . '/partials/page-hero.php';
         <div class="cards-grid">
             <?php foreach ($allProducts as $i => $pr): ?>
             <a class="card reveal reveal-d<?= $i % 3 + 1 ?>" href="<?= e(url($page['slug_' . lang()] . '/' . $pr['slug_' . lang()])) ?>">
-                <div class="card-media"><img src="<?= e(upload_url($pr['image'])) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy"></div>
+                <div class="card-media contain"><img src="<?= e(upload_url($pr['image'])) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy"></div>
                 <div class="card-body">
                     <h3><?= e(lv($pr, 'name')) ?></h3>
                     <p><?= e(excerpt(lv($pr, 'summary'), 120)) ?></p>

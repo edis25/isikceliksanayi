@@ -87,6 +87,7 @@ $tables = [
         summary_en TEXT,
         body_tr TEXT,
         body_en TEXT,
+        spec_table TEXT,
         image VARCHAR(255) DEFAULT '',
         meta_title_tr VARCHAR(190) DEFAULT '',
         meta_title_en VARCHAR(190) DEFAULT '',

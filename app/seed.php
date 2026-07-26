@@ -400,88 +400,12 @@ function seed_database(Database $db): void
     }
 
     /* ================= ÜRÜNLER ================= */
-    $products = [
-        [
-            'slug_tr' => 'sicak-cekilmis-celik-urunler', 'slug_en' => 'hot-drawn-steel-products',
-            'name_tr' => 'Sıcak Çekilmiş Çelik Ürünler', 'name_en' => 'Hot-Drawn Steel Products',
-            'summary_tr' => 'Yüksek sıcaklıkta şekillendirilen, dayanımı ve işlenebilirliği yüksek çelik ürünler.',
-            'summary_en' => 'Steel products formed at high temperature, offering high strength and workability.',
-            'body_tr' => "Sıcak çekilmiş çelik ürünlerimiz; lama, köşebent, kare, yuvarlak ve altıköşe kesitlerde, uluslararası standartlara uygun olarak üretilmektedir.\n\nModern hadde hatlarımız ve yüksek hassasiyetli proses kontrolümüz sayesinde ölçü tutarlılığı ve yüzey kalitesi sürekli güvence altındadır. İnşaattan makine imalatına kadar geniş bir kullanım alanına sahiptir.",
-            'body_en' => "Our hot-drawn steel products are manufactured in flat, angle, square, round and hexagonal sections in accordance with international standards.\n\nOur modern rolling lines and high-precision process control ensure consistent dimensions and surface quality. They serve a wide range of applications from construction to machinery manufacturing.",
-            'image' => 'assets/img/sicak-cekim.jpg',
-            'meta_title_tr' => 'Sıcak Çekilmiş Çelik Ürünler | Işık Çelik',
-            'meta_title_en' => 'Hot-Drawn Steel Products | Işık Çelik',
-            'meta_desc_tr' => 'Lama, köşebent, kare, yuvarlak ve altıköşe kesitlerde sıcak çekilmiş çelik ürünler. Uluslararası standartlarda üretim, Karabük\'ten dünyaya ihracat.',
-            'meta_desc_en' => 'Hot-drawn steel in flat, angle, square, round and hexagonal sections. Manufactured to international standards, exported worldwide from Türkiye.',
-        ],
-        [
-            'slug_tr' => 'soguk-cekilmis-celik-urunler', 'slug_en' => 'cold-drawn-steel-products',
-            'name_tr' => 'Soğuk Çekilmiş Çelik Ürünler', 'name_en' => 'Cold-Drawn Steel Products',
-            'summary_tr' => 'Hassas toleranslı, parlak yüzeyli, yüksek mukavemetli soğuk çekim ürünler.',
-            'summary_en' => 'Cold-drawn products with tight tolerances, bright surfaces and high strength.',
-            'body_tr' => "Soğuk çekme prosesi; ürünlere hassas ölçü toleransı, parlak ve düzgün yüzey ile artırılmış mekanik dayanım kazandırır.\n\nOtomotiv, makine ve bağlantı elemanı sektörlerinin talep ettiği yüksek hassasiyetli uygulamalar için ideal çözümler sunuyoruz.",
-            'body_en' => "The cold-drawing process gives our products tight dimensional tolerances, bright and smooth surfaces, and enhanced mechanical strength.\n\nWe offer ideal solutions for high-precision applications demanded by the automotive, machinery and fastener industries.",
-            'image' => 'assets/img/hadde-hatti.jpg',
-            'meta_title_tr' => 'Soğuk Çekilmiş Çelik Ürünler | Işık Çelik',
-            'meta_title_en' => 'Cold-Drawn Steel Products | Işık Çelik',
-            'meta_desc_tr' => 'Hassas toleranslı, parlak yüzeyli soğuk çekilmiş çelik ürünler. Otomotiv, makine ve bağlantı elemanı sektörleri için yüksek mukavemetli çözümler.',
-            'meta_desc_en' => 'Cold-drawn steel with tight tolerances and bright surfaces. High-strength solutions for automotive, machinery and fastener industries.',
-        ],
-        [
-            'slug_tr' => 'celik-profiller', 'slug_en' => 'steel-profiles',
-            'name_tr' => 'Çelik Profiller', 'name_en' => 'Steel Profiles',
-            'summary_tr' => 'Global pazarda yüksek rekabet gücüne sahip, katma değerli profil üretimi.',
-            'summary_en' => 'Value-added profile production with strong global competitiveness.',
-            'body_tr' => "Çelik profil ürün grubumuz, katma değerli üretim anlayışımızın merkezinde yer alır. Global pazarda yüksek rekabet gücüne sahip olduğumuz bu üründe, geniş kesit yelpazesi ve esnek üretim kabiliyeti sunuyoruz.\n\nİnşaat, makine ve sanayi yatırımlarının taşıyıcı sistem ihtiyaçları için güvenilir çözüm ortağıyız.",
-            'body_en' => "Steel profiles are at the heart of our value-added manufacturing approach. In this product group where we hold strong global competitiveness, we offer a wide range of sections and flexible production capability.\n\nWe are a reliable solution partner for the structural needs of construction, machinery and industrial investments.",
-            'image' => 'assets/img/uretim-robotik.jpg',
-            'meta_title_tr' => 'Çelik Profiller | Işık Çelik',
-            'meta_title_en' => 'Steel Profiles | Işık Çelik',
-            'meta_desc_tr' => 'Katma değerli çelik profil üretimi. Geniş kesit yelpazesi, esnek üretim kabiliyeti ve global pazarda yüksek rekabet gücü.',
-            'meta_desc_en' => 'Value-added steel profile production. Wide section range, flexible manufacturing capability and strong global competitiveness.',
-        ],
-        [
-            'slug_tr' => 'ozel-profiller', 'slug_en' => 'custom-steel-profiles',
-            'name_tr' => 'Özel Profiller', 'name_en' => 'Custom Steel Profiles',
-            'summary_tr' => 'Projenize özel kesit ve ölçülerde, mühendislik odaklı profil çözümleri.',
-            'summary_en' => 'Engineering-driven profile solutions in project-specific sections and sizes.',
-            'body_tr' => "Standart kesitlerin ötesinde, müşterilerimizin teknik çizimlerine göre özel profil üretimi gerçekleştiriyoruz.\n\nMühendislik ekibimiz; kesit tasarımından numune onayına ve seri üretime kadar tüm süreçte müşterilerimizle birlikte çalışır. Özel mühendislik gerektiren yüksek katma değerli ürünlerde global fırsatları değerlendiriyoruz.",
-            'body_en' => "Beyond standard sections, we manufacture custom profiles according to our customers' technical drawings.\n\nOur engineering team works with customers throughout the entire process — from section design to sample approval and mass production. We continue to pursue global opportunities in engineering-intensive, value-added products.",
-            'image' => 'assets/img/tesis-vinc.jpg',
-            'meta_title_tr' => 'Özel Profiller | Işık Çelik',
-            'meta_title_en' => 'Custom Steel Profiles | Işık Çelik',
-            'meta_desc_tr' => 'Teknik çizime göre özel çelik profil üretimi. Kesit tasarımından seri üretime mühendislik odaklı çözümler.',
-            'meta_desc_en' => 'Custom steel profile production from technical drawings. Engineering-driven solutions from section design to mass production.',
-        ],
-        [
-            'slug_tr' => 'islenmis-cubuklar', 'slug_en' => 'machined-steel-bars',
-            'name_tr' => 'İşlenmiş Çubuklar', 'name_en' => 'Machined Steel Bars',
-            'summary_tr' => 'Talaşlı imalata hazır, hassas işlenmiş katma değerli çubuk ürünler.',
-            'summary_en' => 'Precision-machined, value-added bar products ready for further processing.',
-            'body_tr' => "İşlenmiş çubuk ürün grubumuzda, global pazarda yüksek rekabet gücüne sahibiz.\n\nTalaşlı imalat süreçlerine hazır, hassas toleranslarda işlenmiş çubuklarımız; otomotiv, makine ve tarım ekipmanları sektörlerinde yarı mamul olarak doğrudan kullanılabilir. Müşterilerimizin üretim sürelerini kısaltan, katma değerli bir çözümdür.",
-            'body_en' => "We hold strong global competitiveness in our machined steel bar product group.\n\nMachined to tight tolerances and ready for further processing, our bars can be used directly as semi-finished components in the automotive, machinery and agricultural equipment industries — a value-added solution that shortens our customers' production times.",
-            'image' => 'assets/img/hadde-hatti.jpg',
-            'meta_title_tr' => 'İşlenmiş Çubuklar | Işık Çelik',
-            'meta_title_en' => 'Machined Steel Bars | Işık Çelik',
-            'meta_desc_tr' => 'Hassas toleranslarda işlenmiş, talaşlı imalata hazır çelik çubuklar. Otomotiv, makine ve tarım ekipmanları için katma değerli çözümler.',
-            'meta_desc_en' => 'Steel bars machined to tight tolerances, ready for further processing. Value-added solutions for automotive, machinery and agricultural equipment.',
-        ],
-        [
-            'slug_tr' => 'baglanti-elemanlari', 'slug_en' => 'fasteners',
-            'name_tr' => 'Bağlantı Elemanları', 'name_en' => 'Fasteners',
-            'summary_tr' => 'Sanayinin temel ihtiyacı bağlantı elemanları için güvenilir hammadde ve ürün tedariki.',
-            'summary_en' => 'Reliable raw material and product supply for industrial fasteners.',
-            'body_tr' => "Bağlantı elemanları ürün grubumuz, sanayinin en temel ihtiyaçlarından birine cevap verir.\n\nYüksek mukavemetli çelik kalitelerinde, uluslararası standartlara uygun üretim ile inşaattan makine imalatına kadar geniş bir alanda güvenilir bağlantı çözümleri sunuyoruz.",
-            'body_en' => "Our fasteners product group answers one of industry's most fundamental needs.\n\nManufactured from high-strength steel grades to international standards, we provide reliable fastening solutions for applications ranging from construction to machinery manufacturing.",
-            'image' => 'assets/img/uretim-robotik.jpg',
-            'meta_title_tr' => 'Bağlantı Elemanları | Işık Çelik',
-            'meta_title_en' => 'Fasteners | Işık Çelik',
-            'meta_desc_tr' => 'Yüksek mukavemetli çelik kalitelerinde, uluslararası standartlara uygun bağlantı elemanları üretimi ve tedariki.',
-            'meta_desc_en' => 'Production and supply of fasteners from high-strength steel grades, manufactured to international standards.',
-        ],
-    ];
-    foreach ($products as $i => $p) {
-        $p['sort_order'] = $i;
+    // Eski isikcelik.com'dan birebir aktarılan ürünler (ad, görsel, ölçü tablosu)
+    $importFile = __DIR__ . '/products-import.json';
+    $products = is_file($importFile) ? (json_decode(file_get_contents($importFile), true) ?: []) : [];
+    foreach ($products as $p) {
+        $p['body_tr'] = $p['body_tr'] ?? '';
+        $p['body_en'] = $p['body_en'] ?? '';
         $p['is_published'] = 1;
         $db->insert('products', $p);
     }

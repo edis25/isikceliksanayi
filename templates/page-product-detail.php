@@ -23,7 +23,7 @@ require __DIR__ . '/partials/header.php';
 
 $heroTitle = lv($product, 'name');
 $heroLead  = lv($product, 'summary');
-$heroImage = $product['image'];
+$heroImage = $page['image'];
 $extraCrumb = ['label' => lv($page, 'title'), 'url' => url($page['slug_' . lang()])];
 require __DIR__ . '/partials/page-hero.php';
 ?>
@@ -32,11 +32,16 @@ require __DIR__ . '/partials/page-hero.php';
     <div class="container">
         <div class="split">
             <div class="split-media reveal">
-                <img src="<?= e(upload_url($product['image'])) ?>" alt="<?= e(lv($product, 'name')) ?>">
+                <div class="product-figure">
+                    <img src="<?= e(upload_url($product['image'])) ?>" alt="<?= e(lv($product, 'name')) ?>">
+                </div>
             </div>
             <div class="split-body reveal reveal-d1">
                 <p class="eyebrow"><?= e(t('nav.products')) ?></p>
                 <h2><?= e(lv($product, 'name')) ?></h2>
+                <?php if (lv($product, 'summary')): ?>
+                <p class="split-sub"><?= e(lv($product, 'summary')) ?></p>
+                <?php endif; ?>
                 <?= nl2p(lv($product, 'body')) ?>
                 <?php if ($contactPage): ?>
                 <a class="btn" href="<?= e(url($contactPage['slug_' . lang()])) ?>"><?= e(t('btn.contact_us')) ?> <span class="arr">→</span></a>
@@ -45,6 +50,20 @@ require __DIR__ . '/partials/page-hero.php';
         </div>
     </div>
 </section>
+
+<?php if (!empty($product['spec_table'])): ?>
+<section class="section tight">
+    <div class="container">
+        <div class="section-head reveal">
+            <p class="eyebrow"><?= e(t('nav.products')) ?></p>
+            <h2 class="section-title"><?= lang() === 'tr' ? 'Üretim Ölçüleri' : 'Production Range' ?></h2>
+        </div>
+        <div class="spec-table-wrap reveal">
+            <?= $product['spec_table'] /* eski siteden birebir aktarılan tablo; admin panelden düzenlenebilir */ ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
 
 <?php if ($others): ?>
 <section class="section tight">
@@ -56,7 +75,7 @@ require __DIR__ . '/partials/page-hero.php';
         <div class="cards-grid">
             <?php foreach ($others as $i => $pr): ?>
             <a class="card reveal reveal-d<?= $i + 1 ?>" href="<?= e(url($page['slug_' . lang()] . '/' . $pr['slug_' . lang()])) ?>">
-                <div class="card-media"><img src="<?= e(upload_url($pr['image'])) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy"></div>
+                <div class="card-media contain"><img src="<?= e(upload_url($pr['image'])) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy"></div>
                 <div class="card-body">
                     <h3><?= e(lv($pr, 'name')) ?></h3>
                     <p><?= e(excerpt(lv($pr, 'summary'), 100)) ?></p>

@@ -4,8 +4,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a class="brand" href="<?= e(url('')) ?>">
-                    <?= brand_mark() ?>
-                    <span class="brand-text">IŞIK ÇELİK<small><?= lang() === 'tr' ? 'ÇELİK SANAYİ' : 'STEEL INDUSTRY' ?></small></span>
+                    <img class="brand-logo" src="<?= e(asset('assets/img/logo-light.png')) ?>" alt="<?= e(setting('site_name', 'Işık Çelik')) ?>" width="350" height="196">
                 </a>
                 <p><?= e(t('footer.slogan')) ?></p>
             </div>

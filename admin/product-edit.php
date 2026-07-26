@@ -11,7 +11,7 @@ if ($isNew) {
     $product = [
         'name_tr' => '', 'name_en' => '', 'slug_tr' => '', 'slug_en' => '',
         'summary_tr' => '', 'summary_en' => '', 'body_tr' => '', 'body_en' => '',
-        'image' => '', 'meta_title_tr' => '', 'meta_title_en' => '',
+        'spec_table' => '', 'image' => '', 'meta_title_tr' => '', 'meta_title_en' => '',
         'meta_desc_tr' => '', 'meta_desc_en' => '', 'sort_order' => 99, 'is_published' => 1,
     ];
 }
@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'summary_en'   => trim($_POST['summary_en'] ?? ''),
         'body_tr'      => trim($_POST['body_tr'] ?? ''),
         'body_en'      => trim($_POST['body_en'] ?? ''),
+        'spec_table'   => trim($_POST['spec_table'] ?? ''),
         'image'        => trim($_POST['image'] ?? ''),
         'meta_title_tr'=> trim($_POST['meta_title_tr'] ?? ''),
         'meta_title_en'=> trim($_POST['meta_title_en'] ?? ''),
@@ -111,6 +112,11 @@ admin_header($isNew ? 'Yeni Ürün' : 'Ürün Düzenle: ' . $product['name_tr'])
             </div>
         </div>
         <?php admin_image_field('image', $product['image']); ?>
+        <div class="field">
+            <label>Üretim Ölçüleri Tablosu (HTML)</label>
+            <textarea class="tall" name="spec_table" spellcheck="false" style="font-family:monospace;font-size:12.5px"><?= e($product['spec_table']) ?></textarea>
+            <small>&lt;table&gt;&lt;tr&gt;&lt;td&gt; yapısında ölçü tablosu. İlk satır başlık, ilk sütun ölçü olarak vurgulanır; boş bırakılırsa ürün sayfasında tablo gösterilmez.</small>
+        </div>
         <div class="field-row">
             <div class="field">
                 <label>Sıra</label>

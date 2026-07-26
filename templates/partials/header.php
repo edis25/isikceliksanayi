@@ -9,14 +9,14 @@ $fullTitle = $seo['title'] ?? $siteName;
 if (mb_stripos($fullTitle, 'Işık Çelik') === false && mb_stripos($fullTitle, 'Isik') === false) {
     $fullTitle .= $metaSuffix;
 }
-$faviconSvg = rawurlencode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><rect x="1.5" y="1.5" width="41" height="41" rx="8" fill="#0b0f14"/><path d="M22 8 14 24h6l-2 12 10-17h-6l2-11Z" fill="#f05a22"/></svg>');
+$faviconSvg = rawurlencode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><rect x="1.5" y="1.5" width="41" height="41" rx="8" fill="#1b2265"/><path d="M22 7 35 20 22 33 9 20Z" fill="#fff"/><path d="M13 27l9 8 9-8-2-2-7 6-7-6Z" fill="#fff"/></svg>');
 
 $orgJsonLd = [
     '@context' => 'https://schema.org',
     '@type'    => 'Organization',
     'name'     => $siteName,
     'url'      => base_url() . '/',
-    'logo'     => 'data:image/svg+xml,' . $faviconSvg,
+    'logo'     => asset('assets/img/logo-dark.png'),
     'foundingDate' => '1965',
     'address'  => [
         '@type' => 'PostalAddress',
@@ -84,8 +84,7 @@ if ($sameAs) {
 <header class="site-header<?= empty($transparentHeader) ? ' solid' : '' ?>">
     <div class="container">
         <a class="brand" href="<?= e(url('')) ?>" aria-label="<?= e($siteName) ?>">
-            <?= brand_mark() ?>
-            <span class="brand-text">IŞIK ÇELİK<small><?= lang() === 'tr' ? 'ÇELİK SANAYİ' : 'STEEL INDUSTRY' ?></small></span>
+            <img class="brand-logo" src="<?= e(asset('assets/img/logo-light.png')) ?>" alt="<?= e($siteName) ?>" width="350" height="196">
         </a>
         <nav class="main-nav" aria-label="<?= lang() === 'tr' ? 'Ana menü' : 'Main menu' ?>">
             <?php foreach ($navKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
