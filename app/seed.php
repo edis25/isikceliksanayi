@@ -13,6 +13,7 @@ function seed_database(Database $db): void
         ['site_name', 'Site Adı', 'Işık Çelik', 'Işık Çelik'],
         ['slogan', 'Slogan', 'Güçlü Altyapı. Sürdürülebilir Üretim. Küresel Vizyon.', 'Strong Infrastructure. Sustainable Manufacturing. Global Vision.'],
         ['phone', 'Telefon', '+90 (370) 424 20 77', '+90 (370) 424 20 77'],
+        ['whatsapp', 'WhatsApp Numarası (ülke koduyla, örn: 905321234567)', '903704242077', '903704242077'],
         ['email', 'E-posta', 'export@isikcelik.com', 'export@isikcelik.com'],
         ['address', 'Adres', 'Karabük Organize Sanayi Bölgesi, Karabük / Türkiye', 'Karabük Organized Industrial Zone, Karabük, Türkiye'],
         ['map_embed', 'Google Maps Embed URL', '', ''],

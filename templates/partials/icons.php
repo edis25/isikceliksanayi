@@ -22,6 +22,7 @@ function icon_svg(string $name): string
         'pin'          => '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
         'clock'        => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
         'arrow'        => '<path d="M5 12h14M13 6l6 6-6 6"/>',
+        'whatsapp'     => '<path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3Z"/><path d="M9 8.5c0 4 2.5 6.5 6.5 6.5.4 0 .9-.4.9-.9v-1.3l-2.2-.7-.9.9c-1.1-.5-2-1.4-2.5-2.5l.9-.9-.7-2.2H9.9c-.5 0-.9.5-.9 1.1Z"/>',
     ];
     $path = $icons[$name] ?? $icons['industry'];
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $path . '</svg>';

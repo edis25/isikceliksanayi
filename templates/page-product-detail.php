@@ -26,9 +26,17 @@ $others = $db->all(
     ['id' => $product['id'], 'cid' => (int) $product['category_id']]
 );
 $contactPage = $pagesByKey['contact'] ?? null;
-$quoteUrl = $contactPage
-    ? url($contactPage['slug_' . lang()]) . '?urun=' . rawurlencode(lv($product, 'name'))
-    : url('');
+
+/* Teklif İste → WhatsApp (numara panelden yönetilir); numara yoksa iletişim formuna düşer */
+$waNumber = preg_replace('/\D/', '', setting('whatsapp'));
+$waText = (lang() === 'tr'
+    ? 'Merhaba, ' . lv($product, 'name') . ' ürünü hakkında teklif almak istiyorum. '
+    : 'Hello, I would like to request a quote for ' . lv($product, 'name') . '. ')
+    . ($alternates[lang()] ?? '');
+$quoteUrl = $waNumber !== ''
+    ? 'https://wa.me/' . $waNumber . '?text=' . rawurlencode($waText)
+    : ($contactPage ? url($contactPage['slug_' . lang()]) . '?urun=' . rawurlencode(lv($product, 'name')) : url(''));
+$quoteIsWa = $waNumber !== '';
 
 require __DIR__ . '/partials/header.php';
 
@@ -61,7 +69,10 @@ require __DIR__ . '/partials/page-hero.php';
                 </p>
                 <?php endif; ?>
                 <div class="detail-actions">
-                    <a class="btn" href="<?= e($quoteUrl) ?>"><?= e(t('btn.quote')) ?> <span class="arr">→</span></a>
+                    <a class="btn<?= $quoteIsWa ? ' btn-wa' : '' ?>" href="<?= e($quoteUrl) ?>"<?= $quoteIsWa ? ' target="_blank" rel="noopener"' : '' ?>>
+                        <?php if ($quoteIsWa): ?><span class="btn-ico"><?= icon_svg('whatsapp') ?></span><?php endif; ?>
+                        <?= e(t('btn.quote')) ?> <span class="arr">→</span>
+                    </a>
                     <a class="btn btn-dark" href="tel:<?= e(preg_replace('/[^0-9+]/', '', setting('phone'))) ?>"><?= e(setting('phone')) ?></a>
                 </div>
             </div>

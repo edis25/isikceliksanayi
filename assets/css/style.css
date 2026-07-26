@@ -935,6 +935,11 @@ ul.checks li::before {
     border-radius: 20px;
 }
 
+.btn-wa { background: #25d366; border-color: #25d366; }
+.btn-wa:hover { background: #1eb857; border-color: #1eb857; }
+.btn .btn-ico { display: inline-flex; }
+.btn .btn-ico svg { width: 19px; height: 19px; }
+
 .detail-cat { margin-top: 16px; font-size: 14.5px; color: var(--c-muted); }
 .detail-cat a { color: var(--c-accent); font-weight: 600; }
 .detail-cat a:hover { text-decoration: underline; }
