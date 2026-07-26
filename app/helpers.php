@@ -203,6 +203,16 @@ function slugify(string $text): string
     return trim($text, '-');
 }
 
+/** Ürünün ilk galeri (fotoğraf) görselini döndürür — kart hover'ı için. */
+function product_hover_image(array $product): ?string
+{
+    if (empty($product['gallery'])) {
+        return null;
+    }
+    $g = json_decode($product['gallery'], true);
+    return is_array($g) && !empty($g[0]) ? $g[0] : null;
+}
+
 /** Metni belirli uzunlukta kırpar. */
 function excerpt(?string $text, int $len = 160): string
 {

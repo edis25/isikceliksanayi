@@ -47,13 +47,36 @@ $extraCrumb = ['label' => lv($page, 'title'), 'url' => url($page['slug_' . lang(
 require __DIR__ . '/partials/page-hero.php';
 ?>
 
+<?php
+/* Galeri: ana görsel + ek fotoğraflar */
+$galleryImages = [];
+if (!empty($product['image'])) {
+    $galleryImages[] = $product['image'];
+}
+if (!empty($product['gallery'])) {
+    foreach (json_decode($product['gallery'], true) ?: [] as $g) {
+        if ($g) {
+            $galleryImages[] = $g;
+        }
+    }
+}
+?>
 <section class="section">
     <div class="container">
         <div class="split">
             <div class="split-media reveal">
                 <div class="product-figure">
-                    <img src="<?= e(upload_url($product['image'])) ?>" alt="<?= e(lv($product, 'name')) ?>">
+                    <img id="product-main-img" src="<?= e(upload_url($galleryImages[0] ?? '')) ?>" alt="<?= e(lv($product, 'name')) ?>">
                 </div>
+                <?php if (count($galleryImages) > 1): ?>
+                <div class="product-thumbs">
+                    <?php foreach ($galleryImages as $i => $g): ?>
+                    <button type="button" class="product-thumb<?= $i === 0 ? ' active' : '' ?>" data-src="<?= e(upload_url($g)) ?>" aria-label="<?= e(lv($product, 'name')) ?> <?= $i + 1 ?>">
+                        <img src="<?= e(upload_url($g)) ?>" alt="" loading="lazy">
+                    </button>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
             </div>
             <div class="split-body reveal reveal-d1">
                 <p class="eyebrow"><?= e($productCat ? lv($productCat, 'name') : t('nav.products')) ?></p>
@@ -104,7 +127,12 @@ require __DIR__ . '/partials/page-hero.php';
         <div class="cards-grid">
             <?php foreach ($others as $i => $pr): ?>
             <a class="card reveal reveal-d<?= $i + 1 ?>" href="<?= e(url($page['slug_' . lang()] . '/' . $pr['slug_' . lang()])) ?>">
-                <div class="card-media contain"><img src="<?= e(upload_url($pr['image'])) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy"></div>
+                <div class="card-media contain">
+                    <img src="<?= e(upload_url($pr['image'])) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy">
+                    <?php if ($hoverImg = product_hover_image($pr)): ?>
+                    <img class="hover-img" src="<?= e(upload_url($hoverImg)) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy">
+                    <?php endif; ?>
+                </div>
                 <div class="card-body">
                     <h3><?= e(lv($pr, 'name')) ?></h3>
                     <p><?= e(excerpt(lv($pr, 'summary'), 100)) ?></p>

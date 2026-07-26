@@ -84,6 +84,18 @@
         document.querySelectorAll('.stat-value[data-value]').forEach(function (el) { cio.observe(el); });
     }
 
+    /* Ürün galerisi: küçük görsele tıklayınca ana görsel değişir */
+    var mainImg = document.getElementById('product-main-img');
+    if (mainImg) {
+        document.querySelectorAll('.product-thumb').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                mainImg.src = btn.getAttribute('data-src');
+                document.querySelectorAll('.product-thumb').forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+            });
+        });
+    }
+
     /* Hero videosu: otomatik oynatma engellenirse posteri göster */
     var heroVideo = document.querySelector('.hero-media video');
     if (heroVideo) {

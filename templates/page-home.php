@@ -117,7 +117,12 @@ require __DIR__ . '/partials/header.php';
         <div class="cards-grid">
             <?php foreach ($homeProducts as $i => $pr): ?>
             <a class="card reveal reveal-d<?= min($i % 3 + 1, 3) ?>" href="<?= e(url($productsPage['slug_' . lang()] . '/' . $pr['slug_' . lang()])) ?>">
-                <div class="card-media contain"><img src="<?= e(upload_url($pr['image'])) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy"></div>
+                <div class="card-media contain">
+                    <img src="<?= e(upload_url($pr['image'])) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy">
+                    <?php if ($hoverImg = product_hover_image($pr)): ?>
+                    <img class="hover-img" src="<?= e(upload_url($hoverImg)) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy">
+                    <?php endif; ?>
+                </div>
                 <div class="card-body">
                     <h3><?= e(lv($pr, 'name')) ?></h3>
                     <p><?= e(excerpt(lv($pr, 'summary'), 110)) ?></p>

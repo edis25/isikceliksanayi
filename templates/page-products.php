@@ -106,6 +106,9 @@ require __DIR__ . '/partials/page-hero.php';
                     <a class="card reveal reveal-d<?= $i % 3 + 1 ?>" href="<?= e(url($page['slug_' . lang()] . '/' . $pr['slug_' . lang()])) ?>" data-name="<?= e(mb_strtolower(lv($pr, 'name') . ' ' . lv($pr, 'summary'), 'UTF-8')) ?>">
                         <div class="card-media contain">
                             <img src="<?= e(upload_url($pr['image'])) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy">
+                            <?php if ($hoverImg = product_hover_image($pr)): ?>
+                            <img class="hover-img" src="<?= e(upload_url($hoverImg)) ?>" alt="<?= e(lv($pr, 'name')) ?>" loading="lazy">
+                            <?php endif; ?>
                             <?php if ($prCat): ?>
                             <span class="cat-badge"><?= e(lv($prCat, 'name')) ?></span>
                             <?php endif; ?>

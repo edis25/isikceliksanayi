@@ -13,7 +13,7 @@ if ($isNew) {
         'category_id' => 0,
         'name_tr' => '', 'name_en' => '', 'slug_tr' => '', 'slug_en' => '',
         'summary_tr' => '', 'summary_en' => '', 'body_tr' => '', 'body_en' => '',
-        'spec_table' => '', 'image' => '', 'meta_title_tr' => '', 'meta_title_en' => '',
+        'spec_table' => '', 'image' => '', 'gallery' => '', 'meta_title_tr' => '', 'meta_title_en' => '',
         'meta_desc_tr' => '', 'meta_desc_en' => '', 'sort_order' => 99, 'is_published' => 1,
     ];
 }
@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'body_en'      => trim($_POST['body_en'] ?? ''),
         'spec_table'   => trim($_POST['spec_table'] ?? ''),
         'image'        => trim($_POST['image'] ?? ''),
+        // Galeri: her satırda bir görsel yolu → JSON dizi
+        'gallery'      => json_encode(array_values(array_filter(array_map('trim', explode("\n", $_POST['gallery'] ?? ''))))),
         'meta_title_tr'=> trim($_POST['meta_title_tr'] ?? ''),
         'meta_title_en'=> trim($_POST['meta_title_en'] ?? ''),
         'meta_desc_tr' => trim($_POST['meta_desc_tr'] ?? ''),
@@ -124,7 +126,12 @@ admin_header($isNew ? 'Yeni Ürün' : 'Ürün Düzenle: ' . $product['name_tr'])
             </select>
             <small>Kategorileri <a href="categories.php">Kategoriler</a> sayfasından yönetebilirsiniz.</small>
         </div>
-        <?php admin_image_field('image', $product['image']); ?>
+        <?php admin_image_field('image', $product['image'], 'Ana Görsel (illüstrasyon)'); ?>
+        <div class="field">
+            <label>Galeri Görselleri (her satıra bir yol)</label>
+            <textarea name="gallery" style="min-height:70px" placeholder="assets/img/products/... veya uploads/..."><?= e(implode("\n", json_decode($product['gallery'] ?: '[]', true) ?: [])) ?></textarea>
+            <small>Ürün fotoğrafları. İlki, listede kartın üzerine gelince görünür; detay sayfasında küçük görseller olarak listelenir.</small>
+        </div>
         <div class="field">
             <label>Üretim Ölçüleri Tablosu (HTML)</label>
             <textarea class="tall" name="spec_table" spellcheck="false" style="font-family:monospace;font-size:12.5px"><?= e($product['spec_table']) ?></textarea>
