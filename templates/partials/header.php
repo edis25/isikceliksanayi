@@ -95,6 +95,7 @@ if ($sameAs) {
             <img class="brand-logo" src="<?= e(asset('assets/img/logo-light.png')) ?>" alt="<?= e($siteName) ?>" width="350" height="196">
         </a>
         <nav class="main-nav" aria-label="<?= lang() === 'tr' ? 'Ana menü' : 'Main menu' ?>">
+            <a href="<?= e(url('')) ?>"<?= $activeKey === 'home' ? ' class="active"' : '' ?>><?= e(t('nav.home')) ?></a>
             <div class="nav-item has-sub">
                 <a href="<?= e(url($pagesByKey['about']['slug_' . lang()] ?? '')) ?>"<?= $corporateActive ? ' class="active"' : '' ?>>
                     <?= e(t('nav.corporate')) ?>
