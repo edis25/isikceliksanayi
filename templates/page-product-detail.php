@@ -76,7 +76,7 @@ require __DIR__ . '/partials/header.php';
     </div>
 </div>
 
-<section class="section tight">
+<section class="product-detail">
     <div class="container">
         <div class="product-panel reveal">
             <div class="product-panel-media">
@@ -128,23 +128,21 @@ require __DIR__ . '/partials/header.php';
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<?php if (!empty($product['spec_table'])): ?>
-<section class="section tight">
-    <div class="container">
-        <h2 class="spec-title reveal"><span class="eyebrow" style="margin:0"><?= e(t('nav.products')) ?></span> <?= lang() === 'tr' ? 'Üretim Ölçüleri' : 'Production Range' ?></h2>
-        <div class="spec-table-wrap reveal">
-            <?= $product['spec_table'] /* eski siteden birebir aktarılan tablo; admin panelden düzenlenebilir */ ?>
+        <?php if (!empty($product['spec_table'])): ?>
+        <div class="spec-card reveal">
+            <div class="spec-card-head">
+                <h2><?= lang() === 'tr' ? 'Üretim Ölçüleri' : 'Production Range' ?></h2>
+                <span class="hint"><?= lang() === 'tr' ? 'mm | inç' : 'mm | inch' ?></span>
+            </div>
+            <div class="spec-table-wrap">
+                <?= $product['spec_table'] /* eski siteden birebir aktarılan tablo; admin panelden düzenlenebilir */ ?>
+            </div>
         </div>
-    </div>
-</section>
-<?php endif; ?>
+        <?php endif; ?>
 
-<?php if ($others): ?>
-<section class="section tight" style="padding-bottom:clamp(70px,9vw,130px)">
-    <div class="container">
+        <?php if ($others): ?>
+        <div class="related-block">
         <h2 class="spec-title reveal"><?= e(t('products.related')) ?></h2>
         <div class="cards-grid">
             <?php foreach ($others as $i => $pr): ?>
@@ -163,8 +161,9 @@ require __DIR__ . '/partials/header.php';
             </a>
             <?php endforeach; ?>
         </div>
+        </div>
+        <?php endif; ?>
     </div>
 </section>
-<?php endif; ?>
 
 <?php require __DIR__ . '/partials/footer.php'; ?>

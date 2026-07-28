@@ -1090,20 +1090,25 @@ ul.checks li::before {
 }
 .crumb-band .breadcrumb { margin-bottom: 0; }
 
+.product-detail { padding: 36px 0 90px; }
+
 .product-panel {
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     gap: clamp(28px, 4vw, 56px);
     background: var(--c-white);
     border: 1px solid var(--c-line);
+    border-top: 3px solid var(--c-accent);
     border-radius: var(--radius);
     padding: clamp(22px, 3.5vw, 44px);
     box-shadow: 0 10px 34px -18px rgba(11,15,20,.15);
     align-items: start;
 }
 .product-panel .product-figure {
-    border: 0;
-    background: var(--c-paper);
+    border: 1px solid var(--c-line);
+    background:
+        linear-gradient(rgba(246,245,241,.92), rgba(246,245,241,.92)),
+        repeating-linear-gradient(45deg, rgba(22,32,43,.16) 0 1px, transparent 1px 14px);
     padding: clamp(16px, 2.5vw, 30px);
 }
 .product-panel .product-figure img { max-height: 340px; }
@@ -1161,6 +1166,57 @@ ul.checks li::before {
     font-weight: 800;
     margin-bottom: 20px;
 }
+
+/* Teknik föy kartı: koyu başlık şeridi + tablo */
+.spec-card {
+    margin-top: 26px;
+    background: var(--c-white);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 10px 34px -18px rgba(11,15,20,.15);
+}
+.spec-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 24px;
+    background: var(--c-dark);
+    border-bottom: 3px solid var(--c-accent);
+}
+.spec-card-head h2 {
+    color: var(--c-white);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.spec-card-head h2::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    background: var(--c-accent);
+}
+.spec-card-head .hint {
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--c-accent-2);
+    white-space: nowrap;
+}
+.spec-card .spec-table-wrap {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.related-block { margin-top: clamp(48px, 6vw, 72px); }
 
 /* ---------- Ürün detayı: görsel + ölçü tablosu ---------- */
 .product-figure {
@@ -1229,6 +1285,7 @@ ul.checks li::before {
     color: var(--c-ink);
 }
 .spec-table-wrap tr:nth-child(even) td:not(:first-child) { background: #fafaf8; }
+.spec-table-wrap tbody tr:hover td:not(:first-child) { background: rgba(240, 90, 34, .06); }
 
 /* ---------- Makale (haber detay) ---------- */
 .article-layout { max-width: 800px; margin: 0 auto; }
