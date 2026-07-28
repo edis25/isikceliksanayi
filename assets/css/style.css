@@ -1083,6 +1083,85 @@ ul.checks li::before {
 .detail-cat a:hover { text-decoration: underline; }
 .detail-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
 
+/* ---------- Ürün detayı (kompakt) ---------- */
+.crumb-band {
+    background: var(--c-dark);
+    padding: 106px 0 20px;
+}
+.crumb-band .breadcrumb { margin-bottom: 0; }
+
+.product-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(28px, 4vw, 56px);
+    background: var(--c-white);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    padding: clamp(22px, 3.5vw, 44px);
+    box-shadow: 0 10px 34px -18px rgba(11,15,20,.15);
+    align-items: start;
+}
+.product-panel .product-figure {
+    border: 0;
+    background: var(--c-paper);
+    padding: clamp(16px, 2.5vw, 30px);
+}
+.product-panel .product-figure img { max-height: 340px; }
+.product-panel-info .eyebrow { margin-bottom: 10px; }
+.product-panel-info h1 {
+    font-size: clamp(26px, 3.4vw, 38px);
+    font-weight: 800;
+    letter-spacing: -.015em;
+}
+.product-summary {
+    margin-top: 10px;
+    font-size: 15.5px;
+    color: var(--c-body);
+}
+
+.attr-list {
+    margin-top: 22px;
+    border-top: 1px solid var(--c-line);
+}
+.attr-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 8px 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--c-line);
+    align-items: start;
+}
+.attr-label {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--c-ink);
+    padding-top: 4px;
+}
+.attr-values { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--c-paper);
+    border: 1px solid var(--c-line);
+    border-radius: 4px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--c-body);
+    white-space: nowrap;
+}
+
+.spec-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: clamp(20px, 2.4vw, 26px);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
 /* ---------- Ürün detayı: görsel + ölçü tablosu ---------- */
 .product-figure {
     background: var(--c-white);
@@ -1255,6 +1334,8 @@ ul.checks li::before {
 
 @media (max-width: 1000px) {
     .locations-grid { grid-template-columns: repeat(2, 1fr); }
+    .product-panel { grid-template-columns: 1fr; }
+    .attr-row { grid-template-columns: 120px 1fr; }
     .shop-layout { grid-template-columns: 1fr; }
     .shop-sidebar { position: static; }
     .shop-grid { grid-template-columns: repeat(2, 1fr); }

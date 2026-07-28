@@ -27,7 +27,7 @@ $others = $db->all(
 );
 $contactPage = $pagesByKey['contact'] ?? null;
 
-/* Teklif İste → WhatsApp (numara panelden yönetilir); numara yoksa iletişim formuna düşer */
+/* Teklif İste → WhatsApp (numara panelden yönetilir); numara yoksa iletişim sayfasına düşer */
 $waNumber = preg_replace('/\D/', '', setting('whatsapp'));
 $waText = (lang() === 'tr'
     ? 'Merhaba, ' . lv($product, 'name') . ' ürünü hakkında teklif almak istiyorum. '
@@ -38,16 +38,6 @@ $quoteUrl = $waNumber !== ''
     : ($contactPage ? url($contactPage['slug_' . lang()]) : url(''));
 $quoteIsWa = $waNumber !== '';
 
-require __DIR__ . '/partials/header.php';
-
-$heroTitle = lv($product, 'name');
-$heroLead  = lv($product, 'summary');
-$heroImage = $page['image'];
-$extraCrumb = ['label' => lv($page, 'title'), 'url' => url($page['slug_' . lang()])];
-require __DIR__ . '/partials/page-hero.php';
-?>
-
-<?php
 /* Galeri: ana görsel + ek fotoğraflar */
 $galleryImages = [];
 if (!empty($product['image'])) {
@@ -60,11 +50,36 @@ if (!empty($product['gallery'])) {
         }
     }
 }
+
+/* Öznitelikler: Üretim Standartı / Kalite / Boy ... (eski siteden birebir) */
+$attributes = [];
+if (!empty($product['attributes'])) {
+    $attributes = json_decode($product['attributes'], true) ?: [];
+}
+
+require __DIR__ . '/partials/header.php';
 ?>
-<section class="section">
+
+<div class="crumb-band">
     <div class="container">
-        <div class="split">
-            <div class="split-media reveal">
+        <nav class="breadcrumb" aria-label="breadcrumb">
+            <a href="<?= e(url('')) ?>"><?= e(t('breadcrumb.home')) ?></a>
+            <span class="sep">/</span>
+            <a href="<?= e(url($page['slug_' . lang()])) ?>"><?= e(lv($page, 'title')) ?></a>
+            <?php if ($productCat): ?>
+            <span class="sep">/</span>
+            <a href="<?= e(url($page['slug_' . lang()]) . '?cat=' . rawurlencode($productCat['slug_' . lang()])) ?>"><?= e(lv($productCat, 'name')) ?></a>
+            <?php endif; ?>
+            <span class="sep">/</span>
+            <span><?= e(lv($product, 'name')) ?></span>
+        </nav>
+    </div>
+</div>
+
+<section class="section tight">
+    <div class="container">
+        <div class="product-panel reveal">
+            <div class="product-panel-media">
                 <div class="product-figure">
                     <img id="product-main-img" src="<?= e(upload_url($galleryImages[0] ?? '')) ?>" alt="<?= e(lv($product, 'name')) ?>">
                 </div>
@@ -78,19 +93,32 @@ if (!empty($product['gallery'])) {
                 </div>
                 <?php endif; ?>
             </div>
-            <div class="split-body reveal reveal-d1">
-                <p class="eyebrow"><?= e($productCat ? lv($productCat, 'name') : t('nav.products')) ?></p>
-                <h2><?= e(lv($product, 'name')) ?></h2>
-                <?php if (lv($product, 'summary')): ?>
-                <p class="split-sub"><?= e(lv($product, 'summary')) ?></p>
-                <?php endif; ?>
-                <?= nl2p(lv($product, 'body')) ?>
+            <div class="product-panel-info">
                 <?php if ($productCat): ?>
-                <p class="detail-cat">
-                    <?= e(t('shop.category')) ?>:
-                    <a href="<?= e(url($page['slug_' . lang()]) . '?cat=' . rawurlencode($productCat['slug_' . lang()])) ?>"><?= e(lv($productCat, 'name')) ?></a>
-                </p>
+                <a class="eyebrow" href="<?= e(url($page['slug_' . lang()]) . '?cat=' . rawurlencode($productCat['slug_' . lang()])) ?>"><?= e(lv($productCat, 'name')) ?></a>
                 <?php endif; ?>
+                <h1><?= e(lv($product, 'name')) ?></h1>
+                <?php if (lv($product, 'summary')): ?>
+                <p class="product-summary"><?= e(lv($product, 'summary')) ?></p>
+                <?php endif; ?>
+
+                <?php if ($attributes): ?>
+                <div class="attr-list">
+                    <?php foreach ($attributes as $attr): ?>
+                    <div class="attr-row">
+                        <span class="attr-label"><?= e($attr['label_' . lang()] ?? $attr['label_tr'] ?? '') ?></span>
+                        <span class="attr-values">
+                            <?php foreach (($attr['values'] ?? []) as $v): ?>
+                            <span class="chip"><?= e($v) ?></span>
+                            <?php endforeach; ?>
+                        </span>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
+
+                <?= nl2p(lv($product, 'body')) ?>
+
                 <div class="detail-actions">
                     <a class="btn<?= $quoteIsWa ? ' btn-wa' : '' ?>" href="<?= e($quoteUrl) ?>"<?= $quoteIsWa ? ' target="_blank" rel="noopener"' : '' ?>>
                         <?php if ($quoteIsWa): ?><span class="btn-ico"><?= icon_svg('whatsapp') ?></span><?php endif; ?>
@@ -106,10 +134,7 @@ if (!empty($product['gallery'])) {
 <?php if (!empty($product['spec_table'])): ?>
 <section class="section tight">
     <div class="container">
-        <div class="section-head reveal">
-            <p class="eyebrow"><?= e(t('nav.products')) ?></p>
-            <h2 class="section-title"><?= lang() === 'tr' ? 'Üretim Ölçüleri' : 'Production Range' ?></h2>
-        </div>
+        <h2 class="spec-title reveal"><span class="eyebrow" style="margin:0"><?= e(t('nav.products')) ?></span> <?= lang() === 'tr' ? 'Üretim Ölçüleri' : 'Production Range' ?></h2>
         <div class="spec-table-wrap reveal">
             <?= $product['spec_table'] /* eski siteden birebir aktarılan tablo; admin panelden düzenlenebilir */ ?>
         </div>
@@ -118,12 +143,9 @@ if (!empty($product['gallery'])) {
 <?php endif; ?>
 
 <?php if ($others): ?>
-<section class="section tight">
+<section class="section tight" style="padding-bottom:clamp(70px,9vw,130px)">
     <div class="container">
-        <div class="section-head reveal">
-            <p class="eyebrow"><?= e(t('nav.products')) ?></p>
-            <h2 class="section-title"><?= e(t('products.related')) ?></h2>
-        </div>
+        <h2 class="spec-title reveal"><?= e(t('products.related')) ?></h2>
         <div class="cards-grid">
             <?php foreach ($others as $i => $pr): ?>
             <a class="card reveal reveal-d<?= $i + 1 ?>" href="<?= e(url($page['slug_' . lang()] . '/' . $pr['slug_' . lang()])) ?>">

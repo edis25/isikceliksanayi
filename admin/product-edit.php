@@ -13,9 +13,47 @@ if ($isNew) {
         'category_id' => 0,
         'name_tr' => '', 'name_en' => '', 'slug_tr' => '', 'slug_en' => '',
         'summary_tr' => '', 'summary_en' => '', 'body_tr' => '', 'body_en' => '',
-        'spec_table' => '', 'image' => '', 'gallery' => '', 'meta_title_tr' => '', 'meta_title_en' => '',
+        'spec_table' => '', 'attributes' => '', 'image' => '', 'gallery' => '', 'meta_title_tr' => '', 'meta_title_en' => '',
         'meta_desc_tr' => '', 'meta_desc_en' => '', 'sort_order' => 99, 'is_published' => 1,
     ];
+}
+
+/**
+ * Öznitelik satırlarını JSON'a çevirir.
+ * Satır biçimi: "Etiket TR | Label EN : değer1 ; değer2 ; değer3"
+ */
+function parse_attributes(string $text): string
+{
+    $items = [];
+    foreach (explode("\n", $text) as $line) {
+        $line = trim($line);
+        if ($line === '' || !str_contains($line, ':')) {
+            continue;
+        }
+        [$labels, $values] = explode(':', $line, 2);
+        $labelParts = array_map('trim', explode('|', $labels));
+        $vals = array_values(array_filter(array_map('trim', explode(';', $values))));
+        if ($labelParts[0] === '' || !$vals) {
+            continue;
+        }
+        $items[] = [
+            'label_tr' => $labelParts[0],
+            'label_en' => $labelParts[1] ?? $labelParts[0],
+            'values'   => $vals,
+        ];
+    }
+    return json_encode($items, JSON_UNESCAPED_UNICODE);
+}
+
+/** JSON öznitelikleri düzenlenebilir satır biçimine çevirir. */
+function attributes_to_text(?string $json): string
+{
+    $lines = [];
+    foreach (json_decode($json ?: '[]', true) ?: [] as $a) {
+        $label = ($a['label_tr'] ?? '') . (isset($a['label_en']) && $a['label_en'] !== ($a['label_tr'] ?? '') ? ' | ' . $a['label_en'] : '');
+        $lines[] = $label . ' : ' . implode(' ; ', $a['values'] ?? []);
+    }
+    return implode("\n", $lines);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -30,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'body_tr'      => trim($_POST['body_tr'] ?? ''),
         'body_en'      => trim($_POST['body_en'] ?? ''),
         'spec_table'   => trim($_POST['spec_table'] ?? ''),
+        'attributes'   => parse_attributes($_POST['attributes'] ?? ''),
         'image'        => trim($_POST['image'] ?? ''),
         // Galeri: her satırda bir görsel yolu → JSON dizi
         'gallery'      => json_encode(array_values(array_filter(array_map('trim', explode("\n", $_POST['gallery'] ?? ''))))),
@@ -131,6 +170,11 @@ admin_header($isNew ? 'Yeni Ürün' : 'Ürün Düzenle: ' . $product['name_tr'])
             <label>Galeri Görselleri (her satıra bir yol)</label>
             <textarea name="gallery" style="min-height:70px" placeholder="assets/img/products/... veya uploads/..."><?= e(implode("\n", json_decode($product['gallery'] ?: '[]', true) ?: [])) ?></textarea>
             <small>Ürün fotoğrafları. İlki, listede kartın üzerine gelince görünür; detay sayfasında küçük görseller olarak listelenir.</small>
+        </div>
+        <div class="field">
+            <label>Teknik Özellikler (Üretim Standartı, Kalite, Boy...)</label>
+            <textarea name="attributes" style="min-height:100px;font-family:monospace;font-size:13px" spellcheck="false"><?= e(attributes_to_text($product['attributes'])) ?></textarea>
+            <small>Her satır bir özellik: <code>Etiket TR | Label EN : değer1 ; değer2 ; değer3</code> — örn. <code>Kalite | Grade : S235JR ; S275JR</code></small>
         </div>
         <div class="field">
             <label>Üretim Ölçüleri Tablosu (HTML)</label>

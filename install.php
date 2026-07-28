@@ -99,6 +99,7 @@ $tables = [
         body_tr TEXT,
         body_en TEXT,
         spec_table TEXT,
+        attributes TEXT,
         image VARCHAR(255) DEFAULT '',
         gallery TEXT,
         meta_title_tr VARCHAR(190) DEFAULT '',
