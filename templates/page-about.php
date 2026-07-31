@@ -1,5 +1,6 @@
 <?php
 $intro  = $sections['intro'] ?? null;
+$stats  = $sections['stats'] ?? null;
 $vision = $sections['vision'] ?? null;
 $goals  = $sections['goals'] ?? null;
 
@@ -23,6 +24,24 @@ require __DIR__ . '/partials/page-hero.php';
         </div>
     </div>
 </section>
+<?php endif; ?>
+
+<?php if ($stats): ?>
+<div class="stats-band">
+    <div class="container">
+        <?php if (lv($stats, 'title')): ?>
+        <p class="eyebrow" style="margin-bottom:30px"><?= e(lv($stats, 'title')) ?></p>
+        <?php endif; ?>
+        <div class="stats-grid">
+            <?php foreach (section_items($stats) as $item): ?>
+            <div class="stat">
+                <div class="stat-value" data-value="<?= e($item['value']) ?>"><?= e($item['value']) ?></div>
+                <div class="stat-label"><?= e($item['label']) ?></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
 <?php endif; ?>
 
 <?php if ($vision): ?>

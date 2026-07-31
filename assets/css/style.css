@@ -4,17 +4,17 @@
    ============================================================ */
 
 :root {
-    --c-dark:      #0b0f14;
-    --c-dark-2:    #121820;
-    --c-dark-3:    #1a222d;
+    --c-dark:      #070b2e;
+    --c-dark-2:    #0d1238;
+    --c-dark-3:    #141b4a;
     --c-paper:     #f6f5f1;
     --c-white:     #ffffff;
-    --c-ink:       #16202b;
-    --c-body:      #46525e;
-    --c-muted:     #8b949e;
+    --c-ink:       #10163f;
+    --c-body:      #444b6e;
+    --c-muted:     #858ca8;
     --c-accent:    #f05a22;
     --c-accent-2:  #ffb23e;
-    --c-line:      rgba(22, 32, 43, .12);
+    --c-line:      rgba(16, 22, 63, .12);
     --c-line-dark: rgba(255, 255, 255, .12);
 
     --font-display: 'Archivo', 'Helvetica Neue', sans-serif;
@@ -23,7 +23,7 @@
     --container: 1240px;
     --gutter: clamp(20px, 4vw, 48px);
     --radius: 4px;
-    --shadow: 0 18px 50px -18px rgba(11, 15, 20, .25);
+    --shadow: 0 18px 50px -18px rgba(7, 11, 46, .25);
     --ease: cubic-bezier(.22, .61, .36, 1);
 }
 
@@ -88,7 +88,7 @@ h1, h2, h3, h4 {
 
 .btn-dark {
     background: transparent;
-    border-color: rgba(22, 32, 43, .3);
+    border-color: rgba(16, 22, 63, .3);
     color: var(--c-ink);
 }
 .btn-dark:hover { background: var(--c-ink); border-color: var(--c-ink); color: var(--c-white); }
@@ -126,7 +126,7 @@ h1, h2, h3, h4 {
 .site-header .header-right { justify-self: end; }
 .site-header.scrolled,
 .site-header.solid {
-    background: rgba(11, 15, 20, .92);
+    background: rgba(7, 11, 46, .92);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 0 rgba(255, 255, 255, .06);
@@ -351,8 +351,8 @@ body.nav-open { overflow: hidden; }
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, rgba(11,15,20,.55) 0%, rgba(11,15,20,.15) 40%, rgba(11,15,20,.82) 100%),
-        linear-gradient(100deg, rgba(11,15,20,.6) 0%, rgba(11,15,20,0) 60%);
+        linear-gradient(180deg, rgba(7,11,46,.55) 0%, rgba(7,11,46,.15) 40%, rgba(7,11,46,.82) 100%),
+        linear-gradient(100deg, rgba(7,11,46,.6) 0%, rgba(7,11,46,0) 60%);
 }
 .hero .container {
     position: relative;
@@ -557,7 +557,7 @@ ul.checks li::before {
     background: var(--c-white);
     border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 6px 24px -12px rgba(11, 15, 20, .18);
+    box-shadow: 0 6px 24px -12px rgba(7, 11, 46, .18);
     transition: transform .4s var(--ease), box-shadow .4s var(--ease);
 }
 .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
@@ -572,7 +572,7 @@ ul.checks li::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 55%, rgba(11,15,20,.45));
+    background: linear-gradient(180deg, transparent 55%, rgba(7,11,46,.45));
     opacity: .7;
 }
 /* Ürün illüstrasyonları: beyaz zeminde tam görünür */
@@ -665,7 +665,7 @@ ul.checks li::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(11,15,20,.92) 15%, rgba(11,15,20,.4) 100%);
+    background: linear-gradient(90deg, rgba(7,11,46,.92) 15%, rgba(7,11,46,.4) 100%);
 }
 .dark-feature .container { position: relative; z-index: 2; }
 .dark-feature p { color: rgba(255,255,255,.75); }
@@ -686,7 +686,7 @@ ul.checks li::before {
 .cta-band .bg::after {
     content: "";
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, rgba(11,15,20,.55), rgba(11,15,20,.95));
+    background: radial-gradient(ellipse at center, rgba(7,11,46,.55), rgba(7,11,46,.95));
 }
 .cta-band .container { position: relative; z-index: 2; }
 .cta-band h2 {
@@ -708,7 +708,7 @@ ul.checks li::before {
     background: var(--c-white);
     border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 6px 24px -12px rgba(11,15,20,.18);
+    box-shadow: 0 6px 24px -12px rgba(7,11,46,.18);
     transition: transform .4s var(--ease), box-shadow .4s var(--ease);
 }
 .news-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
@@ -741,7 +741,7 @@ ul.checks li::before {
 .page-hero .bg::after {
     content: "";
     position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(11,15,20,.75), rgba(11,15,20,.55) 55%, rgba(11,15,20,.92));
+    background: linear-gradient(180deg, rgba(7,11,46,.75), rgba(7,11,46,.55) 55%, rgba(7,11,46,.92));
 }
 .page-hero .container { position: relative; z-index: 2; }
 .breadcrumb {
@@ -798,7 +798,7 @@ ul.checks li::before {
     background: var(--c-white);
     border-radius: var(--radius);
     padding: clamp(28px, 4vw, 44px);
-    box-shadow: 0 6px 24px -14px rgba(11,15,20,.15);
+    box-shadow: 0 6px 24px -14px rgba(7,11,46,.15);
 }
 .region-block + .region-block { margin-top: 26px; }
 .region-block h3 { font-size: 24px; }
@@ -865,7 +865,7 @@ ul.checks li::before {
     border: 1px solid var(--c-line);
     border-radius: var(--radius);
     padding: clamp(28px, 5vw, 56px);
-    box-shadow: 0 6px 24px -14px rgba(11,15,20,.12);
+    box-shadow: 0 6px 24px -14px rgba(7,11,46,.12);
 }
 
 /* ---------- İletişim ---------- */
@@ -1106,14 +1106,14 @@ ul.checks li::before {
     border-top: 3px solid var(--c-accent);
     border-radius: var(--radius);
     padding: clamp(22px, 3.5vw, 44px);
-    box-shadow: 0 10px 34px -18px rgba(11,15,20,.15);
+    box-shadow: 0 10px 34px -18px rgba(7,11,46,.15);
     align-items: start;
 }
 .product-panel .product-figure {
     border: 1px solid var(--c-line);
     background:
         linear-gradient(rgba(246,245,241,.92), rgba(246,245,241,.92)),
-        repeating-linear-gradient(45deg, rgba(22,32,43,.16) 0 1px, transparent 1px 14px);
+        repeating-linear-gradient(45deg, rgba(16,22,63,.16) 0 1px, transparent 1px 14px);
     padding: clamp(16px, 2.5vw, 30px);
 }
 .product-panel .product-figure img { max-height: 340px; }
@@ -1179,7 +1179,7 @@ ul.checks li::before {
     border: 1px solid var(--c-line);
     border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 10px 34px -18px rgba(11,15,20,.15);
+    box-shadow: 0 10px 34px -18px rgba(7,11,46,.15);
 }
 .spec-card-head {
     display: flex;
@@ -1257,7 +1257,7 @@ ul.checks li::before {
     background: var(--c-white);
     border: 1px solid var(--c-line);
     border-radius: var(--radius);
-    box-shadow: 0 6px 24px -14px rgba(11,15,20,.12);
+    box-shadow: 0 6px 24px -14px rgba(7,11,46,.12);
     -webkit-overflow-scrolling: touch;
 }
 .spec-table-wrap table {

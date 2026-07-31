@@ -17,7 +17,7 @@ $fullTitle = $seo['title'] ?? $siteName;
 if (mb_stripos($fullTitle, 'Işık Çelik') === false && mb_stripos($fullTitle, 'Isik') === false) {
     $fullTitle .= $metaSuffix;
 }
-$faviconSvg = rawurlencode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><rect x="1.5" y="1.5" width="41" height="41" rx="8" fill="#1b2265"/><path d="M22 7 35 20 22 33 9 20Z" fill="#fff"/><path d="M13 27l9 8 9-8-2-2-7 6-7-6Z" fill="#fff"/></svg>');
+$faviconSvg = rawurlencode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><rect x="1.5" y="1.5" width="41" height="41" rx="8" fill="#000066"/><path d="M22 7 35 20 22 33 9 20Z" fill="#fff"/><path d="M13 27l9 8 9-8-2-2-7 6-7-6Z" fill="#fff"/></svg>');
 
 $orgJsonLd = [
     '@context' => 'https://schema.org',
@@ -49,6 +49,7 @@ if ($sameAs) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070b2e">
 <title><?= e($fullTitle) ?></title>
 <?php if (!empty($seo['description'])): ?>
 <meta name="description" content="<?= e($seo['description']) ?>">

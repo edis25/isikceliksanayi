@@ -51,8 +51,8 @@
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, rgba(11,15,20,.6) 0%, rgba(11,15,20,.2) 45%, rgba(11,15,20,.9) 100%),
-        linear-gradient(100deg, rgba(11,15,20,.65) 0%, rgba(11,15,20,0) 65%);
+        linear-gradient(180deg, rgba(7,11,46,.6) 0%, rgba(7,11,46,.2) 45%, rgba(7,11,46,.9) 100%),
+        linear-gradient(100deg, rgba(7,11,46,.65) 0%, rgba(7,11,46,0) 65%);
 }
 .c-hero-content {
     position: relative;
@@ -148,7 +148,7 @@
 .c-journey-shade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(11,15,20,.9) 0%, rgba(11,15,20,.55) 45%, rgba(11,15,20,.25) 100%);
+    background: linear-gradient(90deg, rgba(7,11,46,.9) 0%, rgba(7,11,46,.55) 45%, rgba(7,11,46,.25) 100%);
 }
 .c-journey-content {
     position: relative;
@@ -297,7 +297,7 @@
     border-radius: var(--radius);
     background:
         linear-gradient(rgba(246,245,241,.94), rgba(246,245,241,.94)),
-        repeating-linear-gradient(45deg, rgba(22,32,43,.14) 0 1px, transparent 1px 13px);
+        repeating-linear-gradient(45deg, rgba(16,22,63,.14) 0 1px, transparent 1px 13px);
 }
 .c-product-img img { max-height: 82%; max-width: 82%; object-fit: contain; transition: transform .4s var(--ease); }
 .c-product:hover .c-product-img > img:first-child { transform: scale(1.05); }
@@ -361,7 +361,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(11,15,20,.92) 20%, rgba(11,15,20,.35) 100%);
+    background: linear-gradient(90deg, rgba(7,11,46,.92) 20%, rgba(7,11,46,.35) 100%);
 }
 .c-energy-content { position: relative; z-index: 2; }
 .c-energy h2 { color: var(--c-white); font-size: clamp(30px, 4.4vw, 54px); font-weight: 800; max-width: 16ch; }
@@ -427,7 +427,7 @@
     letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--c-white);
-    background: rgba(11,15,20,.75);
+    background: rgba(7,11,46,.75);
     border: 1px solid var(--c-line-dark);
     border-radius: 20px;
     padding: 6px 14px;
@@ -469,7 +469,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, rgba(11,15,20,.5), rgba(11,15,20,.95));
+    background: radial-gradient(ellipse at center, rgba(7,11,46,.5), rgba(7,11,46,.95));
 }
 .c-cta .container { position: relative; z-index: 2; }
 .c-cta h2 {

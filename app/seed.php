@@ -132,7 +132,7 @@ function seed_database(Database $db): void
         ['video' => 'assets/video/hero.mp4', 'poster' => 'assets/img/hero-poster.jpg'],
         'assets/img/sicak-cekim.jpg'];
 
-    $sections[] = ['home', 'stats', 'stats', 1,
+    $sections[] = ['about', 'stats', 'stats', 1,
         'Rakamlarla Işık Çelik', 'Işık Çelik in Numbers', '', '', '', '',
         [
             'items_tr' => [
@@ -199,7 +199,7 @@ function seed_database(Database $db): void
         "With more than half a century of experience, Işık Çelik represents reliability, consistency and excellence in the steel industry.\n\nOur manufacturing processes are carried out in accordance with international quality standards, focusing on sustainability, operational efficiency and continuous improvement. Through our advanced technological infrastructure and automation investments, we consistently deliver high-quality products with dependable performance.\n\nToday, we proudly export to more than 100 countries across five continents, representing the strength of the Turkish steel industry in global markets.",
         [], 'assets/img/tesis-havadan.jpg'];
 
-    $sections[] = ['about', 'vision', 'feature-list', 1,
+    $sections[] = ['about', 'vision', 'feature-list', 2,
         'Gelecek Vizyonu', 'Our Vision',
         '2026; büyüme, yenilenme ve dönüşüm yılıdır.', 'The year 2026 represents a new era of growth, transformation and innovation.',
         '', '',
@@ -216,7 +216,7 @@ function seed_database(Database $db): void
             ],
         ], 'assets/img/sicak-cekim.jpg'];
 
-    $sections[] = ['about', 'goals', 'feature-list', 2,
+    $sections[] = ['about', 'goals', 'feature-list', 3,
         'Yıl Sonu Hedeflerimiz', 'Our Year-End Objectives',
         '', '', '', '',
         [
