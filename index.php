@@ -68,13 +68,9 @@ if ($path === '') {
         $alternates = ['tr' => url('', 'tr'), 'en' => url('', 'en')];
     }
 } elseif ($path === 'yeni-anasayfa' || $path === 'new-home') {
-    // Yeni kreatif ana sayfa önizlemesi — onaylanınca home sayfasının şablonu 'home2' yapılır
-    $page = $pagesByKey['home'] ?? null;
-    if ($page) {
-        $template = 'home2';
-        $alternates = ['tr' => url('yeni-anasayfa', 'tr'), 'en' => url('new-home', 'en')];
-        $ctx['noindex'] = true;
-    }
+    // Eski önizleme adresi — yeni tasarım artık ana sayfa
+    header('Location: ' . url('', LANG), true, 301);
+    exit;
 } elseif (isset($pagesBySlug[$path])) {
     $page = $pagesBySlug[$path];
     $template = $page['template'];

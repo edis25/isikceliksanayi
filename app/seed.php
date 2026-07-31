@@ -31,7 +31,7 @@ function seed_database(Database $db): void
     /* ================= SAYFALAR ================= */
     $pages = [
         'home' => [
-            'template' => 'home', 'slug_tr' => '', 'slug_en' => '', 'sort_order' => 0,
+            'template' => 'home2', 'slug_tr' => '', 'slug_en' => '', 'sort_order' => 0,
             'title_tr' => 'Ana Sayfa', 'title_en' => 'Home',
             'meta_title_tr' => 'Işık Çelik | Çelik Üretiminde Yarım Asrı Aşan Güç',
             'meta_title_en' => 'Işık Çelik | Over Half a Century of Steel Manufacturing Excellence',
