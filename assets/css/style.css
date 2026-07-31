@@ -1438,10 +1438,16 @@ ul.checks li::before {
     line-height: .95;
     letter-spacing: -.03em;
     white-space: nowrap;
-    background: linear-gradient(135deg, #e8eaf6 0%, #9aa0c4 45%, #3a4070 100%);
+    /* Metalik zemin + üzerinden geçen parlama şeridi (JS background-position'ı süpürür) */
+    background:
+        linear-gradient(115deg, transparent 42%, rgba(255,255,255,.9) 50%, rgba(255,178,62,.5) 54%, transparent 62%) no-repeat,
+        linear-gradient(135deg, #e8eaf6 0%, #9aa0c4 45%, #3a4070 100%);
+    background-size: 260% 100%, 100% 100%;
+    background-position: 130% 0, 0 0;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    will-change: transform, filter, background-position;
 }
 .tlx-text { max-width: 620px; margin-top: clamp(14px, 2.4vw, 28px); }
 .tlx-text h3 {

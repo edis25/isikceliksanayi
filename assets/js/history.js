@@ -54,6 +54,29 @@
                 }
             }
         });
+
+        /* Yıl geçişi: derinlikten blur ile vurup oturur, ardından metal parlaması süpürülür */
+        var frame = frames[idx];
+        var year = frame.querySelector('.tlx-year');
+        var textEls = frame.querySelectorAll('.tlx-text h3, .tlx-text p');
+        if (year) {
+            gsap.killTweensOf([year].concat(Array.prototype.slice.call(textEls)));
+            var tl = gsap.timeline();
+            tl.fromTo(year,
+                { yPercent: 42, autoAlpha: 0, scale: 1.18, filter: 'blur(14px)', backgroundPosition: '130% 0, 0 0' },
+                { yPercent: 0, autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: .75, ease: 'back.out(1.5)' }
+            );
+            // Parlama şeridi rakamların üzerinden geçer
+            tl.to(year, {
+                backgroundPosition: '-30% 0, 0 0',
+                duration: .9,
+                ease: 'power2.inOut'
+            }, '-=0.15');
+            tl.fromTo(textEls,
+                { x: -34, autoAlpha: 0 },
+                { x: 0, autoAlpha: 1, duration: .55, ease: 'power3.out', stagger: .09 },
+                '-=0.95');
+        }
     };
 
     var st = ScrollTrigger.create({
