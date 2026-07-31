@@ -61,7 +61,7 @@
         });
     }
 
-    /* ---------- S2 Üretim yolculuğu: pinned sahneler ---------- */
+    /* ---------- S2 Üretim yolculuğu: pinned sahneler + scroll'a bağlı video ---------- */
     var journey = document.querySelector('.c-journey');
     if (journey) {
         var stages = journey.querySelectorAll('.c-stage');
@@ -71,21 +71,18 @@
         var count = stages.length;
         var current = -1;
 
+        // Videolar kendiliğinden oynamaz; kareyi scroll yönetir
+        videos.forEach(function (v) {
+            v.pause();
+            v.removeAttribute('autoplay');
+        });
+
         var setStage = function (idx) {
             if (idx === current) { return; }
             current = idx;
             stages.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
             dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
-            videos.forEach(function (v, i) {
-                var on = i === idx;
-                v.classList.toggle('active', on);
-                if (on) {
-                    var p = v.play();
-                    if (p) { p.catch(function () {}); }
-                } else {
-                    v.pause();
-                }
-            });
+            videos.forEach(function (v, i) { v.classList.toggle('active', i === idx); });
             if (progress) { progress.style.height = ((idx + 1) / count * 100) + '%'; }
         };
 
@@ -96,7 +93,15 @@
             pin: true,
             scrub: true,
             onUpdate: function (self) {
-                setStage(Math.min(count - 1, Math.floor(self.progress * count)));
+                var pos = self.progress * count;
+                var idx = Math.min(count - 1, Math.floor(pos));
+                setStage(idx);
+                // Aktif videoyu scroll ile ileri/geri sar
+                var v = videos[idx];
+                if (v && v.duration) {
+                    var lp = Math.min(Math.max(pos - idx, 0), 1);
+                    v.currentTime = Math.min(v.duration - 0.05, lp * v.duration);
+                }
             }
         });
         setStage(0);

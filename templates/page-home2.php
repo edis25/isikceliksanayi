@@ -38,18 +38,12 @@ $stages = [
     ],
     [
         'no'    => '02',
-        'title' => $tr ? 'HADDE' : 'ROLLING',
-        'text'  => $tr ? 'Yüksek hassasiyetli proses kontrolüyle kusursuz ölçü ve yüzey.' : 'Flawless dimensions and surface with high-precision process control.',
-        'video' => 'assets/video/scene-hadde.mp4',
-    ],
-    [
-        'no'    => '03',
         'title' => $tr ? 'ROBOTİK HAT' : 'ROBOTIC LINE',
         'text'  => $tr ? 'Dijital üretim altyapısı ve tam otomasyonla insansız paketleme.' : 'Automated handling with digital manufacturing infrastructure.',
         'video' => 'assets/video/scene-robot.mp4',
     ],
     [
-        'no'    => '04',
+        'no'    => '03',
         'title' => $tr ? 'KAPASİTE' : 'CAPACITY',
         'text'  => $tr ? 'Yeni tesisle üretim gücümüz üç katına çıktı.' : 'Our new facility tripled our production capacity.',
         'video' => 'assets/video/scene-kapasite.mp4',
@@ -104,7 +98,7 @@ require __DIR__ . '/partials/header.php';
     <div class="c-journey-viewport">
         <div class="c-journey-media">
             <?php foreach ($stages as $i => $st): ?>
-            <video class="c-stage-video<?= $i === 0 ? ' active' : '' ?>" muted loop playsinline preload="<?= $i === 0 ? 'auto' : 'metadata' ?>" data-stage="<?= $i ?>">
+            <video class="c-stage-video<?= $i === 0 ? ' active' : '' ?>" muted loop playsinline preload="auto" data-stage="<?= $i ?>">
                 <source src="<?= e(asset($st['video'])) ?>" type="video/mp4">
             </video>
             <?php endforeach; ?>
