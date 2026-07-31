@@ -72,10 +72,26 @@
         var current = -1;
 
         // Videolar kendiliğinden oynamaz; kareyi scroll yönetir
-        videos.forEach(function (v) {
+        var videoTargets = [];
+        var videosUnlocked = false;
+        videos.forEach(function (v, i) {
             v.pause();
             v.removeAttribute('autoplay');
+            v.removeAttribute('loop');
+            videoTargets[i] = 0;
         });
+
+        // Tarayıcının kare çizmesini garantile: bir kez sessizce oynat-durdur
+        var unlockVideos = function () {
+            if (videosUnlocked) { return; }
+            videosUnlocked = true;
+            videos.forEach(function (v) {
+                var p = v.play();
+                if (p) { p.then(function () { v.pause(); }).catch(function () {}); }
+            });
+        };
+        window.addEventListener('touchstart', unlockVideos, { once: true, passive: true });
+        window.addEventListener('wheel', unlockVideos, { once: true, passive: true });
 
         var setStage = function (idx) {
             if (idx === current) { return; }
@@ -86,21 +102,33 @@
             if (progress) { progress.style.height = ((idx + 1) / count * 100) + '%'; }
         };
 
+        // Her frame'de hedef kareye yumuşakça yaklaş (seek çakışmalarını önler, akıcı sarar)
+        gsap.ticker.add(function () {
+            if (current < 0) { return; }
+            var v = videos[current];
+            if (!v || !v.duration || v.seeking) { return; }
+            var target = videoTargets[current];
+            var diff = target - v.currentTime;
+            if (Math.abs(diff) < 0.02) { return; }
+            // Uzak sıçramalarda hızlı, yakında yumuşak takip
+            v.currentTime = Math.abs(diff) > 1.2 ? target : v.currentTime + diff * 0.35;
+        });
+
         ScrollTrigger.create({
             trigger: '.c-journey-viewport',
             start: 'top top',
             end: '+=' + (count * 90) + '%',
             pin: true,
             scrub: true,
+            onEnter: unlockVideos,
             onUpdate: function (self) {
                 var pos = self.progress * count;
                 var idx = Math.min(count - 1, Math.floor(pos));
                 setStage(idx);
-                // Aktif videoyu scroll ile ileri/geri sar
                 var v = videos[idx];
                 if (v && v.duration) {
                     var lp = Math.min(Math.max(pos - idx, 0), 1);
-                    v.currentTime = Math.min(v.duration - 0.05, lp * v.duration);
+                    videoTargets[idx] = Math.min(v.duration - 0.05, lp * v.duration);
                 }
             }
         });
