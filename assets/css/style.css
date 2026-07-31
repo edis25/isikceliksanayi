@@ -1351,7 +1351,7 @@ ul.checks li::before {
     color: rgba(255,255,255,.45);
 }
 
-/* ---------- Tarihçe: sinematik bölümler (Beltrame tarzı) ---------- */
+/* ---------- Tarihçe: scroll ile oynayan film (Beltrame tarzı) ---------- */
 .tlx {
     background: #05081f;
     color: var(--c-white);
@@ -1385,39 +1385,55 @@ ul.checks li::before {
     50% { transform: translateY(8px); opacity: 1; }
 }
 
-.tlx-chapter {
+/* Sahne: ekran sabitlenir, scroll filmi oynatır */
+.tlx-stage {
     position: relative;
-    min-height: 92svh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
-    border-top: 1px solid rgba(255,255,255,.05);
     overflow: hidden;
 }
-.tlx-bg {
+.tlx-media { position: absolute; inset: 0; }
+.tlx-layer {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     background-size: cover;
     background-position: center;
-    opacity: .22;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity .8s var(--ease), transform 1.2s var(--ease);
 }
-.tlx-bg::after {
-    content: "";
+.tlx-layer.active { opacity: .32; transform: scale(1); }
+.tlx-layer-solid { background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(240,90,34,.12), transparent 70%); }
+.tlx-shade {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, #05081f 0%, rgba(5,8,31,.35) 30%, rgba(5,8,31,.35) 70%, #05081f 100%),
-        linear-gradient(90deg, rgba(5,8,31,.8) 0%, rgba(5,8,31,.15) 100%);
+        linear-gradient(180deg, #05081f 0%, rgba(5,8,31,.3) 30%, rgba(5,8,31,.3) 70%, #05081f 100%),
+        linear-gradient(90deg, rgba(5,8,31,.85) 0%, rgba(5,8,31,.15) 100%);
 }
-.tlx-content {
+.tlx-frames {
     position: relative;
     z-index: 2;
     width: 100%;
-    padding-top: 60px;
-    padding-bottom: 60px;
+    min-height: 480px;
 }
+.tlx-frame {
+    position: absolute;
+    left: var(--gutter); right: var(--gutter);
+    top: 50%;
+    transform: translateY(-42%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.tlx-frame.active { opacity: 1; transform: translateY(-50%); pointer-events: auto; }
 .tlx-year {
     font-family: var(--font-display);
-    font-size: clamp(90px, 17vw, 260px);
+    font-size: clamp(90px, 16vw, 240px);
     font-weight: 800;
     line-height: .95;
     letter-spacing: -.03em;
@@ -1427,10 +1443,10 @@ ul.checks li::before {
     background-clip: text;
     color: transparent;
 }
-.tlx-text { max-width: 620px; margin-top: clamp(18px, 3vw, 34px); }
+.tlx-text { max-width: 620px; margin-top: clamp(14px, 2.4vw, 28px); }
 .tlx-text h3 {
     color: var(--c-white);
-    font-size: clamp(24px, 3vw, 40px);
+    font-size: clamp(22px, 2.8vw, 38px);
     font-weight: 800;
     letter-spacing: .04em;
     text-transform: uppercase;
@@ -1446,21 +1462,82 @@ ul.checks li::before {
     background: var(--c-accent);
 }
 .tlx-text p {
-    margin-top: 16px;
-    font-size: clamp(15.5px, 1.3vw, 18px);
+    margin-top: 14px;
+    font-size: clamp(15px, 1.25vw, 17.5px);
     line-height: 1.8;
-    color: rgba(255,255,255,.75);
+    color: rgba(255,255,255,.78);
 }
 
-/* Devasa yıl için daha derin reveal */
-@media (prefers-reduced-motion: no-preference) {
-    .tlx-year.reveal { transform: translateY(60px) scale(.96); transition-duration: 1s; }
-    .tlx-year.reveal.in { transform: none; }
+/* Yıl şeridi (film bölümleri) */
+.tlx-ticker {
+    position: absolute;
+    left: 0; right: 0; bottom: 56px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: clamp(14px, 3vw, 34px);
+    flex-wrap: wrap;
+    padding: 0 var(--gutter);
+}
+.tlx-ticker .tick {
+    background: none;
+    border: 0;
+    padding: 6px 2px;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: clamp(11px, 1.1vw, 13.5px);
+    font-weight: 700;
+    letter-spacing: .14em;
+    color: rgba(255,255,255,.38);
+    position: relative;
+    transition: color .3s;
+}
+.tlx-ticker .tick::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: var(--c-accent);
+    transform: scaleX(0);
+    transition: transform .3s var(--ease);
+}
+.tlx-ticker .tick:hover { color: rgba(255,255,255,.75); }
+.tlx-ticker .tick.active { color: var(--c-white); }
+.tlx-ticker .tick.active::after { transform: scaleX(1); }
+
+.tlx-bar {
+    position: absolute;
+    left: var(--gutter); right: var(--gutter); bottom: 40px;
+    z-index: 3;
+    height: 2px;
+    background: rgba(255,255,255,.12);
+}
+.tlx-bar-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--c-accent), var(--c-accent-2));
+}
+
+/* Fallback: motion yoksa dönemler alt alta statik */
+.no-motion .tlx-stage { display: block; min-height: 0; }
+.no-motion .tlx-media, .no-motion .tlx-ticker, .no-motion .tlx-bar { display: none; }
+.no-motion .tlx-frames { min-height: 0; }
+.no-motion .tlx-frame {
+    position: static;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    padding: clamp(50px, 8vw, 90px) 0;
+    border-top: 1px solid rgba(255,255,255,.06);
+    max-width: var(--container);
+    margin: 0 auto;
 }
 
 @media (max-width: 700px) {
-    .tlx-chapter { min-height: 80svh; }
-    .tlx-year { font-size: clamp(64px, 21vw, 110px); }
+    .tlx-year { font-size: clamp(60px, 19vw, 100px); }
+    .tlx-ticker { bottom: 48px; }
+    .tlx-bar { bottom: 34px; }
 }
 
 /* ---------- Reveal animasyonları ---------- */

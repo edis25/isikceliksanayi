@@ -46,7 +46,7 @@ require __DIR__ . '/partials/page-hero.php';
 <?php endif; ?>
 
 <?php if ($timeline && ($tlItems = section_items($timeline))): ?>
-<section class="tlx">
+<section class="tlx" id="tarihce">
     <div class="tlx-head">
         <div class="container">
             <p class="eyebrow reveal"><?= e(lv($timeline, 'title')) ?></p>
@@ -54,21 +54,43 @@ require __DIR__ . '/partials/page-hero.php';
             <span class="tlx-hint reveal reveal-d2"><?= lang() === 'tr' ? 'Kaydırarak keşfedin' : 'Scroll to explore' ?> ↓</span>
         </div>
     </div>
-    <?php foreach ($tlItems as $i => $item): ?>
-    <article class="tlx-chapter">
-        <?php if (!empty($item['image'])): ?>
-        <div class="tlx-bg" style="background-image:url('<?= e(upload_url($item['image'])) ?>')"></div>
-        <?php endif; ?>
-        <div class="container tlx-content">
-            <div class="tlx-year reveal"><?= e($item['year'] ?? '') ?></div>
-            <div class="tlx-text">
-                <h3 class="reveal reveal-d1"><?= e($item['title'] ?? '') ?></h3>
-                <p class="reveal reveal-d2"><?= e($item['text'] ?? '') ?></p>
-            </div>
+    <div class="tlx-stage">
+        <div class="tlx-media">
+            <?php foreach ($tlItems as $i => $item): ?>
+            <?php if (!empty($item['video'])): ?>
+            <video class="tlx-layer<?= $i === 0 ? ' active' : '' ?>" data-i="<?= $i ?>" muted loop playsinline preload="<?= $i === 0 ? 'auto' : 'metadata' ?>">
+                <source src="<?= e(asset($item['video'])) ?>" type="video/mp4">
+            </video>
+            <?php elseif (!empty($item['image'])): ?>
+            <div class="tlx-layer tlx-layer-img<?= $i === 0 ? ' active' : '' ?>" data-i="<?= $i ?>" style="background-image:url('<?= e(upload_url($item['image'])) ?>')"></div>
+            <?php else: ?>
+            <div class="tlx-layer tlx-layer-solid<?= $i === 0 ? ' active' : '' ?>" data-i="<?= $i ?>"></div>
+            <?php endif; ?>
+            <?php endforeach; ?>
+            <div class="tlx-shade"></div>
         </div>
-    </article>
-    <?php endforeach; ?>
+        <div class="container tlx-frames">
+            <?php foreach ($tlItems as $i => $item): ?>
+            <div class="tlx-frame<?= $i === 0 ? ' active' : '' ?>" data-i="<?= $i ?>">
+                <div class="tlx-year"><?= e($item['year'] ?? '') ?></div>
+                <div class="tlx-text">
+                    <h3><?= e($item['title'] ?? '') ?></h3>
+                    <p><?= e($item['text'] ?? '') ?></p>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="tlx-ticker">
+            <?php foreach ($tlItems as $i => $item): ?>
+            <button type="button" class="tick<?= $i === 0 ? ' active' : '' ?>" data-i="<?= $i ?>"><?= e($item['year'] ?? '') ?></button>
+            <?php endforeach; ?>
+        </div>
+        <div class="tlx-bar"><span class="tlx-bar-fill"></span></div>
+    </div>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="<?= e(asset('assets/js/history.js')) ?>" defer></script>
 <?php endif; ?>
 
 <?php if ($vision): ?>

@@ -206,22 +206,22 @@ function seed_database(Database $db): void
         '', '',
         [
             'items_tr' => [
-                ['year' => '1965', 'title' => 'Kuruluş', 'text' => "Işık Çelik, Türk çelik sanayisinin kalbi Karabük'te üretime başladı.", 'image' => 'assets/img/tesis-vinc.jpg'],
+                ['year' => '1965', 'title' => 'Kuruluş', 'text' => "Işık Çelik, Türk çelik sanayisinin kalbi Karabük'te üretime başladı.", 'image' => 'assets/img/tesis-vinc.jpg', 'video' => 'assets/video/scene-kutuk.mp4'],
                 ['year' => "1970'ler", 'title' => 'Büyüme Yılları', 'text' => 'Sıcak çekilmiş ürün yelpazesi genişledi; Işık Çelik yurt içinde güvenilir bir tedarikçi olarak konumlandı.'],
-                ['year' => "1990'lar", 'title' => 'Modernizasyon', 'text' => 'Hadde hatları yenilendi, üretim kapasitesi ve ürün kalitesi uluslararası standartlara taşındı.', 'image' => 'assets/img/hadde-hatti.jpg'],
+                ['year' => "1990'lar", 'title' => 'Modernizasyon', 'text' => 'Hadde hatları yenilendi, üretim kapasitesi ve ürün kalitesi uluslararası standartlara taşındı.', 'image' => 'assets/img/hadde-hatti.jpg', 'video' => 'assets/video/scene-hadde.mp4'],
                 ['year' => "2000'ler", 'title' => 'İhracata Açılım', 'text' => 'Avrupa ve Orta Doğu pazarlarına ilk düzenli sevkiyatlar başladı; ihracat büyüme stratejisinin merkezine yerleşti.'],
-                ['year' => "2010'lar", 'title' => 'Global Güç', 'text' => "5 kıtada 100'den fazla ülkeye ulaşan ihracat ağıyla Türkiye'nin global çelik gücü haline geldik.", 'image' => 'assets/img/kizgin-cubuk.jpg'],
-                ['year' => '2024', 'title' => 'Sürdürülebilirlik Yatırımları', 'text' => 'Mevcut tesis çatısına 2.812 kWe gücünde güneş enerjisi santrali kuruldu.', 'image' => 'assets/img/ges-cati.jpg'],
-                ['year' => '2026', 'title' => 'Yeni Nesil Tesis', 'text' => 'Yeni üretim tesisi devreye girdi: kapasite üç katına çıkarak yıllık 450.000 tona ulaştı; 3.991 kWe GES ile toplam yenilenebilir güç 6.803 kWe oldu.', 'image' => 'assets/img/tesis-havadan.jpg'],
+                ['year' => "2010'lar", 'title' => 'Global Güç', 'text' => "5 kıtada 100'den fazla ülkeye ulaşan ihracat ağıyla Türkiye'nin global çelik gücü haline geldik.", 'image' => 'assets/img/kizgin-cubuk.jpg', 'video' => 'assets/video/scene-kapasite.mp4'],
+                ['year' => '2024', 'title' => 'Sürdürülebilirlik Yatırımları', 'text' => 'Mevcut tesis çatısına 2.812 kWe gücünde güneş enerjisi santrali kuruldu.', 'image' => 'assets/img/ges-cati.jpg', 'video' => 'assets/video/scene-ges.mp4'],
+                ['year' => '2026', 'title' => 'Yeni Nesil Tesis', 'text' => 'Yeni üretim tesisi devreye girdi: kapasite üç katına çıkarak yıllık 450.000 tona ulaştı; 3.991 kWe GES ile toplam yenilenebilir güç 6.803 kWe oldu.', 'image' => 'assets/img/tesis-havadan.jpg', 'video' => 'assets/video/scene-robot.mp4'],
             ],
             'items_en' => [
-                ['year' => '1965', 'title' => 'Foundation', 'text' => 'Işık Çelik started production in Karabük, the heart of the Turkish steel industry.', 'image' => 'assets/img/tesis-vinc.jpg'],
+                ['year' => '1965', 'title' => 'Foundation', 'text' => 'Işık Çelik started production in Karabük, the heart of the Turkish steel industry.', 'image' => 'assets/img/tesis-vinc.jpg', 'video' => 'assets/video/scene-kutuk.mp4'],
                 ['year' => '1970s', 'title' => 'Years of Growth', 'text' => 'The hot-rolled product range expanded; Işık Çelik became a trusted domestic supplier.'],
-                ['year' => '1990s', 'title' => 'Modernization', 'text' => 'Rolling lines were renewed; capacity and product quality were raised to international standards.', 'image' => 'assets/img/hadde-hatti.jpg'],
+                ['year' => '1990s', 'title' => 'Modernization', 'text' => 'Rolling lines were renewed; capacity and product quality were raised to international standards.', 'image' => 'assets/img/hadde-hatti.jpg', 'video' => 'assets/video/scene-hadde.mp4'],
                 ['year' => '2000s', 'title' => 'Opening to Export', 'text' => 'First regular shipments to European and Middle Eastern markets; exports became central to our growth strategy.'],
-                ['year' => '2010s', 'title' => 'Global Strength', 'text' => 'With exports reaching 100+ countries across 5 continents, we became a global force of Turkish steel.', 'image' => 'assets/img/kizgin-cubuk.jpg'],
-                ['year' => '2024', 'title' => 'Sustainability Investments', 'text' => 'A 2.812 MWp rooftop solar power plant was installed at our existing facility.', 'image' => 'assets/img/ges-cati.jpg'],
-                ['year' => '2026', 'title' => 'Next-Generation Facility', 'text' => 'Our new facility came online: capacity tripled to 450,000 tons/year; with 3.991 MWp of new solar, total renewable power reached 6.803 MWp.', 'image' => 'assets/img/tesis-havadan.jpg'],
+                ['year' => '2010s', 'title' => 'Global Strength', 'text' => 'With exports reaching 100+ countries across 5 continents, we became a global force of Turkish steel.', 'image' => 'assets/img/kizgin-cubuk.jpg', 'video' => 'assets/video/scene-kapasite.mp4'],
+                ['year' => '2024', 'title' => 'Sustainability Investments', 'text' => 'A 2.812 MWp rooftop solar power plant was installed at our existing facility.', 'image' => 'assets/img/ges-cati.jpg', 'video' => 'assets/video/scene-ges.mp4'],
+                ['year' => '2026', 'title' => 'Next-Generation Facility', 'text' => 'Our new facility came online: capacity tripled to 450,000 tons/year; with 3.991 MWp of new solar, total renewable power reached 6.803 MWp.', 'image' => 'assets/img/tesis-havadan.jpg', 'video' => 'assets/video/scene-robot.mp4'],
             ],
         ], ''];
 
