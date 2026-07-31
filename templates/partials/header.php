@@ -53,6 +53,9 @@ if ($sameAs) {
 <?php if (!empty($seo['description'])): ?>
 <meta name="description" content="<?= e($seo['description']) ?>">
 <?php endif; ?>
+<?php if (!empty($ctx['noindex'])): ?>
+<meta name="robots" content="noindex, nofollow">
+<?php endif; ?>
 <link rel="canonical" href="<?= e($seo['canonical']) ?>">
 <?php foreach ($alternates as $l => $altUrl): ?>
 <link rel="alternate" hreflang="<?= e($l) ?>" href="<?= e($altUrl) ?>">
@@ -77,7 +80,7 @@ if ($sameAs) {
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<?= e(asset('assets/css/style.css')) ?>">
 <?php if (isset($_GET['_shot'])): /* tam sayfa ekran görüntüsü modu (geliştirme) */ ?>
-<style>.hero{min-height:780px}.reveal{opacity:1 !important;transform:none !important}</style>
+<style>.hero,.c-hero{min-height:780px !important}.c-journey-viewport,.c-shelf-viewport{min-height:0 !important}.reveal{opacity:1 !important;transform:none !important}</style>
 <?php endif; ?>
 <script type="application/ld+json"><?= json_encode($orgJsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 <?php if (!empty($jsonld_extra)): ?>
@@ -90,51 +93,50 @@ if ($sameAs) {
 </head>
 <body>
 <header class="site-header<?= empty($transparentHeader) ? ' solid' : '' ?>">
-    <div class="container">
+    <div class="container header-grid">
+        <button class="nav-toggle" aria-label="<?= lang() === 'tr' ? 'Menü' : 'Menu' ?>" aria-expanded="false">
+            <span class="bars"><span></span><span></span><span></span></span>
+            <em><?= lang() === 'tr' ? 'MENÜ' : 'MENU' ?></em>
+        </button>
         <a class="brand" href="<?= e(url('')) ?>" aria-label="<?= e($siteName) ?>">
             <img class="brand-logo" src="<?= e(asset('assets/img/logo-light.png')) ?>" alt="<?= e($siteName) ?>" width="350" height="196">
         </a>
-        <nav class="main-nav" aria-label="<?= lang() === 'tr' ? 'Ana menü' : 'Main menu' ?>">
-            <a href="<?= e(url('')) ?>"<?= $activeKey === 'home' ? ' class="active"' : '' ?>><?= e(t('nav.home')) ?></a>
-            <div class="nav-item has-sub">
-                <a href="<?= e(url($pagesByKey['about']['slug_' . lang()] ?? '')) ?>"<?= $corporateActive ? ' class="active"' : '' ?>>
-                    <?= e(t('nav.corporate')) ?>
-                    <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg>
-                </a>
-                <div class="sub-menu">
-                    <?php foreach ($corporateKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
-                    <a href="<?= e(url($p['slug_' . lang()])) ?>"<?= $activeKey === $k ? ' class="active"' : '' ?>><?= e($navLabel($p)) ?></a>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <?php foreach ($topKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
-            <a href="<?= e(url($p['slug_' . lang()])) ?>"<?= $activeKey === $k ? ' class="active"' : '' ?>><?= e(lv($p, 'title')) ?></a>
-            <?php endforeach; ?>
-        </nav>
         <div class="header-right">
             <div class="lang-switch" aria-label="Language">
                 <a href="<?= e($alternates['tr'] ?? url('', 'tr')) ?>"<?= lang() === 'tr' ? ' class="active"' : '' ?>>TR</a>
                 <a href="<?= e($alternates['en'] ?? url('', 'en')) ?>"<?= lang() === 'en' ? ' class="active"' : '' ?>>EN</a>
             </div>
-            <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
         </div>
     </div>
 </header>
 
-<div class="mobile-nav">
-    <a href="<?= e(url('')) ?>"><?= e(t('nav.home')) ?></a>
-    <span class="mobile-group"><?= e(t('nav.corporate')) ?></span>
-    <?php foreach ($corporateKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
-    <a class="sub<?= $activeKey === $k ? ' active' : '' ?>" href="<?= e(url($p['slug_' . lang()])) ?>"><?= e($navLabel($p)) ?></a>
-    <?php endforeach; ?>
-    <?php foreach ($topKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
-    <a href="<?= e(url($p['slug_' . lang()])) ?>"<?= $activeKey === $k ? ' class="active"' : '' ?>><?= e(lv($p, 'title')) ?></a>
-    <?php endforeach; ?>
-    <div class="mobile-lang">
-        <a href="<?= e($alternates['tr'] ?? url('', 'tr')) ?>"<?= lang() === 'tr' ? ' class="active"' : '' ?>>Türkçe</a>
-        <a href="<?= e($alternates['en'] ?? url('', 'en')) ?>"<?= lang() === 'en' ? ' class="active"' : '' ?>>English</a>
+<div class="menu-overlay" aria-hidden="true">
+    <div class="container menu-overlay-inner">
+        <nav class="menu-main" aria-label="<?= lang() === 'tr' ? 'Ana menü' : 'Main menu' ?>">
+            <a href="<?= e(url('')) ?>"<?= $activeKey === 'home' ? ' class="active"' : '' ?>><span class="no">01</span><?= e(t('nav.home')) ?></a>
+            <a href="<?= e(url($pagesByKey['about']['slug_' . lang()] ?? '')) ?>"<?= $corporateActive ? ' class="active"' : '' ?>><span class="no">02</span><?= e(t('nav.corporate')) ?></a>
+            <?php $no = 3; foreach ($topKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
+            <a href="<?= e(url($p['slug_' . lang()])) ?>"<?= $activeKey === $k ? ' class="active"' : '' ?>><span class="no">0<?= $no++ ?></span><?= e(lv($p, 'title')) ?></a>
+            <?php endforeach; ?>
+        </nav>
+        <div class="menu-side">
+            <div class="menu-side-block">
+                <h4><?= e(t('nav.corporate')) ?></h4>
+                <?php foreach ($corporateKeys as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
+                <a href="<?= e(url($p['slug_' . lang()])) ?>"<?= $activeKey === $k ? ' class="active"' : '' ?>><?= e($navLabel($p)) ?></a>
+                <?php endforeach; ?>
+            </div>
+            <div class="menu-side-block">
+                <h4><?= e(t('nav.contact')) ?></h4>
+                <a href="tel:<?= e(preg_replace('/[^0-9+]/', '', setting('phone'))) ?>"><?= e(setting('phone')) ?></a>
+                <a href="mailto:<?= e(setting('email')) ?>"><?= e(setting('email')) ?></a>
+                <div class="menu-lang">
+                    <a href="<?= e($alternates['tr'] ?? url('', 'tr')) ?>"<?= lang() === 'tr' ? ' class="active"' : '' ?>>Türkçe</a>
+                    <a href="<?= e($alternates['en'] ?? url('', 'en')) ?>"<?= lang() === 'en' ? ' class="active"' : '' ?>>English</a>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="menu-marquee" aria-hidden="true"><span>IŞIK ÇELİK — <?= lang() === 'tr' ? "1965'TEN BERİ" : 'SINCE 1965' ?> — KARABÜK — STEEL — IŞIK ÇELİK — <?= lang() === 'tr' ? "1965'TEN BERİ" : 'SINCE 1965' ?> — KARABÜK — STEEL — </span></div>
 </div>
 <main>

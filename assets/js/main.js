@@ -12,17 +12,23 @@
         onScroll();
     }
 
-    /* Mobil menü */
+    /* Tam ekran menü */
     var toggle = document.querySelector('.nav-toggle');
+    var overlay = document.querySelector('.menu-overlay');
+    var setMenu = function (open) {
+        document.body.classList.toggle('nav-open', open);
+        if (toggle) { toggle.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+        if (overlay) { overlay.setAttribute('aria-hidden', open ? 'false' : 'true'); }
+    };
     if (toggle) {
         toggle.addEventListener('click', function () {
-            document.body.classList.toggle('nav-open');
-            toggle.setAttribute('aria-expanded', document.body.classList.contains('nav-open') ? 'true' : 'false');
+            setMenu(!document.body.classList.contains('nav-open'));
         });
-        document.querySelectorAll('.mobile-nav a').forEach(function (a) {
-            a.addEventListener('click', function () {
-                document.body.classList.remove('nav-open');
-            });
+        document.querySelectorAll('.menu-overlay a').forEach(function (a) {
+            a.addEventListener('click', function () { setMenu(false); });
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { setMenu(false); }
         });
     }
 
