@@ -10,41 +10,6 @@ $heroLead = $intro ? lv($intro, 'subtitle') : '';
 require __DIR__ . '/partials/page-hero.php';
 ?>
 
-<?php if ($intro): ?>
-<section class="section">
-    <div class="container">
-        <div class="split">
-            <div class="split-media reveal">
-                <img src="<?= e(upload_url($intro['image'])) ?>" alt="<?= e(lv($intro, 'title')) ?>" loading="lazy">
-            </div>
-            <div class="split-body reveal reveal-d1">
-                <p class="eyebrow"><?= e(t('nav.about')) ?></p>
-                <h2><?= e(lv($intro, 'title')) ?></h2>
-                <?= nl2p(lv($intro, 'body')) ?>
-            </div>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
-
-<?php if ($stats): ?>
-<div class="stats-band">
-    <div class="container">
-        <?php if (lv($stats, 'title')): ?>
-        <p class="eyebrow" style="margin-bottom:30px"><?= e(lv($stats, 'title')) ?></p>
-        <?php endif; ?>
-        <div class="stats-grid">
-            <?php foreach (section_items($stats) as $item): ?>
-            <div class="stat">
-                <div class="stat-value" data-value="<?= e($item['value']) ?>"><?= e($item['value']) ?></div>
-                <div class="stat-label"><?= e($item['label']) ?></div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-
 <?php if ($timeline && ($tlItems = section_items($timeline))): ?>
 <section class="tlx" id="tarihce">
     <div class="tlx-head">
@@ -91,6 +56,41 @@ require __DIR__ . '/partials/page-hero.php';
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="<?= e(asset('assets/js/history.js')) ?>" defer></script>
+<?php endif; ?>
+
+<?php if ($intro): ?>
+<section class="section">
+    <div class="container">
+        <div class="split">
+            <div class="split-media reveal">
+                <img src="<?= e(upload_url($intro['image'])) ?>" alt="<?= e(lv($intro, 'title')) ?>" loading="lazy">
+            </div>
+            <div class="split-body reveal reveal-d1">
+                <p class="eyebrow"><?= e(t('nav.about')) ?></p>
+                <h2><?= e(lv($intro, 'title')) ?></h2>
+                <?= nl2p(lv($intro, 'body')) ?>
+            </div>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<?php if ($stats): ?>
+<div class="stats-band">
+    <div class="container">
+        <?php if (lv($stats, 'title')): ?>
+        <p class="eyebrow" style="margin-bottom:30px"><?= e(lv($stats, 'title')) ?></p>
+        <?php endif; ?>
+        <div class="stats-grid">
+            <?php foreach (section_items($stats) as $item): ?>
+            <div class="stat">
+                <div class="stat-value" data-value="<?= e($item['value']) ?>"><?= e($item['value']) ?></div>
+                <div class="stat-label"><?= e($item['label']) ?></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
 <?php endif; ?>
 
 <?php if ($vision): ?>
