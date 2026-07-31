@@ -94,10 +94,16 @@ function url(string $path = '', ?string $lang = null): string
     return base_url() . $prefix . ($path !== '' ? '/' . $path : ($lang === 'en' ? '/' : '/'));
 }
 
-/** Varlık (asset) URL'si. */
+/** Varlık (asset) URL'si — dosya değiştikçe otomatik sürüm imzası ekler (önbellek kırma). */
 function asset(string $path): string
 {
-    return base_url() . '/' . ltrim($path, '/');
+    $path = ltrim($path, '/');
+    $abs = dirname(__DIR__) . '/' . $path;
+    $ver = '';
+    if (is_file($abs) && preg_match('/\.(css|js)$/', $path)) {
+        $ver = '?v=' . filemtime($abs);
+    }
+    return base_url() . '/' . $path . $ver;
 }
 
 /** Yüklenen medya URL'si. */

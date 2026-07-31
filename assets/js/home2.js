@@ -71,27 +71,28 @@
         var count = stages.length;
         var current = -1;
 
-        // Videolar kendiliğinden oynamaz; kareyi scroll yönetir
-        var videoTargets = [];
-        var videosUnlocked = false;
+        // Videolar kendiliğinden oynamaz; kareyi scroll yönetir.
+        // Klipler belleğe (blob) alınır: Range desteği olmayan sunucularda bile video
+        // tam "seekable" olur ve kare kare ileri/geri sarılabilir.
+        var videoFracs = [];
         videos.forEach(function (v, i) {
             v.pause();
             v.removeAttribute('autoplay');
             v.removeAttribute('loop');
-            videoTargets[i] = 0;
+            videoFracs[i] = 0;
+            var srcEl = v.querySelector('source');
+            var srcUrl = (srcEl && srcEl.src) || v.currentSrc || v.src;
+            if (srcUrl) {
+                fetch(srcUrl)
+                    .then(function (r) { return r.blob(); })
+                    .then(function (b) {
+                        v.src = URL.createObjectURL(b);
+                        v.preload = 'auto';
+                        v.load();
+                    })
+                    .catch(function () {});
+            }
         });
-
-        // Tarayıcının kare çizmesini garantile: bir kez sessizce oynat-durdur
-        var unlockVideos = function () {
-            if (videosUnlocked) { return; }
-            videosUnlocked = true;
-            videos.forEach(function (v) {
-                var p = v.play();
-                if (p) { p.then(function () { v.pause(); }).catch(function () {}); }
-            });
-        };
-        window.addEventListener('touchstart', unlockVideos, { once: true, passive: true });
-        window.addEventListener('wheel', unlockVideos, { once: true, passive: true });
 
         var setStage = function (idx) {
             if (idx === current) { return; }
@@ -102,15 +103,14 @@
             if (progress) { progress.style.height = ((idx + 1) / count * 100) + '%'; }
         };
 
-        // Her frame'de hedef kareye yumuşakça yaklaş (seek çakışmalarını önler, akıcı sarar)
+        // Her frame'de hedef kareye yumuşakça yaklaş (seek çakışmasız, akıcı ileri/geri sarma)
         gsap.ticker.add(function () {
             if (current < 0) { return; }
             var v = videos[current];
-            if (!v || !v.duration || v.seeking) { return; }
-            var target = videoTargets[current];
+            if (!v || !v.duration || v.readyState < 2 || v.seeking) { return; }
+            var target = Math.min(v.duration - 0.05, videoFracs[current] * v.duration);
             var diff = target - v.currentTime;
             if (Math.abs(diff) < 0.02) { return; }
-            // Uzak sıçramalarda hızlı, yakında yumuşak takip
             v.currentTime = Math.abs(diff) > 1.2 ? target : v.currentTime + diff * 0.35;
         });
 
@@ -120,16 +120,11 @@
             end: '+=' + (count * 90) + '%',
             pin: true,
             scrub: true,
-            onEnter: unlockVideos,
             onUpdate: function (self) {
                 var pos = self.progress * count;
                 var idx = Math.min(count - 1, Math.floor(pos));
                 setStage(idx);
-                var v = videos[idx];
-                if (v && v.duration) {
-                    var lp = Math.min(Math.max(pos - idx, 0), 1);
-                    videoTargets[idx] = Math.min(v.duration - 0.05, lp * v.duration);
-                }
+                videoFracs[idx] = Math.min(Math.max(pos - idx, 0), 1);
             }
         });
         setStage(0);
