@@ -111,7 +111,8 @@
             var target = Math.min(v.duration - 0.05, videoFracs[current] * v.duration);
             var diff = target - v.currentTime;
             if (Math.abs(diff) < 0.02) { return; }
-            v.currentTime = Math.abs(diff) > 1.2 ? target : v.currentTime + diff * 0.35;
+            // Ağır, sinematik takip; yalnızca çok uzak sıçramalarda anında atla
+            v.currentTime = Math.abs(diff) > 2.2 ? target : v.currentTime + diff * 0.16;
         });
 
         ScrollTrigger.create({
@@ -119,7 +120,7 @@
             start: 'top top',
             end: '+=' + (count * 90) + '%',
             pin: true,
-            scrub: true,
+            scrub: 1.2,
             onUpdate: function (self) {
                 var pos = self.progress * count;
                 var idx = Math.min(count - 1, Math.floor(pos));
@@ -144,7 +145,7 @@
                 start: 'top top',
                 end: function () { return '+=' + getDistance(); },
                 pin: true,
-                scrub: true,
+                scrub: 1,
                 invalidateOnRefresh: true
             }
         });

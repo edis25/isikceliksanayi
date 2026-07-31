@@ -143,7 +143,7 @@
     height: 100%;
     object-fit: cover;
 }
-.c-stage-video { opacity: 0; transition: opacity .6s var(--ease); }
+.c-stage-video { opacity: 0; transition: opacity 1.4s var(--ease); }
 .c-stage-video.active { opacity: 1; }
 .c-journey-shade {
     position: absolute;
@@ -185,7 +185,7 @@
     right: 0;
     opacity: 0;
     transform: translateY(26px);
-    transition: opacity .5s var(--ease), transform .5s var(--ease);
+    transition: opacity .9s var(--ease) .15s, transform .9s var(--ease) .15s;
     pointer-events: none;
 }
 .c-stage.active { opacity: 1; transform: none; pointer-events: auto; }
