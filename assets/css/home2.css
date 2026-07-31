@@ -177,7 +177,7 @@
     border-radius: 2px;
     transition: height .4s var(--ease);
 }
-.c-journey-texts { position: relative; max-width: 560px; flex: 1; }
+.c-journey-texts { position: relative; max-width: 560px; flex: 1; min-height: 420px; }
 .c-stage {
     position: absolute;
     top: 60px;
@@ -488,5 +488,9 @@
 @media (max-width: 860px) {
     .c-journey-rail { display: none; }
     .c-stage-no { font-size: 54px; }
+    .c-stage { top: 40px; }
+    .c-journey-texts { min-height: 380px; }
     .c-global-viz .c-region { font-size: 10px; padding: 4px 10px; }
+    .c-shelf-hint { display: none; }
+    .c-product { width: min(78vw, 300px); }
 }

@@ -5,7 +5,6 @@
 
     var docEl = document.documentElement;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var small = window.matchMedia('(max-width: 860px)').matches;
 
     /* Split: başlık kelimelerini sarmala (motion açık/kapalı fark etmeksizin güvenli) */
     var splitTargets = document.querySelectorAll('[data-split]');
@@ -22,12 +21,14 @@
     }
 
     var shotMode = window.location.search.indexOf('_shot') !== -1;
-    if (reduced || small || shotMode || typeof window.gsap === 'undefined' || typeof window.ScrollTrigger === 'undefined') {
+    if (reduced || shotMode || typeof window.gsap === 'undefined' || typeof window.ScrollTrigger === 'undefined') {
         enableStatic();
         return;
     }
 
     gsap.registerPlugin(ScrollTrigger);
+    // Mobilde adres çubuğu gizlenirken pin'lerin zıplamasını önle
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
     /* ---------- Kinetik tipografi ---------- */
     splitTargets.forEach(function (el) {
