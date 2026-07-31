@@ -1,8 +1,9 @@
 <?php
-$intro  = $sections['intro'] ?? null;
-$stats  = $sections['stats'] ?? null;
-$vision = $sections['vision'] ?? null;
-$goals  = $sections['goals'] ?? null;
+$intro    = $sections['intro'] ?? null;
+$stats    = $sections['stats'] ?? null;
+$timeline = $sections['timeline'] ?? null;
+$vision   = $sections['vision'] ?? null;
+$goals    = $sections['goals'] ?? null;
 
 require __DIR__ . '/partials/header.php';
 $heroLead = $intro ? lv($intro, 'subtitle') : '';
@@ -42,6 +43,33 @@ require __DIR__ . '/partials/page-hero.php';
         </div>
     </div>
 </div>
+<?php endif; ?>
+
+<?php if ($timeline && ($tlItems = section_items($timeline))): ?>
+<section class="section timeline-section">
+    <div class="container">
+        <div class="section-head center reveal">
+            <p class="eyebrow"><?= e(lv($timeline, 'title')) ?></p>
+            <h2 class="section-title"><?= e(lv($timeline, 'subtitle')) ?></h2>
+        </div>
+        <div class="timeline">
+            <div class="tl-line"><span class="tl-progress"></span></div>
+            <?php foreach ($tlItems as $i => $item): ?>
+            <article class="tl-item<?= $i % 2 ? ' flip' : '' ?>">
+                <span class="tl-dot"></span>
+                <div class="tl-year reveal"><?= e($item['year'] ?? '') ?></div>
+                <div class="tl-card reveal reveal-d1">
+                    <?php if (!empty($item['image'])): ?>
+                    <div class="tl-img"><img src="<?= e(upload_url($item['image'])) ?>" alt="<?= e($item['title'] ?? '') ?>" loading="lazy"></div>
+                    <?php endif; ?>
+                    <h3><?= e($item['title'] ?? '') ?></h3>
+                    <p><?= e($item['text'] ?? '') ?></p>
+                </div>
+            </article>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
 <?php endif; ?>
 
 <?php if ($vision): ?>
