@@ -81,7 +81,7 @@ if ($sameAs) {
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<?= e(asset('assets/css/style.css')) ?>">
 <?php if (isset($_GET['_shot'])): /* tam sayfa ekran görüntüsü modu (geliştirme) */ ?>
-<style>.hero,.c-hero{min-height:780px !important}.c-journey-viewport,.c-shelf-viewport{min-height:0 !important}.reveal{opacity:1 !important;transform:none !important}</style>
+<style>.hero,.c-hero{min-height:780px !important}.tlx-chapter{min-height:700px !important}.c-journey-viewport,.c-shelf-viewport{min-height:0 !important}.reveal{opacity:1 !important;transform:none !important}</style>
 <?php endif; ?>
 <script type="application/ld+json"><?= json_encode($orgJsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 <?php if (!empty($jsonld_extra)): ?>

@@ -46,29 +46,28 @@ require __DIR__ . '/partials/page-hero.php';
 <?php endif; ?>
 
 <?php if ($timeline && ($tlItems = section_items($timeline))): ?>
-<section class="section timeline-section">
-    <div class="container">
-        <div class="section-head center reveal">
-            <p class="eyebrow"><?= e(lv($timeline, 'title')) ?></p>
-            <h2 class="section-title"><?= e(lv($timeline, 'subtitle')) ?></h2>
-        </div>
-        <div class="timeline">
-            <div class="tl-line"><span class="tl-progress"></span></div>
-            <?php foreach ($tlItems as $i => $item): ?>
-            <article class="tl-item<?= $i % 2 ? ' flip' : '' ?>">
-                <span class="tl-dot"></span>
-                <div class="tl-year reveal"><?= e($item['year'] ?? '') ?></div>
-                <div class="tl-card reveal reveal-d1">
-                    <?php if (!empty($item['image'])): ?>
-                    <div class="tl-img"><img src="<?= e(upload_url($item['image'])) ?>" alt="<?= e($item['title'] ?? '') ?>" loading="lazy"></div>
-                    <?php endif; ?>
-                    <h3><?= e($item['title'] ?? '') ?></h3>
-                    <p><?= e($item['text'] ?? '') ?></p>
-                </div>
-            </article>
-            <?php endforeach; ?>
+<section class="tlx">
+    <div class="tlx-head">
+        <div class="container">
+            <p class="eyebrow reveal"><?= e(lv($timeline, 'title')) ?></p>
+            <h2 class="reveal reveal-d1"><?= e(lv($timeline, 'subtitle')) ?></h2>
+            <span class="tlx-hint reveal reveal-d2"><?= lang() === 'tr' ? 'Kaydırarak keşfedin' : 'Scroll to explore' ?> ↓</span>
         </div>
     </div>
+    <?php foreach ($tlItems as $i => $item): ?>
+    <article class="tlx-chapter">
+        <?php if (!empty($item['image'])): ?>
+        <div class="tlx-bg" style="background-image:url('<?= e(upload_url($item['image'])) ?>')"></div>
+        <?php endif; ?>
+        <div class="container tlx-content">
+            <div class="tlx-year reveal"><?= e($item['year'] ?? '') ?></div>
+            <div class="tlx-text">
+                <h3 class="reveal reveal-d1"><?= e($item['title'] ?? '') ?></h3>
+                <p class="reveal reveal-d2"><?= e($item['text'] ?? '') ?></p>
+            </div>
+        </div>
+    </article>
+    <?php endforeach; ?>
 </section>
 <?php endif; ?>
 

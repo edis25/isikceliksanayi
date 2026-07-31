@@ -102,21 +102,6 @@
         });
     }
 
-    /* Tarihçe: scroll ile dolan çizgi */
-    var tl = document.querySelector('.timeline');
-    var tlProgress = document.querySelector('.tl-progress');
-    if (tl && tlProgress) {
-        var updateTl = function () {
-            var rect = tl.getBoundingClientRect();
-            var vh = window.innerHeight;
-            var passed = Math.min(Math.max(vh * 0.6 - rect.top, 0), rect.height);
-            tlProgress.style.height = (passed / rect.height * 100) + '%';
-        };
-        window.addEventListener('scroll', updateTl, { passive: true });
-        window.addEventListener('resize', updateTl);
-        updateTl();
-    }
-
     /* Hero videosu: otomatik oynatma engellenirse posteri göster */
     var heroVideo = document.querySelector('.hero-media video');
     if (heroVideo) {
