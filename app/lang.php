@@ -77,7 +77,7 @@ return [
         'notfound.home'      => 'Ana Sayfaya Dön',
         'breadcrumb.home'    => 'Ana Sayfa',
         'scroll.down'        => 'Aşağı Kaydırın',
-        'since'              => "1965'ten beri",
+        'since'              => "1965'ten bugüne",
     ],
     'en' => [
         'nav.home'           => 'Home',

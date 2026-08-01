@@ -64,7 +64,7 @@ require __DIR__ . '/partials/header.php';
         </video>
     </div>
     <div class="container c-hero-content">
-        <p class="c-eyebrow"><?= e(t('since')) ?> · KARABÜK</p>
+        <p class="c-eyebrow"><?= e(t('since')) ?></p>
         <h1 class="c-title" data-split><?= e($hero ? lv($hero, 'title') : 'Daha Parlak Bir Gelecek İçin') ?></h1>
         <p class="c-sub"><?= e($hero ? lv($hero, 'subtitle') : '') ?></p>
         <div class="c-actions">
