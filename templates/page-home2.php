@@ -97,7 +97,7 @@ require __DIR__ . '/partials/header.php';
 <section class="c-proc" id="s-journey">
     <div class="c-proc-head">
         <div class="container">
-            <p class="c-eyebrow c-eyebrow-light"><?= $tr ? 'ÜRETİM YOLCULUĞU' : 'PRODUCTION JOURNEY' ?></p>
+            <p class="c-eyebrow"><?= $tr ? 'ÜRETİM YOLCULUĞU' : 'PRODUCTION JOURNEY' ?></p>
             <h2 data-split><?= $tr ? 'Çeliğin yolculuğu' : 'The journey of steel' ?></h2>
         </div>
     </div>
@@ -108,7 +108,6 @@ require __DIR__ . '/partials/header.php';
                 <source src="<?= e(asset($st['video'])) ?>" type="video/mp4">
             </video>
         </div>
-        <div class="c-proc-tint"></div>
         <div class="container c-proc-content">
             <span class="c-proc-no"><?= e($st['no']) ?></span>
             <h3><?= e($st['title']) ?></h3>

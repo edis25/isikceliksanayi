@@ -129,8 +129,8 @@
 .c-stat .stat-value .suffix { color: var(--c-accent); }
 .c-stat-label { margin-top: 10px; font-size: 13px; color: var(--c-muted); max-width: 200px; }
 
-/* ---------- S2 Üretim Yolculuğu: turuncu duotone, alt alta akış ---------- */
-.c-proc { background: var(--c-accent); }
+/* ---------- S2 Üretim Yolculuğu: alt alta adımlar, doğal video ---------- */
+.c-proc { background: var(--c-dark); }
 .c-proc-head {
     padding: clamp(60px, 8vw, 110px) 0 clamp(30px, 4vw, 50px);
 }
@@ -140,8 +140,6 @@
     font-weight: 800;
     letter-spacing: -.02em;
 }
-.c-eyebrow-light { color: var(--c-white); }
-.c-eyebrow-light::before { background: var(--c-white); }
 
 .c-proc-step {
     position: relative;
@@ -149,9 +147,8 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: var(--c-accent);
+    background: var(--c-dark);
 }
-/* Duotone: gri video × turuncu zemin (multiply) → açık alanlar turuncu, koyular siyah */
 .c-proc-media,
 .c-proc-media video {
     position: absolute;
@@ -160,22 +157,14 @@
     height: 100%;
     object-fit: cover;
 }
-.c-proc-media video {
-    filter: grayscale(1) contrast(1.05) brightness(1.18);
-}
-/* Turuncu boyama: luminance korunur, ton turuncuya döner (Chalibria duotone hissi) */
-.c-proc-tint {
-    position: absolute;
-    inset: 0;
-    background: var(--c-accent);
-    mix-blend-mode: color;
-    pointer-events: none;
-}
+/* Okunabilirlik: sol taraf ve üst/alt hafif karartma */
 .c-proc-step::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,.3) 0%, transparent 28%, transparent 72%, rgba(0,0,0,.32) 100%);
+    background:
+        linear-gradient(90deg, rgba(7,11,46,.78) 0%, rgba(7,11,46,.35) 45%, rgba(7,11,46,.1) 100%),
+        linear-gradient(180deg, rgba(7,11,46,.45) 0%, transparent 30%, transparent 72%, rgba(7,11,46,.5) 100%);
     pointer-events: none;
 }
 .c-proc-content {
@@ -193,7 +182,7 @@
     font-weight: 800;
     line-height: 1;
     color: transparent;
-    -webkit-text-stroke: 2px rgba(255, 255, 255, .85);
+    -webkit-text-stroke: 2px rgba(240, 90, 34, .8);
 }
 .c-proc-step h3 {
     color: var(--c-white);
@@ -208,7 +197,7 @@
     max-width: 46ch;
     font-size: clamp(15.5px, 1.4vw, 18px);
     line-height: 1.8;
-    color: rgba(255, 255, 255, .92);
+    color: rgba(255, 255, 255, .9);
 }
 .c-proc-big { margin-top: 10px; display: flex; align-items: baseline; gap: 14px; }
 .c-proc-big .stat-value {
@@ -216,14 +205,14 @@
     font-size: clamp(50px, 7vw, 100px);
     font-weight: 800;
     line-height: 1;
-    color: var(--c-white);
+    color: var(--c-accent);
 }
 .c-proc-big small {
     font-family: var(--font-display);
     font-size: 15px;
     font-weight: 700;
     letter-spacing: .22em;
-    color: rgba(255, 255, 255, .85);
+    color: rgba(255, 255, 255, .8);
 }
 
 /* ---------- S3 Ürün Vitrini (yatay) ---------- */
