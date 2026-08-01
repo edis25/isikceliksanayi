@@ -73,7 +73,7 @@ require __DIR__ . '/partials/header.php';
         </div>
     </div>
     <div class="c-marquee" aria-hidden="true">
-        <span>IŞIK ÇELİK — 1965 — KARABÜK — STEEL — 450.000 TON — IŞIK ÇELİK — 1965 — KARABÜK — STEEL — 450.000 TON — </span>
+        <span>IŞIK ÇELİK — 1965 — STEEL — 450.000 TON — IŞIK ÇELİK — 1965 — STEEL — 450.000 TON — </span>
     </div>
 </section>
 
