@@ -212,7 +212,7 @@ function seed_database(Database $db): void
                 ['year' => "2000'ler", 'title' => 'İhracata Açılım', 'text' => 'Avrupa ve Orta Doğu pazarlarına ilk düzenli sevkiyatlar başladı; ihracat büyüme stratejisinin merkezine yerleşti.'],
                 ['year' => "2010'lar", 'title' => 'Global Güç', 'text' => "5 kıtada 100'den fazla ülkeye ulaşan ihracat ağıyla Türkiye'nin global çelik gücü haline geldik.", 'image' => 'assets/img/kizgin-cubuk.jpg', 'video' => 'assets/video/scene-kapasite.mp4'],
                 ['year' => '2024', 'title' => 'Sürdürülebilirlik Yatırımları', 'text' => 'Mevcut tesis çatısına 2.812 kWe gücünde güneş enerjisi santrali kuruldu.', 'image' => 'assets/img/ges-cati.jpg', 'video' => 'assets/video/scene-ges.mp4'],
-                ['year' => '2026', 'title' => 'Yeni Nesil Tesis', 'text' => 'Yeni üretim tesisi devreye girdi: kapasite üç katına çıkarak yıllık 450.000 tona ulaştı; 3.991 kWe GES ile toplam yenilenebilir güç 6.803 kWe oldu.', 'image' => 'assets/img/tesis-havadan.jpg', 'video' => 'assets/video/scene-robot.mp4'],
+                ['year' => '2025', 'title' => 'Yeni Nesil Tesis', 'text' => 'Yeni üretim tesisi devreye girdi: kapasite üç katına çıkarak yıllık 450.000 tona ulaştı; 3.991 kWe GES ile toplam yenilenebilir güç 6.803 kWe oldu.', 'image' => 'assets/img/tesis-havadan.jpg', 'video' => 'assets/video/scene-robot.mp4'],
             ],
             'items_en' => [
                 ['year' => '1965', 'title' => 'Foundation', 'text' => 'Işık Çelik started production in Karabük, the heart of the Turkish steel industry.', 'image' => 'assets/img/tesis-vinc.jpg', 'video' => 'assets/video/scene-kutuk.mp4'],
@@ -221,13 +221,13 @@ function seed_database(Database $db): void
                 ['year' => '2000s', 'title' => 'Opening to Export', 'text' => 'First regular shipments to European and Middle Eastern markets; exports became central to our growth strategy.'],
                 ['year' => '2010s', 'title' => 'Global Strength', 'text' => 'With exports reaching 100+ countries across 5 continents, we became a global force of Turkish steel.', 'image' => 'assets/img/kizgin-cubuk.jpg', 'video' => 'assets/video/scene-kapasite.mp4'],
                 ['year' => '2024', 'title' => 'Sustainability Investments', 'text' => 'A 2.812 MWp rooftop solar power plant was installed at our existing facility.', 'image' => 'assets/img/ges-cati.jpg', 'video' => 'assets/video/scene-ges.mp4'],
-                ['year' => '2026', 'title' => 'Next-Generation Facility', 'text' => 'Our new facility came online: capacity tripled to 450,000 tons/year; with 3.991 MWp of new solar, total renewable power reached 6.803 MWp.', 'image' => 'assets/img/tesis-havadan.jpg', 'video' => 'assets/video/scene-robot.mp4'],
+                ['year' => '2025', 'title' => 'Next-Generation Facility', 'text' => 'Our new facility came online: capacity tripled to 450,000 tons/year; with 3.991 MWp of new solar, total renewable power reached 6.803 MWp.', 'image' => 'assets/img/tesis-havadan.jpg', 'video' => 'assets/video/scene-robot.mp4'],
             ],
         ], ''];
 
     $sections[] = ['about', 'vision', 'feature-list', 3,
         'Gelecek Vizyonu', 'Our Vision',
-        '2026; büyüme, yenilenme ve dönüşüm yılıdır.', 'The year 2026 represents a new era of growth, transformation and innovation.',
+        '2025; büyüme, yenilenme ve dönüşüm yılı oldu.', 'The year 2025 marked a new era of growth, transformation and innovation.',
         '', '',
         [
             'items_tr' => [
@@ -544,7 +544,7 @@ function seed_database(Database $db): void
             'meta_title_en' => 'New Production Facility Commissioned | Işık Çelik',
             'meta_desc_tr' => 'Işık Çelik yeni üretim tesisiyle kapasitesini üç katına çıkardı: yıllık 450.000 ton. Otomasyon ve dijital üretim altyapısıyla yeni bir dönem.',
             'meta_desc_en' => 'Işık Çelik tripled its capacity to 450,000 tons per year with its new facility — a new era of automation and digital manufacturing.',
-            'published_at' => '2026-06-15',
+            'published_at' => '2025-06-15',
         ],
         [
             'slug_tr' => 'ges-yatirimlarimiz-tamamlandi', 'slug_en' => 'solar-power-investments-completed',
@@ -559,7 +559,7 @@ function seed_database(Database $db): void
             'meta_title_en' => 'Solar Power Investments Completed | Işık Çelik',
             'meta_desc_tr' => 'Işık Çelik toplam 6.803 kWe kurulu güce sahip çatı GES yatırımlarını tamamladı. Sürdürülebilir çelik üretiminde yeni bir adım.',
             'meta_desc_en' => 'Işık Çelik completed rooftop solar investments totalling 6.803 MWp — another step towards sustainable steel manufacturing.',
-            'published_at' => '2026-07-10',
+            'published_at' => '2025-07-10',
         ],
     ];
     $news[] = [
