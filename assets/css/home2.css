@@ -157,6 +157,17 @@
     height: 100%;
     object-fit: cover;
 }
+/* Chalibria mantığı: gri video, turuncuya boyanır (luminance korunur) */
+.c-proc-media video {
+    filter: grayscale(1) contrast(1.05) brightness(1.18);
+}
+.c-proc-tint {
+    position: absolute;
+    inset: 0;
+    background: var(--c-accent);
+    mix-blend-mode: color;
+    pointer-events: none;
+}
 /* Okunabilirlik: sol taraf ve üst/alt hafif karartma */
 .c-proc-step::after {
     content: "";

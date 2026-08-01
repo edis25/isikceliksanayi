@@ -108,6 +108,7 @@ require __DIR__ . '/partials/header.php';
                 <source src="<?= e(asset($st['video'])) ?>" type="video/mp4">
             </video>
         </div>
+        <div class="c-proc-tint"></div>
         <div class="container c-proc-content">
             <span class="c-proc-no"><?= e($st['no']) ?></span>
             <h3><?= e($st['title']) ?></h3>
