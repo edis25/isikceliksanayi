@@ -138,6 +138,6 @@ if ($sameAs) {
             </div>
         </div>
     </div>
-    <div class="menu-marquee" aria-hidden="true"><span>IŞIK ÇELİK — <?= lang() === 'tr' ? "1965'TEN BERİ" : 'SINCE 1965' ?> — KARABÜK — STEEL — IŞIK ÇELİK — <?= lang() === 'tr' ? "1965'TEN BERİ" : 'SINCE 1965' ?> — KARABÜK — STEEL — </span></div>
+    <div class="menu-marquee" aria-hidden="true"><span>IŞIK ÇELİK — <?= lang() === 'tr' ? "1965'TEN BUGÜNE" : 'SINCE 1965' ?> — STEEL — IŞIK ÇELİK — <?= lang() === 'tr' ? "1965'TEN BUGÜNE" : 'SINCE 1965' ?> — STEEL — </span></div>
 </div>
 <main>
