@@ -1305,6 +1305,55 @@ ul.checks li::before {
 .article-body p { margin-bottom: 20px; font-size: 17px; line-height: 1.85; }
 .article-body h2, .article-body h3 { margin: 34px 0 16px; }
 
+/* ---------- Haber eki: belge kartı + gömülü PDF ---------- */
+.doc-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    background: var(--c-white);
+    border: 1px solid var(--c-line);
+    border-left: 4px solid var(--c-accent);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 34px 0 20px;
+    box-shadow: 0 8px 26px -16px rgba(7,11,46,.18);
+}
+.doc-card-info { display: flex; align-items: center; gap: 16px; }
+.doc-ico {
+    display: grid;
+    place-items: center;
+    width: 52px; height: 52px;
+    background: rgba(240, 90, 34, .1);
+    border: 1px solid rgba(240, 90, 34, .3);
+    border-radius: var(--radius);
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    color: var(--c-accent);
+}
+.doc-card-info strong { display: block; color: var(--c-ink); font-family: var(--font-display); }
+.doc-name { font-size: 13px; color: var(--c-muted); word-break: break-all; }
+
+.pdf-embed {
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 26px -16px rgba(7,11,46,.18);
+}
+.pdf-embed iframe {
+    display: block;
+    width: 100%;
+    height: min(78vh, 900px);
+    border: 0;
+}
+@media (max-width: 700px) {
+    .pdf-embed iframe { height: 60vh; }
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
     background: var(--c-dark);

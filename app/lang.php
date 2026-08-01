@@ -14,7 +14,7 @@ return [
         'nav.products'       => 'Ürünler',
         'nav.industries'     => 'Sektörler',
         'nav.global'         => 'Global',
-        'nav.news'           => 'Haberler',
+        'nav.news'           => 'Dijital Ayak İzimiz',
         'nav.contact'        => 'İletişim',
 
         'btn.discover'       => 'Keşfedin',
@@ -89,7 +89,7 @@ return [
         'nav.products'       => 'Products',
         'nav.industries'     => 'Industries',
         'nav.global'         => 'Global',
-        'nav.news'           => 'News',
+        'nav.news'           => 'Our Digital Footprint',
         'nav.contact'        => 'Contact',
 
         'btn.discover'       => 'Discover',

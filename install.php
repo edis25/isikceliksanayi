@@ -133,6 +133,7 @@ $tables = [
         body_tr TEXT,
         body_en TEXT,
         image VARCHAR(255) DEFAULT '',
+        attachment VARCHAR(255) DEFAULT '',
         meta_title_tr VARCHAR(190) DEFAULT '',
         meta_title_en VARCHAR(190) DEFAULT '',
         meta_desc_tr TEXT,

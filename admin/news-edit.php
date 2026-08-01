@@ -11,7 +11,7 @@ if ($isNew) {
     $article = [
         'title_tr' => '', 'title_en' => '', 'slug_tr' => '', 'slug_en' => '',
         'summary_tr' => '', 'summary_en' => '', 'body_tr' => '', 'body_en' => '',
-        'image' => '', 'meta_title_tr' => '', 'meta_title_en' => '',
+        'image' => '', 'attachment' => '', 'meta_title_tr' => '', 'meta_title_en' => '',
         'meta_desc_tr' => '', 'meta_desc_en' => '',
         'published_at' => date('Y-m-d'), 'is_published' => 1,
     ];
@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'body_tr'      => trim($_POST['body_tr'] ?? ''),
         'body_en'      => trim($_POST['body_en'] ?? ''),
         'image'        => trim($_POST['image'] ?? ''),
+        'attachment'   => trim($_POST['attachment'] ?? ''),
         'meta_title_tr'=> trim($_POST['meta_title_tr'] ?? ''),
         'meta_title_en'=> trim($_POST['meta_title_en'] ?? ''),
         'meta_desc_tr' => trim($_POST['meta_desc_tr'] ?? ''),
@@ -109,6 +110,11 @@ admin_header($isNew ? 'Yeni Haber' : 'Haber Düzenle');
             </div>
         </div>
         <?php admin_image_field('image', $article['image'], 'Kapak Görseli'); ?>
+        <div class="field">
+            <label>Ekli Belge (PDF)</label>
+            <input type="text" name="attachment" value="<?= e($article['attachment']) ?>" placeholder="assets/docs/... veya uploads/...">
+            <small>Dolu ise haber detayında "Belgeyi Görüntüle" kartı ve gömülü PDF önizlemesi gösterilir.</small>
+        </div>
         <div class="field-row">
             <div class="field">
                 <label>Yayın Tarihi</label>

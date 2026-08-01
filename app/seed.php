@@ -95,9 +95,9 @@ function seed_database(Database $db): void
         ],
         'news' => [
             'template' => 'news', 'slug_tr' => 'haberler', 'slug_en' => 'news', 'sort_order' => 7,
-            'title_tr' => 'Haberler', 'title_en' => 'News',
-            'meta_title_tr' => 'Haberler | Işık Çelik',
-            'meta_title_en' => 'News | Işık Çelik',
+            'title_tr' => 'Dijital Ayak İzimiz', 'title_en' => 'Our Digital Footprint',
+            'meta_title_tr' => 'Dijital Ayak İzimiz | Işık Çelik',
+            'meta_title_en' => 'Our Digital Footprint | Işık Çelik',
             'meta_desc_tr'  => "Işık Çelik'ten güncel haberler: yatırımlar, üretim, sürdürülebilirlik ve sektör gelişmeleri.",
             'meta_desc_en'  => "Latest news from Işık Çelik: investments, production, sustainability and industry developments.",
             'image' => 'assets/img/tesis-havadan.jpg',
@@ -562,6 +562,24 @@ function seed_database(Database $db): void
             'published_at' => '2026-07-10',
         ],
     ];
+    $news[] = [
+        'slug_tr' => 'prime-odak-konu-roportaji-dogukan-baylan',
+        'slug_en' => 'prime-focus-topic-interview-dogukan-baylan',
+        'title_tr' => 'Işık Çelik Prime dergisinde: "Yeni üretim tesisimizle kapasitemizi üç katına çıkardık"',
+        'title_en' => 'Işık Çelik in Prime magazine: "We tripled our capacity with our new facility"',
+        'summary_tr' => 'Yönetim Kurulu Üyemiz Doğukan Baylan, Prime dergisinin Eylül 2025 sayısındaki Odak Konu röportajında yeni tesisimizi, ihracat stratejimizi ve sektörün gündemini anlattı.',
+        'summary_en' => "Board Member Doğukan Baylan discussed our new facility, export strategy and the industry agenda in Prime magazine's September 2025 Focus Topic interview.",
+        'body_tr' => "Prime dergisinin Eylül 2025 sayısında \"Odak Konu\" köşesine konuk olan Yönetim Kurulu Üyemiz Doğukan Baylan, yeni üretim tesisimizi, ihracat stratejimizi ve çelik sektörünün gündemini değerlendirdi.\n\n1965 yılından bu yana Karabük'te faaliyet gösteren firmamız, yeni üretim tesisinin devreye girmesiyle üretim kapasitesini üç katına çıkararak yıllık 450.000 tona ulaştı. Çatıda kurulu 3.991 kWe güneş enerjisi santrali ve mevcut tesisteki 2.812 kWe santral ile toplam 6.803 kWe elektrik üretimi yenilenebilir kaynaklardan sağlanıyor.\n\nRöportajın tamamını aşağıdaki dergi sayfalarından okuyabilirsiniz.",
+        'body_en' => "In the September 2025 issue of Prime magazine, our Board Member Doğukan Baylan discussed our new production facility, export strategy and the steel industry agenda.\n\nYou can read the full interview in the magazine pages below.",
+        'image' => 'assets/img/tesis-havadan.jpg',
+        'attachment' => 'assets/docs/OdakKonu-IsikCelik.pdf',
+        'meta_title_tr' => 'Prime Odak Konu Röportajı — Doğukan Baylan | Işık Çelik',
+        'meta_title_en' => 'Prime Focus Topic Interview — Doğukan Baylan | Işık Çelik',
+        'meta_desc_tr' => "Işık Çelik Yönetim Kurulu Üyesi Doğukan Baylan, Prime dergisine yeni üretim tesisini, 450.000 ton kapasiteyi ve ihracat hedeflerini anlattı.",
+        'meta_desc_en' => 'Işık Çelik Board Member Doğukan Baylan talks to Prime magazine about the new facility and export goals.',
+        'published_at' => '2025-09-01',
+    ];
+
     foreach ($news as $n) {
         $n['is_published'] = 1;
         $n['created_at'] = $now;

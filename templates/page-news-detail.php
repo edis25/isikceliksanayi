@@ -37,6 +37,25 @@ require __DIR__ . '/partials/page-hero.php';
             <div class="article-body reveal reveal-d1">
                 <?= nl2p(lv($article, 'body')) ?>
             </div>
+
+            <?php if (!empty($article['attachment'])): ?>
+            <div class="doc-card reveal">
+                <div class="doc-card-info">
+                    <span class="doc-ico">PDF</span>
+                    <div>
+                        <strong><?= lang() === 'tr' ? 'Ekli Belge' : 'Attached Document' ?></strong>
+                        <span class="doc-name"><?= e(basename($article['attachment'])) ?></span>
+                    </div>
+                </div>
+                <a class="btn" href="<?= e(upload_url($article['attachment'])) ?>" target="_blank" rel="noopener">
+                    <?= lang() === 'tr' ? 'Belgeyi Görüntüle' : 'View Document' ?> <span class="arr">→</span>
+                </a>
+            </div>
+            <div class="pdf-embed reveal">
+                <iframe src="<?= e(upload_url($article['attachment'])) ?>#view=FitH" title="<?= e(lv($article, 'title')) ?>" loading="lazy"></iframe>
+            </div>
+            <?php endif; ?>
+
             <a class="text-link" href="<?= e(url($page['slug_' . lang()])) ?>">← <?= e(t('btn.all_news')) ?></a>
         </article>
     </div>
