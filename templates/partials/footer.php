@@ -3,13 +3,13 @@
     <?php
     // Ulusal liste başarıları — footer rozet şeridi
     $awards = lang() === 'tr' ? [
-        ['org' => 'FORTUNE 500', 'sub' => 'Türkiye — En Büyük 500 Şirket'],
-        ['org' => 'İSO 500', 'sub' => "Türkiye'nin 500 Büyük Sanayi Kuruluşu"],
-        ['org' => 'TİM 500', 'sub' => 'Türkiye’nin İlk 500 İhracatçısı'],
+        ['num' => '500', 'org' => 'FORTUNE 500', 'sub' => 'Türkiye — En Büyük 500 Şirket'],
+        ['num' => '500', 'org' => 'İSO 500', 'sub' => "Türkiye'nin 500 Büyük Sanayi Kuruluşu"],
+        ['num' => '100', 'org' => 'TİM 100', 'sub' => 'Türkiye’nin İlk 100 İhracatçısı'],
     ] : [
-        ['org' => 'FORTUNE 500', 'sub' => "Türkiye's 500 Largest Companies"],
-        ['org' => 'ISO 500', 'sub' => "Türkiye's Top 500 Industrial Enterprises"],
-        ['org' => 'TİM 500', 'sub' => "Türkiye's Top 500 Exporters"],
+        ['num' => '500', 'org' => 'FORTUNE 500', 'sub' => "Türkiye's 500 Largest Companies"],
+        ['num' => '500', 'org' => 'ISO 500', 'sub' => "Türkiye's Top 500 Industrial Enterprises"],
+        ['num' => '100', 'org' => 'TİM 100', 'sub' => "Türkiye's Top 100 Exporters"],
     ];
     ?>
     <div class="awards-band">
@@ -23,7 +23,7 @@
                             <circle cx="36" cy="36" r="34" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2.5 3.5"/>
                             <circle cx="36" cy="36" r="28" stroke="currentColor" stroke-width="1.6"/>
                             <path d="M20 49l-4 5M52 49l4 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                            <text x="36" y="41" text-anchor="middle" font-family="Archivo, sans-serif" font-size="17" font-weight="800" fill="currentColor">500</text>
+                            <text x="36" y="41" text-anchor="middle" font-family="Archivo, sans-serif" font-size="17" font-weight="800" fill="currentColor"><?= e($a['num']) ?></text>
                         </svg>
                     </span>
                     <div class="award-text">
