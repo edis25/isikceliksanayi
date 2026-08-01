@@ -1,5 +1,40 @@
 </main>
 <footer class="site-footer">
+    <?php
+    // Ulusal liste başarıları — footer rozet şeridi
+    $awards = lang() === 'tr' ? [
+        ['org' => 'FORTUNE 500', 'sub' => 'Türkiye — En Büyük 500 Şirket'],
+        ['org' => 'İSO 500', 'sub' => "Türkiye'nin 500 Büyük Sanayi Kuruluşu"],
+        ['org' => 'TİM 500', 'sub' => 'Türkiye’nin İlk 500 İhracatçısı'],
+    ] : [
+        ['org' => 'FORTUNE 500', 'sub' => "Türkiye's 500 Largest Companies"],
+        ['org' => 'ISO 500', 'sub' => "Türkiye's Top 500 Industrial Enterprises"],
+        ['org' => 'TİM 500', 'sub' => "Türkiye's Top 500 Exporters"],
+    ];
+    ?>
+    <div class="awards-band">
+        <div class="container">
+            <p class="awards-title"><?= lang() === 'tr' ? 'ULUSAL SIRALAMALARDA IŞIK ÇELİK' : 'IŞIK ÇELİK IN NATIONAL RANKINGS' ?></p>
+            <div class="awards-grid">
+                <?php foreach ($awards as $a): ?>
+                <div class="award">
+                    <span class="award-seal" aria-hidden="true">
+                        <svg viewBox="0 0 72 72" fill="none">
+                            <circle cx="36" cy="36" r="34" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2.5 3.5"/>
+                            <circle cx="36" cy="36" r="28" stroke="currentColor" stroke-width="1.6"/>
+                            <path d="M20 49l-4 5M52 49l4 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            <text x="36" y="41" text-anchor="middle" font-family="Archivo, sans-serif" font-size="17" font-weight="800" fill="currentColor">500</text>
+                        </svg>
+                    </span>
+                    <div class="award-text">
+                        <strong><?= e($a['org']) ?></strong>
+                        <span><?= e($a['sub']) ?></span>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
