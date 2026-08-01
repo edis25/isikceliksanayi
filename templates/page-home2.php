@@ -187,7 +187,7 @@ require __DIR__ . '/partials/header.php';
 <section class="c-global" id="s-global">
     <div class="container">
         <p class="c-eyebrow"><?= e(t('nav.global')) ?></p>
-        <h2 class="c-global-title" data-split><?= $tr ? "Karabük'ten 5 kıtaya" : 'From Karabük to 5 continents' ?></h2>
+        <h2 class="c-global-title" data-split><?= $tr ? "Anadolu'dan 5 kıtaya" : 'From Anatolia to 5 continents' ?></h2>
         <div class="c-global-viz">
             <svg viewBox="0 0 1000 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                 <circle class="c-origin" cx="80" cy="290" r="7"/>
@@ -205,7 +205,7 @@ require __DIR__ . '/partials/header.php';
             <span class="c-region" style="left:62%;top:44%"><?= $tr ? 'Orta Doğu' : 'Middle East' ?></span>
             <span class="c-region" style="left:67%;top:74%"><?= $tr ? 'Kuzey Afrika' : 'North Africa' ?></span>
             <span class="c-region" style="left:87%;top:23%"><?= $tr ? 'Latin Amerika' : 'Latin America' ?></span>
-            <span class="c-region c-region-origin" style="left:8%;top:88%">KARABÜK</span>
+            <span class="c-region c-region-origin" style="left:8%;top:88%"><?= $tr ? 'ANADOLU' : 'ANATOLIA' ?></span>
         </div>
         <div class="c-global-foot">
             <p><?= e($global ? excerpt(lv($global, 'body'), 180) : '') ?></p>

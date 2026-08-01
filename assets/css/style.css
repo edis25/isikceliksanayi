@@ -430,9 +430,11 @@ body.nav-open { overflow: hidden; }
     padding: clamp(40px, 6vw, 64px) 0;
 }
 .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 34px 20px;
+    /* İçerik genişliğine göre dizilir; turuncu çizgi aralıkları eşit dağıtılır */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 34px 28px;
 }
 .stat { text-align: left; position: relative; padding-left: 20px; }
 .stat::before {

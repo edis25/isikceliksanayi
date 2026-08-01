@@ -105,9 +105,11 @@
     padding: clamp(44px, 6vw, 70px) 0;
 }
 .c-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 34px 20px;
+    /* İçerik genişliğine göre dizilir; aradaki boşluklar (turuncu çizgi aralıkları) eşit dağıtılır */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 34px 28px;
 }
 .c-stat { position: relative; padding-left: 20px; }
 .c-stat::before {

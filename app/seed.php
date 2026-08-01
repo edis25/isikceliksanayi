@@ -126,8 +126,8 @@ function seed_database(Database $db): void
     /* ---- ANA SAYFA ---- */
     $sections[] = ['home', 'hero', 'hero', 0,
         'Daha Parlak Bir Gelecek İçin', 'Building a Brighter Future',
-        "1965'ten bu yana Karabük'te, yıllık 450.000 ton üretim kapasitesiyle Türkiye'nin global çelik gücünü temsil ediyoruz.",
-        "Operating from Karabük since 1965, we represent Türkiye's global steel strength with an annual production capacity of 450,000 tons.",
+        "1965'ten bu yana yıllık 450.000 ton üretim kapasitesiyle Türkiye'nin global çelik gücünü temsil ediyoruz.",
+        "Since 1965, we have represented Türkiye's global steel strength with an annual production capacity of 450,000 tons.",
         '', '',
         ['video' => 'assets/video/hero.mp4', 'poster' => 'assets/img/hero-poster.jpg'],
         'assets/img/sicak-cekim.jpg'];
