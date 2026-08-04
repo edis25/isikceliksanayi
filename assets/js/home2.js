@@ -11,12 +11,13 @@
 
     function enableStatic() {
         docEl.classList.add('no-motion');
-        // Üretim adımları: videolar kendiliğinden dönsün
-        document.querySelectorAll('.c-proc-step video').forEach(function (v) {
-            v.loop = true;
+        // Journey: ilk video oynasın, statik düzende hepsi görünür kalır
+        document.querySelectorAll('.c-stage-video').forEach(function (v, i) {
+            v.classList.add('active');
             var p = v.play();
             if (p) { p.catch(function () {}); }
         });
+        document.querySelectorAll('.c-stage').forEach(function (s) { s.classList.add('active'); });
     }
 
     var shotMode = window.location.search.indexOf('_shot') !== -1;
@@ -60,68 +61,74 @@
         });
     }
 
-    /* ---------- S2 Üretim yolculuğu: alt alta duotone adımlar, video scroll'a bağlı ---------- */
-    var procSteps = document.querySelectorAll('.c-proc-step');
-    if (procSteps.length) {
-        var procVideos = [];
-        var procFracs = [];
+    /* ---------- S2 Üretim yolculuğu: pinned sahneler + scroll'a bağlı video ---------- */
+    var journey = document.querySelector('.c-journey');
+    if (journey) {
+        var stages = journey.querySelectorAll('.c-stage');
+        var videos = journey.querySelectorAll('.c-stage-video');
+        var dots = journey.querySelectorAll('.c-stage-dots .dot');
+        var progress = journey.querySelector('.c-journey-progress');
+        var count = stages.length;
+        var current = -1;
 
-        procSteps.forEach(function (step, i) {
-            var v = step.querySelector('video');
-            procVideos[i] = v;
-            procFracs[i] = 0;
-
-            if (v) {
-                v.pause();
-                v.removeAttribute('autoplay');
-                v.removeAttribute('loop');
-                // Blob'a al: Range desteği olmayan sunucularda da tam seekable olsun
-                var srcEl = v.querySelector('source');
-                var srcUrl = (srcEl && srcEl.src) || v.currentSrc || v.src;
-                if (srcUrl) {
-                    fetch(srcUrl)
-                        .then(function (r) { return r.blob(); })
-                        .then(function (b) {
-                            v.src = URL.createObjectURL(b);
-                            v.preload = 'auto';
-                            v.load();
-                        })
-                        .catch(function () {});
-                }
+        // Videolar kendiliğinden oynamaz; kareyi scroll yönetir.
+        // Klipler belleğe (blob) alınır: Range desteği olmayan sunucularda bile video
+        // tam "seekable" olur ve kare kare ileri/geri sarılabilir.
+        var videoFracs = [];
+        videos.forEach(function (v, i) {
+            v.pause();
+            v.removeAttribute('autoplay');
+            v.removeAttribute('loop');
+            videoFracs[i] = 0;
+            var srcEl = v.querySelector('source');
+            var srcUrl = (srcEl && srcEl.src) || v.currentSrc || v.src;
+            if (srcUrl) {
+                fetch(srcUrl)
+                    .then(function (r) { return r.blob(); })
+                    .then(function (b) {
+                        v.src = URL.createObjectURL(b);
+                        v.preload = 'auto';
+                        v.load();
+                    })
+                    .catch(function () {});
             }
-
-            // Adım görünür alandan geçerken video scroll'a bağlı ileri/geri sarar (kilit yok, serbest akış)
-            ScrollTrigger.create({
-                trigger: step,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: true,
-                onUpdate: function (self) {
-                    procFracs[i] = self.progress;
-                }
-            });
-
-            // İçerik girişleri: numara + başlık + metin süzülerek gelir
-            gsap.from(step.querySelectorAll('.c-proc-no, h3, .c-proc-big, p'), {
-                y: 46,
-                autoAlpha: 0,
-                duration: .9,
-                ease: 'power3.out',
-                stagger: .1,
-                scrollTrigger: { trigger: step, start: 'top 70%' }
-            });
         });
 
-        // Her frame'de görünür videoları hedef kareye yumuşakça taşı
+        var setStage = function (idx) {
+            if (idx === current) { return; }
+            current = idx;
+            stages.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
+            dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+            videos.forEach(function (v, i) { v.classList.toggle('active', i === idx); });
+            if (progress) { progress.style.height = ((idx + 1) / count * 100) + '%'; }
+        };
+
+        // Her frame'de hedef kareye yumuşakça yaklaş (seek çakışmasız, akıcı ileri/geri sarma)
         gsap.ticker.add(function () {
-            procVideos.forEach(function (v, i) {
-                if (!v || !v.duration || v.readyState < 2 || v.seeking) { return; }
-                var target = Math.min(v.duration - 0.05, procFracs[i] * v.duration);
-                var diff = target - v.currentTime;
-                if (Math.abs(diff) < 0.02) { return; }
-                v.currentTime = Math.abs(diff) > 2.2 ? target : v.currentTime + diff * 0.16;
-            });
+            if (current < 0) { return; }
+            var v = videos[current];
+            if (!v || !v.duration || v.readyState < 2 || v.seeking) { return; }
+            var target = Math.min(v.duration - 0.05, videoFracs[current] * v.duration);
+            var diff = target - v.currentTime;
+            if (Math.abs(diff) < 0.02) { return; }
+            // Ağır, sinematik takip; yalnızca çok uzak sıçramalarda anında atla
+            v.currentTime = Math.abs(diff) > 2.2 ? target : v.currentTime + diff * 0.16;
         });
+
+        ScrollTrigger.create({
+            trigger: '.c-journey-viewport',
+            start: 'top top',
+            end: '+=' + (count * 90) + '%',
+            pin: true,
+            scrub: 1.2,
+            onUpdate: function (self) {
+                var pos = self.progress * count;
+                var idx = Math.min(count - 1, Math.floor(pos));
+                setStage(idx);
+                videoFracs[idx] = Math.min(Math.max(pos - idx, 0), 1);
+            }
+        });
+        setStage(0);
     }
 
     /* ---------- S3 Ürün vitrini: yatay scroll ---------- */

@@ -93,32 +93,41 @@ require __DIR__ . '/partials/header.php';
 </section>
 <?php endif; ?>
 
-<!-- S2 — ÜRETİM YOLCULUĞU (turuncu duotone, alt alta akış) -->
-<section class="c-proc" id="s-journey">
-    <div class="c-proc-head">
-        <div class="container">
-            <p class="c-eyebrow"><?= $tr ? 'ÜRETİM YOLCULUĞU' : 'PRODUCTION JOURNEY' ?></p>
-            <h2 data-split><?= $tr ? 'Çeliğin yolculuğu' : 'The journey of steel' ?></h2>
-        </div>
-    </div>
-    <?php foreach ($stages as $i => $st): ?>
-    <div class="c-proc-step">
-        <div class="c-proc-media">
-            <video muted playsinline preload="auto">
+<!-- S2 — ÜRETİM YOLCULUĞU (pinned) -->
+<section class="c-journey" id="s-journey">
+    <div class="c-journey-viewport">
+        <div class="c-journey-media">
+            <?php foreach ($stages as $i => $st): ?>
+            <video class="c-stage-video<?= $i === 0 ? ' active' : '' ?>" muted loop playsinline preload="auto" data-stage="<?= $i ?>">
                 <source src="<?= e(asset($st['video'])) ?>" type="video/mp4">
             </video>
+            <?php endforeach; ?>
+            <div class="c-journey-shade"></div>
         </div>
-        <div class="c-proc-tint"></div>
-        <div class="container c-proc-content">
-            <span class="c-proc-no"><?= e($st['no']) ?></span>
-            <h3><?= e($st['title']) ?></h3>
-            <?php if (!empty($st['big'])): ?>
-            <div class="c-proc-big"><span class="stat-value" data-value="<?= e($st['big']) ?>"><?= e($st['big']) ?></span> <small><?= e($st['bigLabel']) ?></small></div>
-            <?php endif; ?>
-            <p><?= e($st['text']) ?></p>
+        <div class="container c-journey-content">
+            <div class="c-journey-rail">
+                <div class="c-journey-progress"></div>
+            </div>
+            <div class="c-journey-texts">
+                <p class="c-eyebrow"><?= $tr ? 'ÜRETİM YOLCULUĞU' : 'PRODUCTION JOURNEY' ?></p>
+                <?php foreach ($stages as $i => $st): ?>
+                <div class="c-stage<?= $i === 0 ? ' active' : '' ?>" data-stage="<?= $i ?>">
+                    <span class="c-stage-no"><?= e($st['no']) ?></span>
+                    <h2><?= e($st['title']) ?></h2>
+                    <?php if (!empty($st['big'])): ?>
+                    <div class="c-stage-big"><span class="stat-value" data-value="<?= e($st['big']) ?>"><?= e($st['big']) ?></span> <small><?= e($st['bigLabel']) ?></small></div>
+                    <?php endif; ?>
+                    <p><?= e($st['text']) ?></p>
+                </div>
+                <?php endforeach; ?>
+                <div class="c-stage-dots">
+                    <?php foreach ($stages as $i => $st): ?>
+                    <span class="dot<?= $i === 0 ? ' active' : '' ?>" data-stage="<?= $i ?>"></span>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
     </div>
-    <?php endforeach; ?>
 </section>
 
 <!-- S3 — ÜRÜN VİTRİNİ (yatay) -->
