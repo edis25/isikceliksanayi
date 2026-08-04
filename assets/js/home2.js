@@ -90,13 +90,12 @@
                 }
             }
 
-            // Adım ekrana kilitlenir; video scroll'la tamamlanmadan sonraki adıma geçilmez
+            // Adım görünür alandan geçerken video scroll'a bağlı ileri/geri sarar (kilit yok, serbest akış)
             ScrollTrigger.create({
                 trigger: step,
-                start: 'top top',
-                end: '+=130%',
-                pin: true,
-                scrub: 1,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
                 onUpdate: function (self) {
                     procFracs[i] = self.progress;
                 }
