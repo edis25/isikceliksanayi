@@ -266,7 +266,14 @@ function seed_database(Database $db): void
         "Our new production facility represents more than an increase in capacity — it is a major step forward in digital transformation and operational excellence.\n\nThese investments enable us to optimize production costs while offering our customers sustainable, high-quality and competitively priced solutions.",
         [], 'assets/img/uretim-robotik.jpg'];
 
-    $sections[] = ['production', 'features', 'icon-cards', 1,
+    $sections[] = ['production', 'video', 'video', 1,
+        'Tanıtım Filmimiz', 'Our Facility Film',
+        'Yeni nesil üretim tesisimizi 2,5 dakikada izleyin', 'Watch our next-generation facility in 2.5 minutes',
+        '', '',
+        ['video' => 'assets/video/uretim-tanitim.mp4', 'poster' => 'assets/img/uretim-video-poster.jpg'],
+        'assets/img/uretim-video-poster.jpg'];
+
+    $sections[] = ['production', 'features', 'icon-cards', 2,
         'Teknolojik Altyapımız', 'Our Technological Infrastructure',
         '', '', '', '',
         [
@@ -284,7 +291,7 @@ function seed_database(Database $db): void
             ],
         ], ''];
 
-    $sections[] = ['production', 'gallery', 'gallery', 2,
+    $sections[] = ['production', 'gallery', 'gallery', 3,
         'Tesisimizden', 'Inside Our Facility', '', '', '', '',
         [
             'images' => [

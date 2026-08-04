@@ -1305,6 +1305,70 @@ ul.checks li::before {
 .article-body p { margin-bottom: 20px; font-size: 17px; line-height: 1.85; }
 .article-body h2, .article-body h3 { margin: 34px 0 16px; }
 
+/* ---------- Tanıtım filmi bölümü ---------- */
+.video-feature {
+    position: relative;
+    background:
+        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(240, 90, 34, .12), transparent 65%),
+        var(--c-dark);
+    padding: clamp(70px, 9vw, 120px) 0;
+    overflow: hidden;
+}
+.video-frame {
+    position: relative;
+    max-width: 980px;
+    margin: 0 auto;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-top: 3px solid var(--c-accent);
+    box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .8), 0 0 60px -20px rgba(240, 90, 34, .25);
+}
+.video-frame video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #000;
+}
+.video-frame .video-play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 92px;
+    height: 92px;
+    display: grid;
+    place-items: center;
+    background: rgba(7, 11, 46, .55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border: 2px solid var(--c-accent);
+    border-radius: 50%;
+    color: var(--c-white);
+    cursor: pointer;
+    transition: transform .3s var(--ease), background .3s, opacity .4s;
+}
+.video-frame .video-play svg { width: 34px; height: 34px; margin-left: 4px; }
+.video-frame .video-play:hover { transform: scale(1.08); background: rgba(240, 90, 34, .85); }
+.video-play-ring {
+    position: absolute;
+    inset: -2px;
+    border: 2px solid var(--c-accent);
+    border-radius: 50%;
+    animation: playPulse 2s ease-out infinite;
+    pointer-events: none;
+}
+@keyframes playPulse {
+    0% { transform: scale(1); opacity: .8; }
+    100% { transform: scale(1.55); opacity: 0; }
+}
+.video-frame.playing .video-play { opacity: 0; pointer-events: none; }
+
+@media (max-width: 620px) {
+    .video-frame .video-play { width: 68px; height: 68px; }
+    .video-frame .video-play svg { width: 26px; height: 26px; }
+}
+
 /* ---------- Haber eki: belge kartı + gömülü PDF ---------- */
 .doc-card {
     display: flex;

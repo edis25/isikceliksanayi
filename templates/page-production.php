@@ -1,5 +1,6 @@
 <?php
 $intro    = $sections['intro'] ?? null;
+$video    = $sections['video'] ?? null;
 $features = $sections['features'] ?? null;
 $gallery  = $sections['gallery'] ?? null;
 
@@ -21,6 +22,26 @@ require __DIR__ . '/partials/page-hero.php';
                 <p class="split-sub"><?= e(lv($intro, 'subtitle')) ?></p>
                 <?= nl2p(lv($intro, 'body')) ?>
             </div>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<?php if ($video && !empty($video['data']['video'])): ?>
+<section class="video-feature">
+    <div class="container">
+        <div class="section-head center reveal">
+            <p class="eyebrow" style="color:var(--c-accent-2)"><?= e(lv($video, 'title')) ?></p>
+            <h2 class="section-title" style="color:#fff"><?= e(lv($video, 'subtitle')) ?></h2>
+        </div>
+        <div class="video-frame reveal reveal-d1" data-video-frame>
+            <video preload="metadata" poster="<?= e(asset($video['data']['poster'] ?? '')) ?>" playsinline>
+                <source src="<?= e(asset($video['data']['video'])) ?>" type="video/mp4">
+            </video>
+            <button type="button" class="video-play" aria-label="<?= lang() === 'tr' ? 'Videoyu oynat' : 'Play video' ?>">
+                <span class="video-play-ring"></span>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg>
+            </button>
         </div>
     </div>
 </section>
