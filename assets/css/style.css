@@ -1726,7 +1726,29 @@ ul.checks li::before {
     .cards-grid, .icon-grid, .news-grid, .gallery-grid, .shop-grid, .locations-grid { grid-template-columns: 1fr; }
     .form-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
+    /* Rakam bandı: mobilde düzenli 2 kolon */
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 18px; }
+
+    /* Breadcrumb: tek satır, gerekirse yatay kaydırma */
+    .breadcrumb { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .breadcrumb::-webkit-scrollbar { display: none; }
+    .breadcrumb a, .breadcrumb span { white-space: nowrap; }
+
+    /* Başarı rozetleri: ortalanmış tek kolon */
+    .awards-grid { flex-direction: column; align-items: center; gap: 20px; }
+    .award { width: 100%; max-width: 320px; }
+
+    /* Tarihçe yıl şeridi: tek satır, parmakla kaydırılabilir */
+    .tlx-ticker {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 18px;
+    }
+    .tlx-ticker::-webkit-scrollbar { display: none; }
+    .tlx-ticker .tick { flex-shrink: 0; }
     .scroll-hint { display: none; }
     .hero .container { padding-top: 130px; }
 }

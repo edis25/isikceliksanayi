@@ -505,6 +505,20 @@
     .c-stage-no { font-size: 54px; }
     .c-stage { top: 40px; }
     .c-journey-texts { min-height: 380px; }
+
+    /* Global: bölge etiketleri haritada üst üste binmesin, svg altında satıra dizilsin */
+    .c-global-viz .c-region {
+        position: static;
+        transform: none;
+        display: inline-flex;
+        font-size: 11px;
+        padding: 5px 12px;
+        margin: 10px 8px 0 0;
+    }
+    .c-global-viz .c-region-origin { order: -1; }
+
+    /* Rakam bandı: düzenli 2 kolon */
+    .c-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 18px; }
     .c-global-viz .c-region { font-size: 10px; padding: 4px 10px; }
     .c-shelf-hint { display: none; }
     .c-product { width: min(78vw, 300px); }
