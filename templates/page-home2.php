@@ -189,7 +189,7 @@ require __DIR__ . '/partials/header.php';
         <p class="c-eyebrow"><?= e(t('nav.global')) ?></p>
         <h2 class="c-global-title" data-split><?= $tr ? "Anadolu'dan 5 kıtaya" : 'From Anatolia to 5 continents' ?></h2>
         <div class="c-global-viz">
-            <svg viewBox="0 0 1000 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <svg viewBox="0 0 1000 340" preserveAspectRatio="none" aria-hidden="true">
                 <circle class="c-origin" cx="80" cy="290" r="7"/>
                 <circle class="c-origin-pulse" cx="80" cy="290" r="7"/>
                 <path class="c-arc" d="M80 290 Q 260 40 480 90"/>

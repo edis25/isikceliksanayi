@@ -1,15 +1,15 @@
 </main>
 <footer class="site-footer">
     <?php
-    // Ulusal liste başarıları — footer rozet şeridi
+    // Ulusal liste başarıları — resmi rozetlerle footer şeridi
     $awards = lang() === 'tr' ? [
-        ['num' => '500', 'org' => 'FORTUNE 500', 'sub' => 'Türkiye — En Büyük 500 Şirket'],
-        ['num' => '500', 'org' => 'İSO 500', 'sub' => "Türkiye'nin 500 Büyük Sanayi Kuruluşu"],
-        ['num' => '1000', 'org' => 'TİM 1000', 'sub' => 'Türkiye’nin İlk 1000 İhracatçısı'],
+        ['logo' => 'assets/img/awards/fortune500.png', 'alt' => 'Fortune 500', 'org' => 'FORTUNE 500', 'sub' => 'Türkiye — En Büyük 500 Şirket'],
+        ['logo' => 'assets/img/awards/iso500.png', 'alt' => 'İSO İkinci 500', 'org' => 'İSO İKİNCİ 500', 'sub' => "Türkiye'nin İkinci 500 Büyük Sanayi Kuruluşu"],
+        ['logo' => 'assets/img/awards/tim-ilk1000.png', 'alt' => 'TİM İlk 1000', 'org' => 'TİM İLK 1000', 'sub' => 'Türkiye’nin İlk 1000 İhracatçı Firması'],
     ] : [
-        ['num' => '500', 'org' => 'FORTUNE 500', 'sub' => "Türkiye's 500 Largest Companies"],
-        ['num' => '500', 'org' => 'ISO 500', 'sub' => "Türkiye's Top 500 Industrial Enterprises"],
-        ['num' => '1000', 'org' => 'TİM 1000', 'sub' => "Türkiye's Top 1000 Exporters"],
+        ['logo' => 'assets/img/awards/fortune500.png', 'alt' => 'Fortune 500', 'org' => 'FORTUNE 500', 'sub' => "Türkiye's 500 Largest Companies"],
+        ['logo' => 'assets/img/awards/iso500.png', 'alt' => 'ISO Second 500', 'org' => 'İSO SECOND 500', 'sub' => "Türkiye's Second Top 500 Industrial Enterprises"],
+        ['logo' => 'assets/img/awards/tim-ilk1000.png', 'alt' => 'TİM Top 1000', 'org' => 'TİM TOP 1000', 'sub' => 'Top 1000 Exporters of Türkiye'],
     ];
     ?>
     <div class="awards-band">
@@ -18,13 +18,8 @@
             <div class="awards-grid">
                 <?php foreach ($awards as $a): ?>
                 <div class="award">
-                    <span class="award-seal" aria-hidden="true">
-                        <svg viewBox="0 0 72 72" fill="none">
-                            <circle cx="36" cy="36" r="34" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2.5 3.5"/>
-                            <circle cx="36" cy="36" r="28" stroke="currentColor" stroke-width="1.6"/>
-                            <path d="M20 49l-4 5M52 49l4 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                            <text x="36" y="41" text-anchor="middle" font-family="Archivo, sans-serif" font-size="<?= strlen($a['num']) > 3 ? '13' : '17' ?>" font-weight="800" fill="currentColor"><?= e($a['num']) ?></text>
-                        </svg>
+                    <span class="award-logo">
+                        <img src="<?= e(asset($a['logo'])) ?>" alt="<?= e($a['alt']) ?>" loading="lazy">
                     </span>
                     <div class="award-text">
                         <strong><?= e($a['org']) ?></strong>
