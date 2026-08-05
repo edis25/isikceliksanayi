@@ -102,6 +102,26 @@
         });
     }
 
+    /* Tanıtım filmi: tıkla-oynat (sesli, kontrollü) */
+    document.querySelectorAll('[data-video-frame]').forEach(function (frame) {
+        var video = frame.querySelector('video');
+        var btn = frame.querySelector('.video-play');
+        if (!video || !btn) { return; }
+        btn.addEventListener('click', function () {
+            frame.classList.add('playing');
+            video.setAttribute('controls', '');
+            var p = video.play();
+            if (p) { p.catch(function () {}); }
+        });
+        video.addEventListener('pause', function () {
+            if (!video.seeking && video.currentTime > 0 && !video.ended) { return; }
+        });
+        video.addEventListener('ended', function () {
+            frame.classList.remove('playing');
+            video.removeAttribute('controls');
+        });
+    });
+
     /* Hero videosu: otomatik oynatma engellenirse posteri göster */
     var heroVideo = document.querySelector('.hero-media video');
     if (heroVideo) {
