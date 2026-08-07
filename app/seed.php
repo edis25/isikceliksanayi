@@ -15,6 +15,7 @@ function seed_database(Database $db): void
         ['phone', 'Telefon', '+90 (370) 424 20 77', '+90 (370) 424 20 77'],
         ['whatsapp', 'WhatsApp Numarası (ülke koduyla, örn: 905321234567)', '903704242077', '903704242077'],
         ['email', 'E-posta', 'export@isikcelik.com', 'export@isikcelik.com'],
+        ['email2', 'İkinci E-posta', 'info@isikcelik.com', 'info@isikcelik.com'],
         ['address', 'Adres', 'Karabük Organize Sanayi Bölgesi Manolya Cad. No:7/2 Karabük, Türkiye', 'Karabük Organized Industrial Zone, Manolya Cad. No:7/2 Karabük, Türkiye'],
         ['map_embed', 'Google Maps Embed URL', '', ''],
         ['linkedin', 'LinkedIn', '', ''],

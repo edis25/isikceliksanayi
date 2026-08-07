@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $settings = $db->all('SELECT * FROM settings ORDER BY id');
 
 /* Tek değerli ayarlar (dilden bağımsız): her iki alana aynı değer yazılması yeterli */
-$singleValue = ['phone', 'whatsapp', 'email', 'map_embed', 'linkedin', 'instagram', 'youtube', 'ga_code', 'site_name'];
+$singleValue = ['phone', 'whatsapp', 'email', 'email2', 'map_embed', 'linkedin', 'instagram', 'youtube', 'ga_code', 'site_name'];
 
 admin_header('Site Ayarları');
 ?>

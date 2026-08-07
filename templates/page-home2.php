@@ -59,7 +59,7 @@ require __DIR__ . '/partials/header.php';
 <!-- S1 — AÇILIŞ -->
 <section class="c-hero" id="s-hero">
     <div class="c-hero-media">
-        <video autoplay muted loop playsinline preload="metadata" poster="<?= e(asset('assets/img/hero-poster.jpg')) ?>">
+        <video autoplay muted loop playsinline preload="auto" poster="<?= e(asset('assets/img/hero-poster.jpg')) ?>">
             <source src="<?= e(asset('assets/video/hero.mp4')) ?>" type="video/mp4">
         </video>
     </div>

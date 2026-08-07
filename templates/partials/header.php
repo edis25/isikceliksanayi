@@ -130,6 +130,7 @@ if ($sameAs) {
             <div class="menu-side-block">
                 <h4><?= e(t('nav.contact')) ?></h4>
                 <a href="tel:<?= e(preg_replace('/[^0-9+]/', '', setting('phone'))) ?>"><?= e(setting('phone')) ?></a>
+                <a href="mailto:<?= e(setting('email2', 'info@isikcelik.com')) ?>"><?= e(setting('email2', 'info@isikcelik.com')) ?></a>
                 <a href="mailto:<?= e(setting('email')) ?>"><?= e(setting('email')) ?></a>
                 <div class="menu-lang">
                     <a href="<?= e($alternates['tr'] ?? url('', 'tr')) ?>"<?= lang() === 'tr' ? ' class="active"' : '' ?>>Türkçe</a>
