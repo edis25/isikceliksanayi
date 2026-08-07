@@ -99,7 +99,6 @@
     <div class="footer-bottom">
         <div class="container">
             <span>© <?= date('Y') ?> <?= e(setting('site_name', 'Işık Çelik')) ?>. <?= e(t('footer.rights')) ?></span>
-            <span><?= lang() === 'tr' ? "1965'ten beri Karabük'te" : 'In Karabük since 1965' ?></span>
         </div>
     </div>
 </footer>

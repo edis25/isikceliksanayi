@@ -135,9 +135,14 @@ require __DIR__ . '/partials/header.php';
 <section class="c-shelf" id="s-shelf">
     <div class="c-shelf-viewport">
         <div class="container c-shelf-head">
-            <p class="c-eyebrow"><?= e(t('nav.products')) ?></p>
-            <h2 class="c-shelf-title" data-split><?= $tr ? 'Çelik, her formda.' : 'Steel, in every form.' ?></h2>
-            <span class="c-shelf-hint"><?= $tr ? 'Kaydırmaya devam edin' : 'Keep scrolling' ?> →</span>
+            <div>
+                <p class="c-eyebrow"><?= e(t('nav.products')) ?></p>
+                <h2 class="c-shelf-title" data-split><?= $tr ? 'Çelik, her formda.' : 'Steel, in every form.' ?></h2>
+            </div>
+            <div class="c-shelf-nav">
+                <button type="button" class="shelf-btn" data-shelf-prev aria-label="<?= $tr ? 'Önceki' : 'Previous' ?>">←</button>
+                <button type="button" class="shelf-btn" data-shelf-next aria-label="<?= $tr ? 'Sonraki' : 'Next' ?>">→</button>
+            </div>
         </div>
         <div class="c-track">
             <?php foreach ($allProducts as $i => $pr): ?>
