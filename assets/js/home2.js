@@ -20,17 +20,25 @@
         document.querySelectorAll('.c-stage').forEach(function (s) { s.classList.add('active'); });
     }
 
-    /* Ürün vitrini: ok tuşlarıyla yatay gezinme */
+    /* Ürün vitrini: ok tuşları — pinned modda sayfayı, statik modda bandı kaydırır */
     var shelfTrack = document.querySelector('.c-track');
     if (shelfTrack) {
         var shelfStep = function () {
             var card = shelfTrack.querySelector('.c-product');
             return card ? (card.getBoundingClientRect().width + 22) * 2 : 600;
         };
+        var shelfMove = function (dir) {
+            if (docEl.classList.contains('no-motion')) {
+                shelfTrack.scrollBy({ left: dir * shelfStep(), behavior: 'smooth' });
+            } else {
+                // Pin sırasında scroll, banda 1:1 aktarılır
+                window.scrollBy({ top: dir * shelfStep(), behavior: 'smooth' });
+            }
+        };
         var prevBtn = document.querySelector('[data-shelf-prev]');
         var nextBtn = document.querySelector('[data-shelf-next]');
-        if (prevBtn) { prevBtn.addEventListener('click', function () { shelfTrack.scrollBy({ left: -shelfStep(), behavior: 'smooth' }); }); }
-        if (nextBtn) { nextBtn.addEventListener('click', function () { shelfTrack.scrollBy({ left: shelfStep(), behavior: 'smooth' }); }); }
+        if (prevBtn) { prevBtn.addEventListener('click', function () { shelfMove(-1); }); }
+        if (nextBtn) { nextBtn.addEventListener('click', function () { shelfMove(1); }); }
     }
 
     var shotMode = window.location.search.indexOf('_shot') !== -1;
@@ -144,6 +152,26 @@
         setStage(0);
     }
 
+
+    /* ---------- S3 Ürün vitrini: yatay scroll (pinned) ---------- */
+    var track = document.querySelector('.c-track');
+    if (track) {
+        var getDistance = function () {
+            return Math.max(0, track.scrollWidth - window.innerWidth);
+        };
+        gsap.to(track, {
+            x: function () { return -getDistance(); },
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.c-shelf-viewport',
+                start: 'top top',
+                end: function () { return '+=' + getDistance(); },
+                pin: true,
+                scrub: 1,
+                invalidateOnRefresh: true
+            }
+        });
+    }
 
     /* ---------- S4 Enerji: hafif parallax ---------- */
     var energyVideo = document.querySelector('.c-energy-media video');
