@@ -68,6 +68,34 @@
             </div>
         </div>
     </div>
+    <?php
+    // Lokasyon şeridi — iletişim sayfasındaki 5 lokasyon (adres, telefon, e-posta)
+    $locRow = Database::get()->row(
+        "SELECT s.data_json FROM sections s JOIN pages p ON p.id = s.page_id WHERE p.pkey = 'contact' AND s.skey = 'locations' AND s.is_published = 1"
+    );
+    $locData = $locRow ? (json_decode($locRow['data_json'], true) ?: []) : [];
+    $footerLocs = $locData['items_' . lang()] ?? $locData['items_tr'] ?? [];
+    ?>
+    <?php if ($footerLocs): ?>
+    <div class="footer-locs">
+        <div class="container">
+            <div class="footer-locs-grid">
+                <?php foreach ($footerLocs as $fl): ?>
+                <div class="floc">
+                    <h5><?= e($fl['title'] ?? '') ?></h5>
+                    <p class="floc-addr"><?= nl2br(e($fl['address'] ?? '')) ?></p>
+                    <?php foreach (($fl['phones'] ?? []) as $ph): ?>
+                    <a class="floc-link" href="tel:<?= e(preg_replace('/[^0-9+]/', '', $ph)) ?>"><?= e($ph) ?></a>
+                    <?php endforeach; ?>
+                    <?php foreach (($fl['emails'] ?? []) as $em): ?>
+                    <a class="floc-link" href="mailto:<?= e($em) ?>"><?= e($em) ?></a>
+                    <?php endforeach; ?>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
     <div class="footer-bottom">
         <div class="container">
             <span>© <?= date('Y') ?> <?= e(setting('site_name', 'Işık Çelik')) ?>. <?= e(t('footer.rights')) ?></span>

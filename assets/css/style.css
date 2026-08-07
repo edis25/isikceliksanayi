@@ -1521,6 +1521,51 @@ ul.checks li::before {
 .footer-contact li { display: flex; gap: 12px; padding: 8px 0; font-size: 14.5px; }
 .footer-contact svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 4px; color: var(--c-accent); }
 
+/* Lokasyon şeridi: 5 kolonlu adres/telefon/e-posta alanı */
+.footer-locs {
+    border-top: 1px solid var(--c-line-dark);
+    padding: clamp(34px, 4vw, 50px) 0;
+}
+.footer-locs-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px 26px;
+}
+.floc h5 {
+    color: var(--c-accent-2);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--c-line-dark);
+}
+.floc-addr {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, .55);
+    margin-bottom: 8px;
+}
+.floc-link {
+    display: block;
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, .7);
+    padding: 2.5px 0;
+    transition: color .25s;
+}
+.floc-link:hover { color: var(--c-accent-2); }
+
+@media (max-width: 1100px) {
+    .footer-locs-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 700px) {
+    .footer-locs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 460px) {
+    .footer-locs-grid { grid-template-columns: 1fr; }
+}
+
 .footer-bottom {
     border-top: 1px solid var(--c-line-dark);
     padding: 24px 0;
