@@ -20,12 +20,13 @@ else:
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
-routes = ["", "kurumsal", "uretim-teknoloji", "surdurulebilirlik", "urunler", "sektorler",
-          "global", "haberler", "iletisim",
-          "en/", "en/about-us", "en/production-technology", "en/sustainability", "en/products",
-          "en/industries", "en/global-presence", "en/news", "en/contact"]
+routes = ["", "en/"]
 
 db = sqlite3.connect("data/site.db")
+# Statik sayfalar DB'den (yeni sayfa eklenince otomatik dahil olur)
+for (tr, en) in db.execute("SELECT slug_tr, slug_en FROM pages WHERE is_published=1 AND slug_tr != ''"):
+    routes.append(tr)
+    routes.append(f"en/{en}")
 for (s,) in db.execute("SELECT slug_tr FROM products WHERE is_published=1"): routes.append(f"urunler/{s}")
 for (s,) in db.execute("SELECT slug_en FROM products WHERE is_published=1"): routes.append(f"en/products/{s}")
 for (s,) in db.execute("SELECT slug_tr FROM news WHERE is_published=1"): routes.append(f"haberler/{s}")
