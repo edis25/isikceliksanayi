@@ -1631,6 +1631,9 @@ ul.checks li::before {
     font-size: 13px;
     color: rgba(255,255,255,.45);
 }
+.design-by { color: rgba(255,255,255,.45); transition: color .25s; }
+.design-by strong { font-weight: 600; color: rgba(255,255,255,.65); transition: color .25s; }
+.design-by:hover, .design-by:hover strong { color: var(--c-accent-2); }
 
 /* ---------- Tarihçe: scroll ile oynayan film (Beltrame tarzı) ---------- */
 .tlx {

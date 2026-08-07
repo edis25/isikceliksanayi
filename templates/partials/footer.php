@@ -99,6 +99,7 @@
     <div class="footer-bottom">
         <div class="container">
             <span>© <?= date('Y') ?> <?= e(setting('site_name', 'Işık Çelik')) ?>. <?= e(t('footer.rights')) ?></span>
+            <a class="design-by" href="https://www.cann.com.tr" target="_blank" rel="noopener">Design by <strong>Cann Creative Works</strong></a>
         </div>
     </div>
 </footer>
