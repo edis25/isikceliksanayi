@@ -2,7 +2,7 @@
 require_once __DIR__ . '/icons.php';
 
 /* Menü yapısı: kurumsal sayfalar tek başlık altında toplanır */
-$corporateKeys = ['about', 'production', 'sustainability', 'industries', 'global'];
+$corporateKeys = ['about', 'production', 'sustainability', 'quality', 'industries', 'global'];
 $topKeys = ['products', 'news', 'contact'];
 $activeKey = $page['pkey'] ?? '';
 $corporateActive = in_array($activeKey, $corporateKeys, true);

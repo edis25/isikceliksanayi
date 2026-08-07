@@ -41,7 +41,7 @@
             <div class="footer-col">
                 <h4><?= e(t('footer.quicklinks')) ?></h4>
                 <ul>
-                    <?php foreach (['about', 'production', 'sustainability', 'industries', 'global', 'news'] as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
+                    <?php foreach (['about', 'production', 'sustainability', 'quality', 'industries', 'global', 'news'] as $k): if (!isset($pagesByKey[$k])) continue; $p = $pagesByKey[$k]; ?>
                     <li><a href="<?= e(url($p['slug_' . lang()])) ?>"><?= e(lv($p, 'title')) ?></a></li>
                     <?php endforeach; ?>
                 </ul>

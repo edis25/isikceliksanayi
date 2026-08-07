@@ -103,6 +103,15 @@ function seed_database(Database $db): void
             'meta_desc_en'  => "Latest news from Işık Çelik: investments, production, sustainability and industry developments.",
             'image' => 'assets/img/tesis-havadan.jpg',
         ],
+        'quality' => [
+            'template' => 'quality', 'slug_tr' => 'kalite', 'slug_en' => 'quality', 'sort_order' => 9,
+            'title_tr' => 'Kalite', 'title_en' => 'Quality',
+            'meta_title_tr' => 'Kalite | Işık Çelik — ISO 9001, 14001, 45001 Sertifikalı Üretim',
+            'meta_title_en' => 'Quality | Işık Çelik — ISO 9001, 14001, 45001 Certified Production',
+            'meta_desc_tr'  => "Kalite Kontrol Departmanı ve Test-Analiz Laboratuvarı ile uluslararası standartlarda üretim. ISO 9001, ISO 14001, ISO 45001, ISO 10002, EN 10025, TS 708 ve CE belgeleri.",
+            'meta_desc_en'  => "Production to international standards with our Quality Control Department and Test & Analysis Laboratory. ISO 9001, ISO 14001, ISO 45001, ISO 10002, EN 10025, TS 708 and CE certificates.",
+            'image' => 'assets/img/hadde-hatti.jpg',
+        ],
         'contact' => [
             'template' => 'contact', 'slug_tr' => 'iletisim', 'slug_en' => 'contact', 'sort_order' => 8,
             'title_tr' => 'İletişim', 'title_en' => 'Contact',
@@ -408,6 +417,29 @@ function seed_database(Database $db): void
         "Artan korumacılık politikaları, kalite ve sertifikasyon gerekliliklerini ön plana çıkarmıştır. Uluslararası standartlara uygun üretim, belgeli kalite sistemleri ve çevre dostu üretim modelleri sayesinde küresel pazarlarda rekabet avantajımızı koruyoruz.\n\nABD pazarında uygulanan yüksek vergiler ve antidamping önlemleri standart ürünlerde zorluk oluştursa da, yüksek katma değerli ve özel mühendislik gerektiren ürün gruplarında fırsatları değerlendirmeye devam ediyoruz.",
         "As protectionist trade policies continue to expand worldwide, product quality, certification and compliance have become increasingly important. We maintain our competitive advantage through manufacturing to international standards, certified quality management systems and environmentally responsible production practices.\n\nAlthough high tariffs and anti-dumping measures in the U.S. market create challenges for commodity-grade steel products, we continue to pursue opportunities in value-added and engineering-intensive product segments.",
         [], 'assets/img/kizgin-cubuk.jpg'];
+
+    /* ---- KALİTE ---- */
+    $sections[] = ['quality', 'intro', 'split', 0,
+        'Uluslararası Standartlarda Üretim', 'Production to International Standards',
+        'Her aşamada kalite kontrol, her mamulde test ve sertifikasyon', 'Quality control at every stage, testing and certification for every product',
+        "Müşterilerine kaliteli ürün ve hizmet sağlamayı ilke edinen Işık Çelik, üretimin her aşamasını Kalite Kontrol Departmanı ile takip eder. Üretilen her mamul, bünyemizdeki Test–Analiz Laboratuvarı’nda test edilerek uluslararası norm ve standartlara göre sertifikalandırılır.\n\n2007 yılında tamamlanan çalışmalar neticesinde yönetim sistemimiz ISO 9001 Kalite Yönetim Sistemi ile belgelendirilmiştir. İlerleyen süreçte ISO 14001 Çevre Yönetim Sistemi, OHSAS 18001 İş Sağlığı ve Güvenliği Yönetimi ve ISO 10002 Müşteri Memnuniyeti Yönetim Sistemi sertifikaları da alınmıştır.\n\nTesisimizde üretilen ürünler Avrupa Birliği CE Uygunluk Belgesi ile sertifikalandırılmış olup AB ülkelerinde serbest dolaşım hakkına sahiptir. Ayrıca Nervürlü İnşaat Demiri ürünümüz için, CE’ye tabi olmayan yapı malzemelerinin piyasaya arzında zorunlu olan Uygunluk Belgesi’ne sahibiz.",
+        "Committed to providing quality products and services, Işık Çelik monitors every stage of production through its Quality Control Department. Every product is tested in our in-house Test & Analysis Laboratory and certified to international norms and standards.\n\nOur management system was certified with ISO 9001 Quality Management System in 2007, followed by ISO 14001 Environmental Management, OHSAS 18001 Occupational Health & Safety and ISO 10002 Customer Satisfaction Management certificates.\n\nProducts manufactured at our facility carry the EU CE Certificate of Conformity, granting free circulation within EU countries. We also hold the mandatory Certificate of Conformity for our ribbed reinforcing bar products.",
+        [], 'assets/img/uretim-robotik.jpg'];
+
+    $qualityCerts = [
+        ['title' => 'ISO 9001', 'sub_tr' => 'Kalite Yönetim Sistemi', 'sub_en' => 'Quality Management System', 'image' => 'assets/img/kalite/iso-9001.jpg', 'pdf' => 'assets/docs/kalite/iso-9001.pdf'],
+        ['title' => 'ISO 14001', 'sub_tr' => 'Çevre Yönetim Sistemi', 'sub_en' => 'Environmental Management System', 'image' => 'assets/img/kalite/iso-14001.jpg', 'pdf' => 'assets/docs/kalite/iso-14001.pdf'],
+        ['title' => 'ISO 45001', 'sub_tr' => 'İş Sağlığı ve Güvenliği Yönetim Sistemi', 'sub_en' => 'Occupational Health & Safety Management', 'image' => 'assets/img/kalite/iso-45001.jpg', 'pdf' => 'assets/docs/kalite/iso-45001.pdf'],
+        ['title' => 'OHSAS 18001', 'sub_tr' => 'İş Sağlığı ve Güvenliği', 'sub_en' => 'Occupational Health & Safety', 'image' => 'assets/img/kalite/ohsas-18001.jpg', 'pdf' => 'assets/docs/kalite/ohsas-18001.pdf'],
+        ['title' => 'ISO 10002', 'sub_tr' => 'Müşteri Memnuniyeti Yönetim Sistemi', 'sub_en' => 'Customer Satisfaction Management', 'image' => 'assets/img/kalite/iso-10002.jpg', 'pdf' => 'assets/docs/kalite/iso-10002.pdf'],
+        ['title' => 'EN 10025', 'sub_tr' => 'Ürün Sertifikası', 'sub_en' => 'Product Certificate', 'image' => 'assets/img/kalite/en-10025.jpg', 'pdf' => 'assets/docs/kalite/en-10025.pdf'],
+        ['title' => 'TS 708', 'sub_tr' => 'Uygunluk Belgesi', 'sub_en' => 'Certificate of Conformity', 'image' => 'assets/img/kalite/ts-708.jpg', 'pdf' => 'assets/docs/kalite/ts-708.pdf'],
+        ['title' => 'TSE', 'sub_tr' => 'Türk Standartları Uygunluk Belgesi', 'sub_en' => 'Turkish Standards Conformity', 'image' => 'assets/img/kalite/tse-uygunluk.jpg', 'pdf' => ''],
+        ['title' => 'CE', 'sub_tr' => 'Uygunluk İşareti', 'sub_en' => 'CE Marking', 'image' => 'assets/img/kalite/ce.png', 'pdf' => ''],
+    ];
+    $sections[] = ['quality', 'certs', 'certs', 1,
+        'Kalite Belgelerimiz', 'Our Quality Certificates', '', '', '', '',
+        ['items' => $qualityCerts], ''];
 
     /* ---- İLETİŞİM ---- */
     $sections[] = ['contact', 'intro', 'lead', 0,
