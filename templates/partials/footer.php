@@ -59,29 +59,9 @@
             </div>
             <div class="footer-col">
                 <h4><?= e(t('footer.contact')) ?></h4>
-                <?php
-                // İletişim sayfasındaki lokasyonlardan Merkez + Fabrika bilgileri
-                $locRow = Database::get()->row(
-                    "SELECT s.data_json FROM sections s JOIN pages p ON p.id = s.page_id WHERE p.pkey = 'contact' AND s.skey = 'locations' AND s.is_published = 1"
-                );
-                $locData = $locRow ? (json_decode($locRow['data_json'], true) ?: []) : [];
-                $locItems = $locData['items_' . lang()] ?? $locData['items_tr'] ?? [];
-                $footLocs = array_slice($locItems, 0, 2); // Karabük Merkez + Karabük Fabrika
-                ?>
                 <ul class="footer-contact">
                     <li><?= icon_svg('pin') ?><span><?= e(setting('address')) ?></span></li>
-                    <?php foreach ($footLocs as $fl): if (empty($fl['phones'][0])) continue; ?>
-                    <li>
-                        <?= icon_svg('phone') ?>
-                        <span>
-                            <em class="fc-label"><?= e($fl['title'] ?? '') ?></em>
-                            <a href="tel:<?= e(preg_replace('/[^0-9+]/', '', $fl['phones'][0])) ?>"><?= e($fl['phones'][0]) ?></a>
-                        </span>
-                    </li>
-                    <?php endforeach; ?>
-                    <?php if (!$footLocs): ?>
                     <li><?= icon_svg('phone') ?><a href="tel:<?= e(preg_replace('/[^0-9+]/', '', setting('phone'))) ?>"><?= e(setting('phone')) ?></a></li>
-                    <?php endif; ?>
                     <li><?= icon_svg('mail') ?><a href="mailto:<?= e(setting('email2', 'info@isikcelik.com')) ?>"><?= e(setting('email2', 'info@isikcelik.com')) ?></a></li>
                     <li><?= icon_svg('mail') ?><a href="mailto:<?= e(setting('email')) ?>"><?= e(setting('email')) ?></a></li>
                 </ul>
