@@ -47,11 +47,11 @@ $heroLead = $intro ? lv($intro, 'subtitle') : lv($page, 'meta_desc');
 require __DIR__ . '/partials/page-hero.php';
 ?>
 
-<section class="section">
+<section class="section" id="urun-vitrin">
     <div class="container">
         <div class="shop-layout">
             <aside class="shop-sidebar reveal">
-                <form class="shop-search" method="get" action="<?= e($baseListUrl) ?>">
+                <form class="shop-search" method="get" action="<?= e($baseListUrl) ?>#urun-vitrin">
                     <?php if ($activeCat): ?>
                     <input type="hidden" name="cat" value="<?= e($activeCat[$catSlugField]) ?>">
                     <?php endif; ?>
@@ -65,13 +65,13 @@ require __DIR__ . '/partials/page-hero.php';
                     <h3><?= e(t('shop.categories')) ?></h3>
                     <ul>
                         <li>
-                            <a href="<?= e($baseListUrl) ?>"<?= !$activeCat ? ' class="active"' : '' ?>>
+                            <a href="<?= e($baseListUrl) ?>#urun-vitrin"<?= !$activeCat ? ' class="active"' : '' ?>>
                                 <?= e(t('shop.all')) ?> <span class="cnt"><?= $totalCount ?></span>
                             </a>
                         </li>
                         <?php foreach ($allCategories as $c): ?>
                         <li>
-                            <a href="<?= e($baseListUrl . '?cat=' . rawurlencode($c[$catSlugField])) ?>"<?= $activeCat && $activeCat['id'] === $c['id'] ? ' class="active"' : '' ?>>
+                            <a href="<?= e($baseListUrl . '?cat=' . rawurlencode($c[$catSlugField])) ?>#urun-vitrin"<?= $activeCat && $activeCat['id'] === $c['id'] ? ' class="active"' : '' ?>>
                                 <?= e(lv($c, 'name')) ?> <span class="cnt"><?= $counts[(int) $c['id']] ?? 0 ?></span>
                             </a>
                         </li>
@@ -94,7 +94,7 @@ require __DIR__ . '/partials/page-hero.php';
                         <?= count($listProducts) ?> <?= e(t('shop.count')) ?>
                     </span>
                     <?php if ($activeCat || $query !== ''): ?>
-                    <a class="text-link" href="<?= e($baseListUrl) ?>"><?= e(t('shop.all')) ?> <span class="arr">→</span></a>
+                    <a class="text-link" href="<?= e($baseListUrl) ?>#urun-vitrin"><?= e(t('shop.all')) ?> <span class="arr">→</span></a>
                     <?php endif; ?>
                 </div>
 
