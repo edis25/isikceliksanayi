@@ -153,25 +153,7 @@
     }
 
 
-    /* ---------- S3 Ürün vitrini: yatay scroll (pinned) ---------- */
-    var track = document.querySelector('.c-track');
-    if (track) {
-        var getDistance = function () {
-            return Math.max(0, track.scrollWidth - window.innerWidth);
-        };
-        gsap.to(track, {
-            x: function () { return -getDistance(); },
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '.c-shelf-viewport',
-                start: 'top top',
-                end: function () { return '+=' + getDistance(); },
-                pin: true,
-                scrub: 1,
-                invalidateOnRefresh: true
-            }
-        });
-    }
+    /* S3 ürün vitrini: scroll kilidi YOK — ok tuşlarıyla gezinme yukarıda bağlandı */
 
     /* ---------- S4 Enerji: hafif parallax ---------- */
     var energyVideo = document.querySelector('.c-energy-media video');
